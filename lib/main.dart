@@ -1,9 +1,16 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:cbor/cbor.dart';
+import 'package:covid_checker/utils/base45.dart';
+import 'package:covid_checker/utils/certs.dart';
+import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:typed_data/typed_buffers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Barcode? result;
   String? decodedResult;
   QRViewController? controller;
+  final inst = Cbor();
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -100,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Center(
                 child: (result != null)
                     ? Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${base64Decode(result!.code!)}')
+                        'Barcode Type: ${describeEnum(result!.format)}   Data: $decodedResult')
                     : const Text('Scan a code'),
               ),
             )
@@ -113,10 +121,22 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      if(scanData.code.startsWith( ))
-      setState(() {
-        result = scanData;
-      });
+      if (scanData.code != null && scanData.code!.startsWith("HC1:")) {
+        List<int> scanres;
+        scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
+        scanres = gzip.decode(scanres.toList());
+        var certsList = certs.map((key, value) {
+          return MapEntry(
+              value["fingerprint"] as String, value["publicKeyPem"] as String);
+        });
+        var cose = Cose.decodeAndVerify(scanres, certsList);
+        print(cose.certificate);
+
+        setState(() {
+          decodedResult = cose.payload.toString();
+          result = scanData;
+        });
+      }
     });
   }
 
