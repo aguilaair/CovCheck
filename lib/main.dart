@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:cbor/cbor.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/certs.dart';
+import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Logo(),
             Expanded(
               flex: 1,
               child: Container(
