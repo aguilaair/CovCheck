@@ -1,17 +1,13 @@
-import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:cbor/cbor.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/certs.dart';
+import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:typed_data/typed_buffers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,6 +32,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        backgroundColor: const Color(0xffECEEFF),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -65,7 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Barcode? result;
   String? decodedResult;
   QRViewController? controller;
-  final inst = Cbor();
+  CoseResult? coseResult;
+  Map<String, String> certMap = {};
+
+  @override
+  void initState() {
+    (certs["dsc_trust_list"] as Map).forEach((key, value) {
+      for (var element in (value["keys"] as List)) {
+        certMap[element["kid"]] = element["x5c"][0];
+      }
+    });
+    super.initState();
+  }
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -82,10 +90,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Logo(),
+            const Logo(),
             Expanded(
               flex: 1,
               child: Container(
@@ -106,14 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Center(
-                child: (result != null)
-                    ? Text(
-                        'Barcode Type: ${describeEnum(result!.format)}   Data: $decodedResult')
-                    : const Text('Scan a code'),
-              ),
-            )
+                flex: 1,
+                child: CertSimplifiedView(
+                  coseResult: coseResult,
+                  barcodeResult: result,
+                  dismiss: dismissResults,
+                ))
           ],
         ),
       ),
@@ -123,22 +130,36 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      if (scanData.code != null && scanData.code!.startsWith("HC1:")) {
+      if (scanData.code != null &&
+          scanData.code!.startsWith("HC1:") &&
+          scanData.code! != (result?.code)) {
         List<int> scanres;
-        scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
-        scanres = gzip.decode(scanres.toList());
-        Map<String, String> certMap = {};
-        (certs["dsc_trust_list"] as Map).forEach((key, value) {
-          for (var element in (value["keys"] as List)) {
-            certMap[element["kid"]] = element["x5c"][0];
-          }
-        });
-        var cose = Cose.decodeAndVerify(scanres, certMap);
-        setState(() {
-          decodedResult = cose.payload.toString();
-          result = scanData;
-        });
+        try {
+          scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
+          scanres = gzip.decode(scanres.toList());
+          var cose = Cose.decodeAndVerify(scanres, certMap);
+          setState(() {
+            coseResult = cose;
+            result = scanData;
+          });
+        } catch (e) {
+          setState(() {
+            coseResult = CoseResult(
+                payload: {},
+                verified: false,
+                errorCode: CoseErrorCode.invalid_format,
+                certificate: null);
+            result = scanData;
+          });
+        }
       }
+    });
+  }
+
+  void dismissResults() {
+    setState(() {
+      coseResult = null;
+      result = null;
     });
   }
 
