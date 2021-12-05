@@ -1,3 +1,4 @@
+import 'package:covid_checker/widgets/cert_spimplified_info.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -47,6 +48,9 @@ class ResultCard extends StatelessWidget {
                     ),
               ),
             ),
+            coseResult.verified
+                ? CertInfoViewer(coseResult: coseResult)
+                : SizedBox()
           ],
         ),
         margin: const EdgeInsets.only(top: 20),

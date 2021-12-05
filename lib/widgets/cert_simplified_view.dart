@@ -34,7 +34,7 @@ class CertSimplifiedView extends StatelessWidget {
       );
     }
     // No Result
-    return EmptyResult();
+    return const EmptyResult();
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 void main() {
@@ -138,11 +139,13 @@ class _MyHomePageState extends State<MyHomePage> {
           scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
           scanres = gzip.decode(scanres.toList());
           var cose = Cose.decodeAndVerify(scanres, certMap);
+          HapticFeedback.lightImpact();
           setState(() {
             coseResult = cose;
             result = scanData;
           });
         } catch (e) {
+          HapticFeedback.lightImpact();
           setState(() {
             coseResult = CoseResult(
                 payload: {},
