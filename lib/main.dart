@@ -125,13 +125,13 @@ class _MyHomePageState extends State<MyHomePage> {
         List<int> scanres;
         scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
         scanres = gzip.decode(scanres.toList());
-        var certsList = certs.map((key, value) {
-          return MapEntry(
-              value["fingerprint"] as String, value["publicKeyPem"] as String);
+        Map<String, String> certMap = {};
+        (certs["dsc_trust_list"] as Map).forEach((key, value) {
+          for (var element in (value["keys"] as List)) {
+            certMap[element["kid"]] = element["x5c"][0];
+          }
         });
-        var cose = Cose.decodeAndVerify(scanres, certsList);
-        print(cose.certificate);
-
+        var cose = Cose.decodeAndVerify(scanres, certMap);
         setState(() {
           decodedResult = cose.payload.toString();
           result = scanData;
