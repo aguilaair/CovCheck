@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class CertSimplifiedView extends StatelessWidget {
-  CertSimplifiedView({
+  const CertSimplifiedView({
     required this.coseResult,
     required this.barcodeResult,
     required this.dismiss,
     Key? key,
   }) : super(key: key);
 
-  CoseResult? coseResult;
-  Barcode? barcodeResult;
-  Function dismiss;
+  final CoseResult? coseResult;
+  final Barcode? barcodeResult;
+  final Function dismiss;
 
   @override
   Widget build(BuildContext context) {

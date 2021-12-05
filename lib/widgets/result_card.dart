@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ResultCard extends StatelessWidget {
-  ResultCard({
+  const ResultCard({
     required this.barcodeResult,
     required this.coseResult,
     required this.dismiss,
     Key? key,
   }) : super(key: key);
 
-  CoseResult coseResult;
-  Barcode barcodeResult;
-  Function dismiss;
+  final CoseResult coseResult;
+  final Barcode barcodeResult;
+  final Function dismiss;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class ResultCard extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.all(15),
-              padding: EdgeInsets.all(25),
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: coseResult.verified
@@ -38,19 +38,30 @@ class ResultCard extends StatelessWidget {
               ),
               width: double.infinity,
               alignment: Alignment.center,
-              child: Text(
-                coseResult.verified
-                    ? "Valid Certificate"
-                    : "Invalid Certificate",
-                style: Theme.of(context).textTheme.headline5!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+              child: Column(
+                children: [
+                  Text(
+                    coseResult.verified
+                        ? "Valid Certificate"
+                        : "Invalid Certificate",
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  if (!coseResult.verified)
+                    Text(
+                      beautifyCose(coseResult.errorCode),
+                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Colors.white,
+                            //fontWeight: FontWeight.bold,
+                          ),
+                      textAlign: TextAlign.center,
                     ),
+                ],
               ),
             ),
-            coseResult.verified
-                ? CertInfoViewer(coseResult: coseResult)
-                : SizedBox()
+            CertInfoViewer(coseResult: coseResult)
           ],
         ),
         margin: const EdgeInsets.only(top: 20),
@@ -71,4 +82,26 @@ class ResultCard extends StatelessWidget {
       ),
     );
   }
+}
+
+String beautifyCose(CoseErrorCode error) {
+  if (error == CoseErrorCode.cbor_decoding_error) {
+    return "Data read error";
+  } else if (error == CoseErrorCode.invalid_format ||
+      error == CoseErrorCode.payload_format_error ||
+      error == CoseErrorCode.unsupported_format) {
+    return "Invaild Format";
+  } else if (error == CoseErrorCode.invalid_header_format ||
+      error == CoseErrorCode.unsupported_header_format) {
+    return "Invaild Header Format";
+  } else if (error == CoseErrorCode.key_not_found) {
+    return "Key Not Found, certificate may still be valid";
+  } else if (error == CoseErrorCode.kid_mismatch) {
+    return "Signing mismatch, certificate may still be valid";
+  } else if (error == CoseErrorCode.payload_format_error) {
+    return "Data format error";
+  } else if (error == CoseErrorCode.unsupported_algorithm) {
+    return "Unsopported Algorithm";
+  }
+  return "Unknown Error";
 }

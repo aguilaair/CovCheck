@@ -2,15 +2,14 @@ import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 
 class CertInfoViewer extends StatelessWidget {
-  CertInfoViewer({
+  const CertInfoViewer({
     required this.coseResult,
     Key? key,
   }) : super(key: key);
-  CoseResult? coseResult;
+  final CoseResult? coseResult;
 
   @override
   Widget build(BuildContext context) {
-    print(coseResult!.payload);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
@@ -26,13 +25,14 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[-260][1]["nam"]["gn"] ??
-                    coseResult!.payload[-260][1]["nam"]["gnt"],
+                (coseResult!.payload[-260][1]["nam"]["gn"] ??
+                        coseResult!.payload[-260][1]["nam"]["gnt"]) ??
+                    "Not Found",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -44,12 +44,12 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[-260][1]["nam"]["fn"],
+                coseResult!.payload[-260][1]["nam"]["fn"] ?? "Not Found",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -60,12 +60,12 @@ class CertInfoViewer extends StatelessWidget {
                 "Date of Birth",
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Text(coseResult!.payload[-260][1]["dob"]
+              Text(coseResult!.payload[-260][1]["dob"] ?? "Not Found"
                   //style: Theme.of(context).textTheme.headline6,
                   )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
@@ -77,12 +77,12 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                "${yearsOld(coseResult!.payload[-260][1]["dob"]).toString()} Years",
+                "${yearsOld(coseResult!.payload[-260][1]["dob"]) ?? "Unknown"} Years",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -94,12 +94,12 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[1],
+                coseResult!.payload[1] ?? "Unknown",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -107,12 +107,15 @@ class CertInfoViewer extends StatelessWidget {
             style: Theme.of(context).textTheme.headline6,
             textAlign: TextAlign.left,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Center(
             child: Text(
-              coseResult!.payload[-260][1]["v"][0]["is"],
+              (coseResult!.payload[-260][1] as Map<dynamic, dynamic>)
+                      .values
+                      .first[0]["is"] ??
+                  "Unknown",
               textAlign: TextAlign.center,
             ),
           ),
@@ -122,14 +125,13 @@ class CertInfoViewer extends StatelessWidget {
   }
 }
 
-int yearsOld(String time) {
-  DateTime today = DateTime.now();
+int? yearsOld(String time) {
 
   // Parsed date to check
   DateTime? birthDate = DateTime.tryParse(time);
 
   if (birthDate == null) {
-    return 0;
+    return null;
   }
 
   // Date to check but moved 18 years ahead

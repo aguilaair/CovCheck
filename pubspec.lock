@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "2.1.0"
   cbor:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cbor
       url: "https://pub.dartlang.org"

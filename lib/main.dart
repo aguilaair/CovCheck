@@ -90,40 +90,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
+    final widgetList = <Widget>[
+      if (orientation == Orientation.portrait) const Logo(),
+      Expanded(
+        flex: 1,
+        child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+          clipBehavior: Clip.antiAlias,
+          padding: const EdgeInsets.all(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: QRView(
+              key: qrKey,
+              overlay: QrScannerOverlayShape(
+                  borderRadius: 15, overlayColor: Colors.black.withAlpha(100)),
+              onQRViewCreated: _onQRViewCreated,
+            ),
+          ),
+        ),
+      ),
+      Expanded(
+          flex: 1,
+          child: Padding(
+            padding: orientation == Orientation.portrait
+                ? EdgeInsets.zero
+                : const EdgeInsets.only(right: 10),
+            child: CertSimplifiedView(
+              coseResult: coseResult,
+              barcodeResult: result,
+              dismiss: dismissResults,
+            ),
+          )),
+    ];
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            const Logo(),
-            Expanded(
-              flex: 1,
-              child: Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                clipBehavior: Clip.antiAlias,
-                padding: EdgeInsets.all(10),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: QRView(
-                    key: qrKey,
-                    overlay: QrScannerOverlayShape(
-                        borderRadius: 15,
-                        overlayColor: Colors.black.withAlpha(100)),
-                    onQRViewCreated: _onQRViewCreated,
-                  ),
-                ),
+        child: MediaQuery.of(context).orientation == Orientation.landscape
+            ? Row(
+                children: widgetList,
+              )
+            : Column(
+                children: widgetList,
               ),
-            ),
-            Expanded(
-                flex: 1,
-                child: CertSimplifiedView(
-                  coseResult: coseResult,
-                  barcodeResult: result,
-                  dismiss: dismissResults,
-                ))
-          ],
-        ),
       ),
     );
   }

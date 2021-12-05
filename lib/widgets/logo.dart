@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({Key? key}) : super(key: key);
+  const Logo({this.height = 45, Key? key}) : super(key: key);
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class Logo extends StatelessWidget {
         brightness == Brightness.light
             ? "assets/logo-light.svg"
             : "assets/logo-dark.svg",
-        height: 45,
+        height: height,
       ),
     );
   }
