@@ -61,7 +61,13 @@ class ResultCard extends StatelessWidget {
                 ],
               ),
             ),
-            CertInfoViewer(coseResult: coseResult)
+            Expanded(
+              //height: 30,
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: CertInfoViewer(coseResult: coseResult),
+              ),
+            )
           ],
         ),
         margin: const EdgeInsets.only(top: 20),

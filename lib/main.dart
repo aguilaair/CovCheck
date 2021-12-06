@@ -81,11 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void reassemble() {
     super.reassemble();
-    if (Platform.isAndroid) {
-      controller!.pauseCamera();
-    } else if (Platform.isIOS) {
-      controller!.resumeCamera();
-    }
+    controller!.pauseCamera();
+    controller!.resumeCamera();
   }
 
   @override
@@ -96,19 +93,71 @@ class _MyHomePageState extends State<MyHomePage> {
       if (orientation == Orientation.portrait) const Logo(),
       Expanded(
         flex: 1,
-        child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-          clipBehavior: Clip.antiAlias,
-          padding: const EdgeInsets.all(10),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: QRView(
-              key: qrKey,
-              overlay: QrScannerOverlayShape(
-                  borderRadius: 15, overlayColor: Colors.black.withAlpha(100)),
-              onQRViewCreated: _onQRViewCreated,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
+              clipBehavior: Clip.antiAlias,
+              padding: const EdgeInsets.all(10),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: QRView(
+                  key: qrKey,
+                  overlay: QrScannerOverlayShape(
+                      borderRadius: 15,
+                      overlayColor: Colors.black.withAlpha(100)),
+                  onQRViewCreated: _onQRViewCreated,
+                ),
+              ),
             ),
-          ),
+            Positioned(
+              right: 20,
+              top: 10,
+              child: Row(
+                children: [
+                  Tooltip(
+                    message: "Toggle Flash",
+                    child: IconButton(
+                      onPressed: () {
+                        controller!.toggleFlash();
+                      },
+                      icon: const Icon(
+                        Icons.flash_on_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Tooltip(
+                    message: "Flip Camera",
+                    child: IconButton(
+                      onPressed: () {
+                        controller!.flipCamera();
+                      },
+                      icon: const Icon(
+                        Icons.cameraswitch_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Tooltip(
+                    message: "Restart Camera",
+                    child: IconButton(
+                      onPressed: () {
+                        controller!.pauseCamera();
+                        controller!.resumeCamera();
+                      },
+                      icon: const Icon(
+                        Icons.restart_alt_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
       Expanded(

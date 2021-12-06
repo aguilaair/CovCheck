@@ -1,22 +1,20 @@
-import 'package:covid_checker/widgets/cert_detailed_view.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 
-class CertInfoViewer extends StatelessWidget {
-  const CertInfoViewer({
-    required this.coseResult,
-    Key? key,
-  }) : super(key: key);
-  final CoseResult? coseResult;
+class CertDetailedView extends StatelessWidget {
+  const CertDetailedView({required this.coseResult, Key? key})
+      : super(key: key);
+
+  final CoseResult coseResult;
 
   @override
   Widget build(BuildContext context) {
+    final res = coseResult.payload[-260][1] as Map<dynamic, dynamic>;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(coseResult.payload.toString()),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,9 +24,7 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                (coseResult!.payload[-260][1]["nam"]["gn"] ??
-                        coseResult!.payload[-260][1]["nam"]["gnt"]) ??
-                    "Not Found",
+                res["nam"]["gn"] ?? "Not Found",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -45,7 +41,7 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[-260][1]["nam"]["fn"] ?? "Not Found",
+                res["nam"]["fn"] ?? "Not Found",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -61,7 +57,7 @@ class CertInfoViewer extends StatelessWidget {
                 "Date of Birth",
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Text(coseResult!.payload[-260][1]["dob"] ?? "Not Found"
+              Text(res["dob"] ?? "Not Found"
                   //style: Theme.of(context).textTheme.headline6,
                   )
             ],
@@ -78,7 +74,7 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                "${yearsOld(coseResult!.payload[-260][1]["dob"]) ?? "Unknown"} Years",
+                "${yearsOld(res["dob"]) ?? "Unknown"} Years",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -95,7 +91,7 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[1] ?? "Unknown",
+                coseResult.payload[1] ?? "Unknown",
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -112,7 +108,24 @@ class CertInfoViewer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                certType(coseResult!),
+                certType(coseResult),
+                //style: Theme.of(context).textTheme.headline6,
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Certificate Version",
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              Text(
+                res["ver"],
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -130,30 +143,10 @@ class CertInfoViewer extends StatelessWidget {
           ),
           Center(
             child: Text(
-              (coseResult!.payload[-260][1] as Map<dynamic, dynamic>)
-                      .values
-                      .first[0]["is"] ??
-                  "Unknown",
+              (res as Map<dynamic, dynamic>).values.first[0]["is"] ?? "Unknown",
               textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Divider(),
-          Center(
-            child: OutlinedButton.icon(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return CertDetailedView(coseResult: coseResult!);
-                    },
-                  );
-                },
-                icon: Icon(Icons.info_outline_rounded),
-                label: Text("More Details")),
-          )
         ],
       ),
     );
