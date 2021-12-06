@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      title: 'CovCheck',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -35,7 +44,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: const Color(0xffECEEFF),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'CovCheck Main Page'),
     );
   }
 }
@@ -76,8 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  // In order to get hot reload to work we need to pause the camera if the platform
-  // is android, or resume the camera if the platform is iOS.
   @override
   void reassemble() {
     super.reassemble();
@@ -118,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Row(
                 children: [
                   Tooltip(
-                    message: "Toggle Flash",
+                    message: S.of(context).toggleflash,
                     child: IconButton(
                       onPressed: () {
                         controller!.toggleFlash();
@@ -130,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Tooltip(
-                    message: "Flip Camera",
+                    message: S.of(context).rotatecamera,
                     child: IconButton(
                       onPressed: () {
                         controller!.flipCamera();
@@ -142,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Tooltip(
-                    message: "Restart Camera",
+                    message: S.of(context).restartcamera,
                     child: IconButton(
                       onPressed: () {
                         controller!.pauseCamera();

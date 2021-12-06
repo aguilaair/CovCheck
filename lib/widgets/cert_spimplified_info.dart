@@ -1,3 +1,4 @@
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/cert_detailed_view.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +23,13 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "First Name",
+                S.of(context).name,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 (coseResult!.payload[-260][1]["nam"]["gn"] ??
                         coseResult!.payload[-260][1]["nam"]["gnt"]) ??
-                    "Not Found",
+                    S.of(context).unk,
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -41,11 +42,11 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Last Name",
+                S.of(context).surname,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[-260][1]["nam"]["fn"] ?? "Not Found",
+                coseResult!.payload[-260][1]["nam"]["fn"] ?? S.of(context).unk,
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -58,10 +59,10 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Date of Birth",
+                S.of(context).dob,
                 style: Theme.of(context).textTheme.headline6,
               ),
-              Text(coseResult!.payload[-260][1]["dob"] ?? "Not Found"
+              Text(coseResult!.payload[-260][1]["dob"] ?? S.of(context).unk
                   //style: Theme.of(context).textTheme.headline6,
                   )
             ],
@@ -74,11 +75,13 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Age",
+                S.of(context).age,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                "${yearsOld(coseResult!.payload[-260][1]["dob"]) ?? "Unknown"} Years",
+                S.of(context).xageold(
+                    (yearsOld(coseResult!.payload[-260][1]["dob"])) ??
+                        S.of(context).unk),
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -91,11 +94,11 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Country",
+                S.of(context).country,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
-                coseResult!.payload[1] ?? "Unknown",
+                coseResult!.payload[1] ?? S.of(context).unk,
                 //style: Theme.of(context).textTheme.headline6,
               )
             ],
@@ -108,7 +111,7 @@ class CertInfoViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Type of Certificate",
+                S.of(context).certType,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(
@@ -121,7 +124,7 @@ class CertInfoViewer extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "Signing Authority",
+            S.of(context).signingauth,
             style: Theme.of(context).textTheme.headline6,
             textAlign: TextAlign.left,
           ),
@@ -133,7 +136,7 @@ class CertInfoViewer extends StatelessWidget {
               (coseResult!.payload[-260][1] as Map<dynamic, dynamic>)
                       .values
                       .first[0]["is"] ??
-                  "Unknown",
+                  S.of(context).unk,
               textAlign: TextAlign.center,
             ),
           ),
@@ -152,7 +155,7 @@ class CertInfoViewer extends StatelessWidget {
                   );
                 },
                 icon: const Icon(Icons.info_outline_rounded),
-                label: const Text("More Details")),
+                label: Text(S.of(context).moredetails)),
           )
         ],
       ),

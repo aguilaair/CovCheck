@@ -1,3 +1,4 @@
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/cert_spimplified_info.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class ResultCard extends StatelessWidget {
                 children: [
                   Text(
                     coseResult.verified
-                        ? "Valid Certificate"
-                        : "Invalid Certificate",
+                        ? S.of(context).validcert
+                        : S.of(context).invalidcert,
                     style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
