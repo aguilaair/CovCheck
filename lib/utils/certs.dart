@@ -4472,7 +4472,7 @@ const testManfName = {
   }
 };
 
-const testResult = {
+const testResults = {
   "valueSetId": "covid-19-lab-result",
   "valueSetDate": "2021-04-27",
   "valueSetValues": {
@@ -4493,7 +4493,7 @@ const testResult = {
   }
 };
 
-const testType = {
+const testTypes = {
   "valueSetId": "covid-19-lab-test-type",
   "valueSetDate": "2021-04-27",
   "valueSetValues": {
