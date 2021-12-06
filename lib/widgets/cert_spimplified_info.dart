@@ -1,5 +1,6 @@
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/cert_detailed_view.dart';
+import 'package:covid_checker/widgets/detail.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 
@@ -18,107 +19,49 @@ class CertInfoViewer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).name,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                (coseResult!.payload[-260][1]["nam"]["gn"] ??
-                        coseResult!.payload[-260][1]["nam"]["gnt"]) ??
-                    S.of(context).unk,
-                //style: Theme.of(context).textTheme.headline6,
-              )
-            ],
+          Detail(
+            title: S.of(context).name,
+            detail: (coseResult!.payload[-260][1]["nam"]["gn"] ??
+                    coseResult!.payload[-260][1]["nam"]["gnt"]) ??
+                S.of(context).unk,
           ),
           const SizedBox(
             height: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).surname,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
+          Detail(
+            title: S.of(context).surname,
+            detail:
                 coseResult!.payload[-260][1]["nam"]["fn"] ?? S.of(context).unk,
-                //style: Theme.of(context).textTheme.headline6,
-              )
-            ],
           ),
           const SizedBox(
             height: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).dob,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(coseResult!.payload[-260][1]["dob"] ?? S.of(context).unk
-                  //style: Theme.of(context).textTheme.headline6,
-                  )
-            ],
+          Detail(
+            title: S.of(context).dob,
+            detail: coseResult!.payload[-260][1]["dob"] ?? S.of(context).unk,
           ),
           const SizedBox(
             height: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).age,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                S.of(context).xageold(
-                    (yearsOld(coseResult!.payload[-260][1]["dob"])) ??
-                        S.of(context).unk),
-                //style: Theme.of(context).textTheme.headline6,
-              )
-            ],
+          Detail(
+            title: S.of(context).age,
+            detail: S.of(context).xageold(
+                (yearsOld(coseResult!.payload[-260][1]["dob"])) ??
+                    S.of(context).unk),
           ),
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).country,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                coseResult!.payload[1] ?? S.of(context).unk,
-                //style: Theme.of(context).textTheme.headline6,
-              )
-            ],
+          Detail(
+            title: S.of(context).country,
+            detail: coseResult!.payload[1] ?? S.of(context).unk,
           ),
           const SizedBox(
             height: 5,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).certType,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                certType(coseResult!),
-                //style: Theme.of(context).textTheme.headline6,
-              )
-            ],
+          Detail(
+            title: S.of(context).certType,
+            detail: certType(coseResult!),
           ),
           const SizedBox(
             height: 10,
