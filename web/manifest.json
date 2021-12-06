@@ -1,6 +1,6 @@
 {
-    "name": "covid_checker",
-    "short_name": "covid_checker",
+    "name": "CovCheck",
+    "short_name": "CovCheck",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
