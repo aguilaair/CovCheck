@@ -119,7 +119,7 @@ class CertDetailedView extends StatelessWidget {
 
     if (certType(coseResult) == "Vaccination") {
       detailedInfo = [
-        Divider(),
+        const Divider(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +263,7 @@ class CertDetailedView extends StatelessWidget {
       ];
     } else if (certType(coseResult) == "Test") {
       detailedInfo = [
-        Divider(),
+        const Divider(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -410,7 +410,7 @@ class CertDetailedView extends StatelessWidget {
     }
 
     final certInfo = [
-      Divider(),
+      const Divider(),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -492,7 +492,7 @@ class CertDetailedView extends StatelessWidget {
             height: 5,
           ),
           ...certInfo,
-          Divider(),
+          const Divider(),
           Text(
             "Raw Data",
             style: Theme.of(context).textTheme.headline6,

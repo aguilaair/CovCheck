@@ -140,7 +140,7 @@ class CertInfoViewer extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Divider(),
+          const Divider(),
           Center(
             child: OutlinedButton.icon(
                 onPressed: () {
@@ -151,8 +151,8 @@ class CertInfoViewer extends StatelessWidget {
                     },
                   );
                 },
-                icon: Icon(Icons.info_outline_rounded),
-                label: Text("More Details")),
+                icon: const Icon(Icons.info_outline_rounded),
+                label: const Text("More Details")),
           )
         ],
       ),
