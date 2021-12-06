@@ -2,7 +2,7 @@
     package="com.example.covid_checker">
    <application
         android:label="covid_checker"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
