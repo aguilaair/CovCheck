@@ -118,7 +118,7 @@ class CertDetailedView extends StatelessWidget {
       ),
     ];
 
-    if (certType(coseResult) == "Vaccination") {
+    if (certType(coseResult) == S.current.vaccination) {
       detailedInfo = [
         const Divider(),
         Row(
@@ -262,7 +262,7 @@ class CertDetailedView extends StatelessWidget {
           height: 5,
         ),
       ];
-    } else if (certType(coseResult) == "Test") {
+    } else if (certType(coseResult) == S.current.test) {
       detailedInfo = [
         const Divider(),
         Row(

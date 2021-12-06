@@ -50,30 +50,30 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Certificado Válido`
+  /// `Valid Certificate`
   String get validcert {
     return Intl.message(
-      'Certificado Válido',
+      'Valid Certificate',
       name: 'validcert',
       desc: '',
       args: [],
     );
   }
 
-  /// `Certificado Inválido`
+  /// `Invalid Certificate`
   String get invalidcert {
     return Intl.message(
-      'Certificado Inválido',
+      'Invalid Certificate',
       name: 'invalidcert',
       desc: '',
       args: [],
     );
   }
 
-  /// `Escanea un código QR`
+  /// `Scan a QR Code`
   String get scanqrmessage {
     return Intl.message(
-      'Escanea un código QR',
+      'Scan a QR Code',
       name: 'scanqrmessage',
       desc: '',
       args: [],
@@ -90,320 +90,320 @@ class S {
     );
   }
 
-  /// `Cambiar Cámara`
+  /// `Change Camera`
   String get rotatecamera {
     return Intl.message(
-      'Cambiar Cámara',
+      'Change Camera',
       name: 'rotatecamera',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reiniciar Cámara`
+  /// `Restart Camera`
   String get restartcamera {
     return Intl.message(
-      'Reiniciar Cámara',
+      'Restart Camera',
       name: 'restartcamera',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nombre`
+  /// `First Name`
   String get name {
     return Intl.message(
-      'Nombre',
+      'First Name',
       name: 'name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Apellido(s)`
+  /// `Last Name`
   String get surname {
     return Intl.message(
-      'Apellido(s)',
+      'Last Name',
       name: 'surname',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de Nacimiento`
+  /// `Date of Brith`
   String get dob {
     return Intl.message(
-      'Fecha de Nacimiento',
+      'Date of Brith',
       name: 'dob',
       desc: '',
       args: [],
     );
   }
 
-  /// `Edad`
+  /// `Age`
   String get age {
     return Intl.message(
-      'Edad',
+      'Age',
       name: 'age',
       desc: '',
       args: [],
     );
   }
 
-  /// `País`
+  /// `Country`
   String get Country {
     return Intl.message(
-      'País',
+      'Country',
       name: 'Country',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tipo de Certificado`
+  /// `Type of certificate`
   String get certType {
     return Intl.message(
-      'Tipo de Certificado',
+      'Type of certificate',
       name: 'certType',
       desc: '',
       args: [],
     );
   }
 
-  /// `Autoridad de Firmado`
+  /// `Signing Authority`
   String get signingauth {
     return Intl.message(
-      'Autoridad de Firmado',
+      'Signing Authority',
       name: 'signingauth',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mas Detalles`
+  /// `More Details`
   String get moredetails {
     return Intl.message(
-      'Mas Detalles',
+      'More Details',
       name: 'moredetails',
       desc: '',
       args: [],
     );
   }
 
-  /// `{age} Años`
+  /// `{age} Years`
   String xageold(Object age) {
     return Intl.message(
-      '$age Años',
+      '$age Years',
       name: 'xageold',
       desc: '',
       args: [age],
     );
   }
 
-  /// `Fabricante`
+  /// `Manufacturer`
   String get manname {
     return Intl.message(
-      'Fabricante',
+      'Manufacturer',
       name: 'manname',
       desc: '',
       args: [],
     );
   }
 
-  /// `Emfermedad`
+  /// `Disease`
   String get targetdisease {
     return Intl.message(
-      'Emfermedad',
+      'Disease',
       name: 'targetdisease',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tipo de Vacuna`
+  /// `Vaccination Prophylaxis`
   String get vaccproph {
     return Intl.message(
-      'Tipo de Vacuna',
+      'Vaccination Prophylaxis',
       name: 'vaccproph',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nombre del Producto`
+  /// `Name of Product`
   String get prodName {
     return Intl.message(
-      'Nombre del Producto',
+      'Name of Product',
       name: 'prodName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Dosis`
+  /// `Doses`
   String get vacdoses {
     return Intl.message(
-      'Dosis',
+      'Doses',
       name: 'vacdoses',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de Vacunación`
+  /// `Vacciantion Date`
   String get vacdate {
     return Intl.message(
-      'Fecha de Vacunación',
+      'Vacciantion Date',
       name: 'vacdate',
       desc: '',
       args: [],
     );
   }
 
-  /// `País de Administración`
+  /// `Vaccination country`
   String get country {
     return Intl.message(
-      'País de Administración',
+      'Vaccination country',
       name: 'country',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tipo de Certificatio`
+  /// `Type of certificate`
   String get certtype {
     return Intl.message(
-      'Tipo de Certificatio',
+      'Type of certificate',
       name: 'certtype',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID de Certificado`
+  /// `Certificate ID`
   String get certid {
     return Intl.message(
-      'ID de Certificado',
+      'Certificate ID',
       name: 'certid',
       desc: '',
       args: [],
     );
   }
 
-  /// `Versión del Certificado`
+  /// `Certificate Version`
   String get certver {
     return Intl.message(
-      'Versión del Certificado',
+      'Certificate Version',
       name: 'certver',
       desc: '',
       args: [],
     );
   }
 
-  /// `Datos sin Procesar`
+  /// `Raw Data`
   String get rawData {
     return Intl.message(
-      'Datos sin Procesar',
+      'Raw Data',
       name: 'rawData',
       desc: '',
       args: [],
     );
   }
 
-  /// `Tipo de Test`
+  /// `Test type`
   String get testtype {
     return Intl.message(
-      'Tipo de Test',
+      'Test type',
       name: 'testtype',
       desc: '',
       args: [],
     );
   }
 
-  /// `Resultado`
+  /// `Result`
   String get certres {
     return Intl.message(
-      'Resultado',
+      'Result',
       name: 'certres',
       desc: '',
       args: [],
     );
   }
 
-  /// `Detectado`
+  /// `Detected`
   String get detected {
     return Intl.message(
-      'Detectado',
+      'Detected',
       name: 'detected',
       desc: '',
       args: [],
     );
   }
 
-  /// `No Detectado`
+  /// `Not Detected`
   String get notdetected {
     return Intl.message(
-      'No Detectado',
+      'Not Detected',
       name: 'notdetected',
       desc: '',
       args: [],
     );
   }
 
-  /// `Vacunación`
+  /// `Vacciantion`
   String get vaccination {
     return Intl.message(
-      'Vacunación',
+      'Vacciantion',
       name: 'vaccination',
       desc: '',
       args: [],
     );
   }
 
-  /// `Prueba`
+  /// `Test`
   String get test {
     return Intl.message(
-      'Prueba',
+      'Test',
       name: 'test',
       desc: '',
       args: [],
     );
   }
 
-  /// `Fecha de Prueba`
+  /// `Test Date`
   String get testdate {
     return Intl.message(
-      'Fecha de Prueba',
+      'Test Date',
       name: 'testdate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Localización de Prueba`
+  /// `Location of Test`
   String get testloc {
     return Intl.message(
-      'Localización de Prueba',
+      'Location of Test',
       name: 'testloc',
       desc: '',
       args: [],
     );
   }
 
-  /// `Desconocido`
+  /// `Unknown`
   String get unk {
     return Intl.message(
-      'Desconocido',
+      'Unknown',
       name: 'unk',
       desc: '',
       args: [],
     );
   }
 
-  /// `Recuperado`
+  /// `Recovered`
   String get recovered {
     return Intl.message(
-      'Recuperado',
+      'Recovered',
       name: 'recovered',
       desc: '',
       args: [],

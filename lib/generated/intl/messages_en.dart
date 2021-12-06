@@ -20,53 +20,48 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(age) => "${age} Años";
+  static String m0(age) => "${age} Years";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Country": MessageLookupByLibrary.simpleMessage("País"),
-        "age": MessageLookupByLibrary.simpleMessage("Edad"),
-        "certType": MessageLookupByLibrary.simpleMessage("Tipo de Certificado"),
-        "certid": MessageLookupByLibrary.simpleMessage("ID de Certificado"),
-        "certres": MessageLookupByLibrary.simpleMessage("Resultado"),
-        "certtype":
-            MessageLookupByLibrary.simpleMessage("Tipo de Certificatio"),
-        "certver":
-            MessageLookupByLibrary.simpleMessage("Versión del Certificado"),
-        "country":
-            MessageLookupByLibrary.simpleMessage("País de Administración"),
-        "detected": MessageLookupByLibrary.simpleMessage("Detectado"),
-        "dob": MessageLookupByLibrary.simpleMessage("Fecha de Nacimiento"),
+        "Country": MessageLookupByLibrary.simpleMessage("Country"),
+        "age": MessageLookupByLibrary.simpleMessage("Age"),
+        "certType": MessageLookupByLibrary.simpleMessage("Type of certificate"),
+        "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),
+        "certres": MessageLookupByLibrary.simpleMessage("Result"),
+        "certtype": MessageLookupByLibrary.simpleMessage("Type of certificate"),
+        "certver": MessageLookupByLibrary.simpleMessage("Certificate Version"),
+        "country": MessageLookupByLibrary.simpleMessage("Vaccination country"),
+        "detected": MessageLookupByLibrary.simpleMessage("Detected"),
+        "dob": MessageLookupByLibrary.simpleMessage("Date of Brith"),
         "invalidcert":
-            MessageLookupByLibrary.simpleMessage("Certificado Inválido"),
-        "manname": MessageLookupByLibrary.simpleMessage("Fabricante"),
-        "moredetails": MessageLookupByLibrary.simpleMessage("Mas Detalles"),
-        "name": MessageLookupByLibrary.simpleMessage("Nombre"),
-        "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
-        "prodName": MessageLookupByLibrary.simpleMessage("Nombre del Producto"),
-        "rawData": MessageLookupByLibrary.simpleMessage("Datos sin Procesar"),
-        "recovered": MessageLookupByLibrary.simpleMessage("Recuperado"),
-        "restartcamera":
-            MessageLookupByLibrary.simpleMessage("Reiniciar Cámara"),
-        "rotatecamera": MessageLookupByLibrary.simpleMessage("Cambiar Cámara"),
-        "scanqrmessage":
-            MessageLookupByLibrary.simpleMessage("Escanea un código QR"),
+            MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
+        "manname": MessageLookupByLibrary.simpleMessage("Manufacturer"),
+        "moredetails": MessageLookupByLibrary.simpleMessage("More Details"),
+        "name": MessageLookupByLibrary.simpleMessage("First Name"),
+        "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
+        "prodName": MessageLookupByLibrary.simpleMessage("Name of Product"),
+        "rawData": MessageLookupByLibrary.simpleMessage("Raw Data"),
+        "recovered": MessageLookupByLibrary.simpleMessage("Recovered"),
+        "restartcamera": MessageLookupByLibrary.simpleMessage("Restart Camera"),
+        "rotatecamera": MessageLookupByLibrary.simpleMessage("Change Camera"),
+        "scanqrmessage": MessageLookupByLibrary.simpleMessage("Scan a QR Code"),
         "signingauth":
-            MessageLookupByLibrary.simpleMessage("Autoridad de Firmado"),
-        "surname": MessageLookupByLibrary.simpleMessage("Apellido(s)"),
-        "targetdisease": MessageLookupByLibrary.simpleMessage("Emfermedad"),
-        "test": MessageLookupByLibrary.simpleMessage("Prueba"),
-        "testdate": MessageLookupByLibrary.simpleMessage("Fecha de Prueba"),
-        "testloc":
-            MessageLookupByLibrary.simpleMessage("Localización de Prueba"),
-        "testtype": MessageLookupByLibrary.simpleMessage("Tipo de Test"),
+            MessageLookupByLibrary.simpleMessage("Signing Authority"),
+        "surname": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "targetdisease": MessageLookupByLibrary.simpleMessage("Disease"),
+        "test": MessageLookupByLibrary.simpleMessage("Test"),
+        "testdate": MessageLookupByLibrary.simpleMessage("Test Date"),
+        "testloc": MessageLookupByLibrary.simpleMessage("Location of Test"),
+        "testtype": MessageLookupByLibrary.simpleMessage("Test type"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
-        "unk": MessageLookupByLibrary.simpleMessage("Desconocido"),
-        "vaccination": MessageLookupByLibrary.simpleMessage("Vacunación"),
-        "vaccproph": MessageLookupByLibrary.simpleMessage("Tipo de Vacuna"),
-        "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),
-        "vacdoses": MessageLookupByLibrary.simpleMessage("Dosis"),
-        "validcert": MessageLookupByLibrary.simpleMessage("Certificado Válido"),
+        "unk": MessageLookupByLibrary.simpleMessage("Unknown"),
+        "vaccination": MessageLookupByLibrary.simpleMessage("Vacciantion"),
+        "vaccproph":
+            MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),
+        "vacdate": MessageLookupByLibrary.simpleMessage("Vacciantion Date"),
+        "vacdoses": MessageLookupByLibrary.simpleMessage("Doses"),
+        "validcert": MessageLookupByLibrary.simpleMessage("Valid Certificate"),
         "xageold": m0
       };
 }
