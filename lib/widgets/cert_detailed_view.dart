@@ -3,6 +3,8 @@ import 'package:covid_checker/utils/certs.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 
+import 'detail.dart';
+
 class CertDetailedView extends StatelessWidget {
   const CertDetailedView({required this.coseResult, Key? key})
       : super(key: key);
@@ -16,102 +18,43 @@ class CertDetailedView extends StatelessWidget {
     List<Widget> detailedInfo = [];
 
     final personalDataInfo = [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "First Name",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              res["nam"]["gn"] ?? "Not Found",
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).name,
+        detail: res["nam"]["gn"],
       ),
       const SizedBox(
         height: 5,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Last Name",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              res["nam"]["fn"] ?? "Not Found",
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).surname,
+        detail: res["nam"]["fn"],
       ),
       const SizedBox(
         height: 5,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Date of Birth",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              res["dob"] ?? "Not Found",
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).dob,
+        detail: res["dob"],
       ),
       const SizedBox(
         height: 5,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Age",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              "${yearsOld(res["dob"]) ?? S.of(context).unk} Years",
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).age,
+        detail: res["nam"]["gn"],
+      ),
+      Detail(
+        title: S.of(context).age,
+        detail: S.of(context).xageold(
+            (yearsOld(coseResult.payload[-260][1]["dob"])) ??
+                S.of(context).unk),
       ),
       const SizedBox(
         height: 10,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Country",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              coseResult.payload[1],
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).country,
+        detail: coseResult.payload[1],
       ),
       const SizedBox(
         height: 5,
@@ -121,142 +64,52 @@ class CertDetailedView extends StatelessWidget {
     if (certType(coseResult) == S.current.vaccination) {
       detailedInfo = [
         const Divider(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).manname,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                vaccinationManf((res).values.first[0]["ma"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).manname,
+          detail: vaccinationManf((res).values.first[0]["ma"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).targetdisease,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                targetDisease((res).values.first[0]["tg"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).targetdisease,
+          detail: targetDisease((res).values.first[0]["tg"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).vaccproph,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                vaccineProh((res).values.first[0]["vp"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).vaccproph,
+          detail: vaccineProh((res).values.first[0]["vp"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).prodName,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                vaccineProdName((res).values.first[0]["mp"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).prodName,
+          detail: vaccineProdName((res).values.first[0]["mp"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).vacdoses,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                "${(res).values.first[0]["dn"]} / ${(res).values.first[0]["sd"]}",
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).vacdoses,
+          detail:
+              "${(res).values.first[0]["dn"] ?? S.of(context).unk} / ${(res).values.first[0]["sd"] ?? S.of(context).unk}",
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).vacdate,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                (res).values.first[0]["dt"],
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).vacdate,
+          detail: (res).values.first[0]["dt"],
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).vacdate,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                (res).values.first[0]["co"],
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).country,
+          detail: (res).values.first[0]["co"],
         ),
         const SizedBox(
           height: 5,
@@ -377,7 +230,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["dt"],
+                (res).values.first[0]["dt"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -397,7 +250,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["co"],
+                (res).values.first[0]["co"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -422,7 +275,7 @@ class CertDetailedView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              (res).values.first[0]["ci"],
+              (res).values.first[0]["ci"] ?? S.of(context).unk,
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -460,7 +313,7 @@ class CertDetailedView extends StatelessWidget {
       ),
       Center(
         child: Text(
-          (res).values.first[0]["is"],
+          (res).values.first[0]["is"] ?? S.of(context).unk,
           textAlign: TextAlign.center,
         ),
       ),
@@ -472,22 +325,9 @@ class CertDetailedView extends StatelessWidget {
         children: [
           ...personalDataInfo,
           ...detailedInfo,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).certType,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Expanded(
-                child: Text(
-                  certType(coseResult),
-                  maxLines: 3,
-                  textAlign: TextAlign.end,
-                ),
-              )
-            ],
+          Detail(
+            title: S.of(context).certType,
+            detail: certType(coseResult),
           ),
           const SizedBox(
             height: 5,

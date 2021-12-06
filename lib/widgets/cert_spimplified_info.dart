@@ -30,15 +30,14 @@ class CertInfoViewer extends StatelessWidget {
           ),
           Detail(
             title: S.of(context).surname,
-            detail:
-                coseResult!.payload[-260][1]["nam"]["fn"] ?? S.of(context).unk,
+            detail: coseResult!.payload[-260][1]["nam"]["fn"],
           ),
           const SizedBox(
             height: 5,
           ),
           Detail(
             title: S.of(context).dob,
-            detail: coseResult!.payload[-260][1]["dob"] ?? S.of(context).unk,
+            detail: coseResult!.payload[-260][1]["dob"],
           ),
           const SizedBox(
             height: 5,
@@ -54,7 +53,7 @@ class CertInfoViewer extends StatelessWidget {
           ),
           Detail(
             title: S.of(context).country,
-            detail: coseResult!.payload[1] ?? S.of(context).unk,
+            detail: coseResult!.payload[1],
           ),
           const SizedBox(
             height: 5,
