@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      supportedLocales: S.delegate.supportedLocales,
       title: 'CovCheck',
       theme: ThemeData(
         // This is the theme of your application.
