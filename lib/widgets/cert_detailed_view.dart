@@ -106,7 +106,7 @@ class CertDetailedView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              coseResult.payload[1] ?? S.of(context).unk,
+              coseResult.payload[1],
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -211,7 +211,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                "${(res).values.first[0]["dn"] ?? S.of(context).unk} / ${(res).values.first[0]["sd"] ?? S.of(context).unk}",
+                "${(res).values.first[0]["dn"]} / ${(res).values.first[0]["sd"]}",
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -231,7 +231,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["dt"] ?? S.of(context).unk,
+                (res).values.first[0]["dt"],
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -251,7 +251,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["co"] ?? S.of(context).unk,
+                (res).values.first[0]["co"],
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -377,7 +377,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["dt"] ?? S.of(context).unk,
+                (res).values.first[0]["dt"],
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -397,7 +397,7 @@ class CertDetailedView extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["co"] ?? S.of(context).unk,
+                (res).values.first[0]["co"],
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -422,7 +422,7 @@ class CertDetailedView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              (res).values.first[0]["ci"] ?? S.of(context).unk,
+              (res).values.first[0]["ci"],
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -460,7 +460,7 @@ class CertDetailedView extends StatelessWidget {
       ),
       Center(
         child: Text(
-          (res).values.first[0]["is"] ?? S.of(context).unk,
+          (res).values.first[0]["is"],
           textAlign: TextAlign.center,
         ),
       ),

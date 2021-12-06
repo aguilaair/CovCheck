@@ -1,3 +1,4 @@
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Detail extends StatelessWidget {
@@ -5,7 +6,7 @@ class Detail extends StatelessWidget {
       : super(key: key);
 
   final String title;
-  final String detail;
+  final String? detail;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class Detail extends StatelessWidget {
           width: 5,
         ),
         Text(
-          detail,
+          detail ?? S.of(context).unk,
           maxLines: 3,
           textAlign: TextAlign.end,
         )
