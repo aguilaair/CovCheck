@@ -32,5 +32,7 @@
     "vaccination": "Vacunación",
     "test": "Prueba",
     "testdate": "Fecha de Prueba",
-    "unk": "Desconocido"
+    "testloc": "Localización de Prueba",
+    "unk": "Desconocido",
+    "recovered": "Recuperado"
 }

@@ -180,11 +180,11 @@ int? yearsOld(String time) {
 String certType(CoseResult res) {
   var type = (res.payload[-260][1] as Map<dynamic, dynamic>).keys.first;
   if (type == "v") {
-    return "Vaccination";
+    return S.current.vaccination;
   } else if (type == "r") {
-    return "Recovered";
+    return S.current.recovered;
   } else if (type == "t") {
-    return "Test";
+    return S.current.test;
   }
-  return "Unknown";
+  return type;
 }

@@ -1,3 +1,4 @@
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/result_card.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class EmptyResult extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "Scan a QR Code",
+            S.of(context).scanqrmessage,
             style: Theme.of(context).textTheme.headline6,
           ),
         ],

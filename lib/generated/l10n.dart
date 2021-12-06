@@ -380,11 +380,31 @@ class S {
     );
   }
 
+  /// `Localización de Prueba`
+  String get testloc {
+    return Intl.message(
+      'Localización de Prueba',
+      name: 'testloc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Desconocido`
   String get unk {
     return Intl.message(
       'Desconocido',
       name: 'unk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recuperado`
+  String get recovered {
+    return Intl.message(
+      'Recuperado',
+      name: 'recovered',
       desc: '',
       args: [],
     );

@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
         "prodName": MessageLookupByLibrary.simpleMessage("Nombre del Producto"),
         "rawData": MessageLookupByLibrary.simpleMessage("Datos sin Procesar"),
+        "recovered": MessageLookupByLibrary.simpleMessage("Recuperado"),
         "restartcamera":
             MessageLookupByLibrary.simpleMessage("Reiniciar Cámara"),
         "rotatecamera": MessageLookupByLibrary.simpleMessage("Cambiar Cámara"),
@@ -56,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "targetdisease": MessageLookupByLibrary.simpleMessage("Emfermedad"),
         "test": MessageLookupByLibrary.simpleMessage("Prueba"),
         "testdate": MessageLookupByLibrary.simpleMessage("Fecha de Prueba"),
+        "testloc":
+            MessageLookupByLibrary.simpleMessage("Localización de Prueba"),
         "testtype": MessageLookupByLibrary.simpleMessage("Tipo de Test"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
         "unk": MessageLookupByLibrary.simpleMessage("Desconocido"),

@@ -1,3 +1,4 @@
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/utils/certs.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class CertDetailedView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              "${yearsOld(res["dob"]) ?? "Unknown"} Years",
+              "${yearsOld(res["dob"]) ?? S.of(context).unk} Years",
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -105,7 +106,7 @@ class CertDetailedView extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              coseResult.payload[1] ?? "Unknown",
+              coseResult.payload[1] ?? S.of(context).unk,
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -125,7 +126,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Manufacturer Name",
+              S.of(context).manname,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -145,7 +146,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Targeted Disease",
+              S.of(context).targetdisease,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -165,7 +166,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Vaccine or Prohylaxis",
+              S.of(context).vaccproph,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -185,7 +186,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Product name",
+              S.of(context).prodName,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -205,12 +206,12 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Doses",
+              S.of(context).vacdoses,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
               child: Text(
-                "${(res).values.first[0]["dn"] ?? "Unknown"} / ${(res).values.first[0]["sd"] ?? "Unknown"}",
+                "${(res).values.first[0]["dn"] ?? S.of(context).unk} / ${(res).values.first[0]["sd"] ?? S.of(context).unk}",
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -225,12 +226,12 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Date of Vaccination",
+              S.of(context).vacdate,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["dt"] ?? "Unknown",
+                (res).values.first[0]["dt"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -245,12 +246,12 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Administartion Contry",
+              S.of(context).vacdate,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["co"] ?? "Unknown",
+                (res).values.first[0]["co"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -269,7 +270,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Manufacturer Name",
+              S.of(context).manname,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -289,7 +290,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Targeted Disease",
+              S.of(context).targetdisease,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -309,7 +310,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Test Type",
+              S.of(context).testtype,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -329,7 +330,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Test Result",
+              S.of(context).certres,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -349,7 +350,7 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Date of Collection",
+              S.of(context).testdate,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
@@ -371,12 +372,12 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Testing Centre",
+              S.of(context).testloc,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["dt"] ?? "Unknown",
+                (res).values.first[0]["dt"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -391,12 +392,12 @@ class CertDetailedView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Administartion Contry",
+              S.of(context).country,
               style: Theme.of(context).textTheme.headline6,
             ),
             Expanded(
               child: Text(
-                (res).values.first[0]["co"] ?? "Unknown",
+                (res).values.first[0]["co"] ?? S.of(context).unk,
                 maxLines: 3,
                 textAlign: TextAlign.end,
               ),
@@ -416,12 +417,12 @@ class CertDetailedView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Certificate ID",
+            S.of(context).certid,
             style: Theme.of(context).textTheme.headline6,
           ),
           Expanded(
             child: Text(
-              (res).values.first[0]["ci"] ?? "Unknown",
+              (res).values.first[0]["ci"] ?? S.of(context).unk,
               maxLines: 3,
               textAlign: TextAlign.end,
             ),
@@ -436,7 +437,7 @@ class CertDetailedView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Certificate Version",
+            S.of(context).certver,
             style: Theme.of(context).textTheme.headline6,
           ),
           Text(
@@ -450,7 +451,7 @@ class CertDetailedView extends StatelessWidget {
         height: 10,
       ),
       Text(
-        "Signing Authority",
+        S.of(context).signingauth,
         style: Theme.of(context).textTheme.headline6,
         textAlign: TextAlign.left,
       ),
@@ -459,7 +460,7 @@ class CertDetailedView extends StatelessWidget {
       ),
       Center(
         child: Text(
-          (res).values.first[0]["is"] ?? "Unknown",
+          (res).values.first[0]["is"] ?? S.of(context).unk,
           textAlign: TextAlign.center,
         ),
       ),
@@ -476,7 +477,7 @@ class CertDetailedView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Type of Certificate",
+                S.of(context).certType,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Expanded(
@@ -494,7 +495,7 @@ class CertDetailedView extends StatelessWidget {
           ...certInfo,
           const Divider(),
           Text(
-            "Raw Data",
+            S.of(context).rawData,
             style: Theme.of(context).textTheme.headline6,
             textAlign: TextAlign.left,
           ),
@@ -525,11 +526,11 @@ int? yearsOld(String time) {
 String certType(CoseResult res) {
   var type = (res.payload[-260][1] as Map<dynamic, dynamic>).keys.first;
   if (type == "v") {
-    return "Vaccination";
+    return S.current.vaccination;
   } else if (type == "r") {
-    return "Recovered";
+    return S.current.recovered;
   } else if (type == "t") {
-    return "Test";
+    return S.current.test;
   }
   return type;
 }
