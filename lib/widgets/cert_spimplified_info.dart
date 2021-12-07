@@ -90,6 +90,8 @@ class CertInfoViewer extends StatelessWidget {
             child: OutlinedButton.icon(
                 onPressed: () {
                   showModalBottomSheet(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     context: context,
                     builder: (context) {
                       return CertDetailedView(coseResult: coseResult!);

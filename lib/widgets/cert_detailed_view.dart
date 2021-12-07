@@ -197,7 +197,10 @@ class CertDetailedView extends StatelessWidget {
       ),
     ];
 
-    return Padding(
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       padding: const EdgeInsets.all(8.0),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
