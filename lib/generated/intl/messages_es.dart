@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static String m0(age) => "${age} Años";
+  static String m0(type) => "Detalles de ${type}";
+
+  static String m1(age) => "${age} Años";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -28,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "age": MessageLookupByLibrary.simpleMessage("Edad"),
         "certType": MessageLookupByLibrary.simpleMessage("Tipo de Certificado"),
         "certid": MessageLookupByLibrary.simpleMessage("ID de Certificado"),
+        "certinfo":
+            MessageLookupByLibrary.simpleMessage("Información del certificado"),
         "certres": MessageLookupByLibrary.simpleMessage("Resultado"),
         "certtype":
             MessageLookupByLibrary.simpleMessage("Tipo de Certificatio"),
@@ -36,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "country":
             MessageLookupByLibrary.simpleMessage("País de Administración"),
         "detected": MessageLookupByLibrary.simpleMessage("Detectado"),
+        "detialtype": m0,
         "dob": MessageLookupByLibrary.simpleMessage("Fecha de Nacimiento"),
         "errordecoding":
             MessageLookupByLibrary.simpleMessage("Error en lectura de datos"),
@@ -58,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "moredetails": MessageLookupByLibrary.simpleMessage("Mas Detalles"),
         "name": MessageLookupByLibrary.simpleMessage("Nombre"),
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
+        "personaldetails":
+            MessageLookupByLibrary.simpleMessage("Datos Personales"),
         "prodName": MessageLookupByLibrary.simpleMessage("Nombre del Producto"),
         "rawData": MessageLookupByLibrary.simpleMessage("Datos sin Procesar"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recuperado"),
@@ -82,6 +89,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),
         "vacdoses": MessageLookupByLibrary.simpleMessage("Dosis"),
         "validcert": MessageLookupByLibrary.simpleMessage("Certificado Válido"),
-        "xageold": m0
+        "xageold": m1
       };
 }

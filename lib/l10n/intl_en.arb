@@ -42,5 +42,8 @@
     "errorinvaliddataformat": "Data Format Error",
     "errorunsopportedalgo": "Unsupported Algorithm",
     "errorkidmismatch": "Signing Mismatch",
-    "errorunk": "Unknown Error"
+    "errorunk": "Unknown Error",
+    "detialtype": "{type} Details",
+    "personaldetails": "Personal Details",
+    "certinfo": "Certificate Info"
 }

@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(age) => "${age} Years";
+  static String m0(type) => "${type} Details";
+
+  static String m1(age) => "${age} Years";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -28,11 +30,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "certType": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),
+        "certinfo": MessageLookupByLibrary.simpleMessage("Certificate Info"),
         "certres": MessageLookupByLibrary.simpleMessage("Result"),
         "certtype": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certver": MessageLookupByLibrary.simpleMessage("Certificate Version"),
         "country": MessageLookupByLibrary.simpleMessage("Vaccination country"),
         "detected": MessageLookupByLibrary.simpleMessage("Detected"),
+        "detialtype": m0,
         "dob": MessageLookupByLibrary.simpleMessage("Date of Brith"),
         "errordecoding":
             MessageLookupByLibrary.simpleMessage("Data Read Error"),
@@ -55,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "moredetails": MessageLookupByLibrary.simpleMessage("More Details"),
         "name": MessageLookupByLibrary.simpleMessage("First Name"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
+        "personaldetails":
+            MessageLookupByLibrary.simpleMessage("Personal Details"),
         "prodName": MessageLookupByLibrary.simpleMessage("Name of Product"),
         "rawData": MessageLookupByLibrary.simpleMessage("Raw Data"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recovered"),
@@ -77,6 +83,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacdate": MessageLookupByLibrary.simpleMessage("Vacciantion Date"),
         "vacdoses": MessageLookupByLibrary.simpleMessage("Doses"),
         "validcert": MessageLookupByLibrary.simpleMessage("Valid Certificate"),
-        "xageold": m0
+        "xageold": m1
       };
 }

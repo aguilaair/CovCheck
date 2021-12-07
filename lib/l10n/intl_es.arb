@@ -42,5 +42,8 @@
     "errorinvaliddataformat": "Formato de datos inválido",
     "errorunsopportedalgo": "Algoritmo no compatible",
     "errorkidmismatch": "Firma no coincide con certificado",
-    "errorunk": "Error Desconocido"
+    "errorunk": "Error Desconocido",
+    "detialtype": "Detalles de {type}",
+    "personaldetails": "Datos Personales",
+    "certinfo": "Información del certificado"
 }

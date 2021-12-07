@@ -208,9 +208,10 @@ class CertDetailedView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: [
             ExpansionTile(
-              title: const Text(
-                "Personal Data",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              title: Text(
+                S.of(context).personaldetails,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               childrenPadding:
                   const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
@@ -219,7 +220,7 @@ class CertDetailedView extends StatelessWidget {
             //...,
             ExpansionTile(
               title: Text(
-                certType(coseResult) + " Details",
+                S.of(context).detialtype(certType(coseResult)),
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
@@ -228,9 +229,10 @@ class CertDetailedView extends StatelessWidget {
               children: detailedInfo,
             ),
             ExpansionTile(
-              title: const Text(
-                "Certificate Info",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              title: Text(
+                S.of(context).certinfo,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               childrenPadding:
                   const EdgeInsets.symmetric(vertical: 5, horizontal: 15),

@@ -489,6 +489,36 @@ class S {
       args: [],
     );
   }
+
+  /// `{type} Details`
+  String detialtype(Object type) {
+    return Intl.message(
+      '$type Details',
+      name: 'detialtype',
+      desc: '',
+      args: [type],
+    );
+  }
+
+  /// `Personal Details`
+  String get personaldetails {
+    return Intl.message(
+      'Personal Details',
+      name: 'personaldetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate Info`
+  String get certinfo {
+    return Intl.message(
+      'Certificate Info',
+      name: 'certinfo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
