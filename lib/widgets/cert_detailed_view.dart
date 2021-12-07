@@ -198,7 +198,7 @@ class CertDetailedView extends StatelessWidget {
     ];
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       padding: const EdgeInsets.all(8.0),
@@ -259,6 +259,8 @@ class CertDetailedView extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Theme.of(context).backgroundColor,
+                    border: Border.all(
+                        color: Colors.blueAccent.withAlpha(200), width: 1.5),
                   ),
                 ),
               ],

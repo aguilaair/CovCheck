@@ -110,5 +110,5 @@ String beautifyCose(CoseErrorCode error) {
   } else if (error == CoseErrorCode.unsupported_algorithm) {
     return S.current.errorunsopportedalgo;
   }
-  return "Unknown Error";
+  return S.current.errorunk;
 }
