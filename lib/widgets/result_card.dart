@@ -73,13 +73,15 @@ class ResultCard extends StatelessWidget {
         ),
         margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey
+                  : const Color(0xff27226A),
               blurRadius: 15,
               spreadRadius: -3,
             )

@@ -49,6 +49,9 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark().copyWith(
         backgroundColor: const Color(0xff080B27),
+        cardColor: const Color(0xff050612),
+        primaryColor: const Color(0xFF262DC9),
+        primaryColorDark: const Color(0xFF262DC9),
       ),
       home: const MyHomePage(title: 'CovCheck Main Page'),
     );

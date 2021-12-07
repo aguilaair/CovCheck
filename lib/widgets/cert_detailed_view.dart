@@ -198,9 +198,13 @@ class CertDetailedView extends StatelessWidget {
     ];
 
     return Container(
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+        color: Theme.of(context).cardColor,
+      ),
       padding: const EdgeInsets.all(8.0),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),

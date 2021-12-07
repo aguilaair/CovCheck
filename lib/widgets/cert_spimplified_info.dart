@@ -91,8 +91,13 @@ class CertInfoViewer extends StatelessWidget {
                 onPressed: () {
                   showModalBottomSheet(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     context: context,
+                    barrierColor:
+                        Theme.of(context).brightness == Brightness.light
+                            ? null
+                            : Colors.white30,
                     builder: (context) {
                       return CertDetailedView(coseResult: coseResult!);
                     },
