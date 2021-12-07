@@ -1,3 +1,4 @@
+import 'package:circle_flags/circle_flags.dart';
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/cert_detailed_view.dart';
 import 'package:covid_checker/widgets/detail.dart';
@@ -54,6 +55,7 @@ class CertInfoViewer extends StatelessWidget {
           Detail(
             title: S.of(context).country,
             detail: coseResult!.payload[1],
+            trialing: CircleFlag(coseResult!.payload[1]),
           ),
           const SizedBox(
             height: 5,

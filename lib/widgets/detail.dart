@@ -2,11 +2,13 @@ import 'package:covid_checker/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Detail extends StatelessWidget {
-  const Detail({required this.detail, required this.title, Key? key})
+  const Detail(
+      {this.trialing, required this.detail, required this.title, Key? key})
       : super(key: key);
 
   final String title;
   final String? detail;
+  final Widget? trialing;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,7 @@ class Detail extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(
-          width: 10
-          ,
+          width: 10,
         ),
         Expanded(
           child: Text(
@@ -28,7 +29,16 @@ class Detail extends StatelessWidget {
             maxLines: 3,
             textAlign: TextAlign.end,
           ),
-        )
+        ),
+        if (trialing != null)
+          Container(
+            height: 40,
+            width: 40,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+            ),
+            child: trialing,
+          )
       ],
     );
   }
