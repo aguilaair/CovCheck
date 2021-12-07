@@ -19,12 +19,15 @@ class Detail extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(
-          width: 5,
+          width: 10
+          ,
         ),
-        Text(
-          detail ?? S.of(context).unk,
-          maxLines: 3,
-          textAlign: TextAlign.end,
+        Expanded(
+          child: Text(
+            detail ?? S.of(context).unk,
+            maxLines: 3,
+            textAlign: TextAlign.end,
+          ),
         )
       ],
     );

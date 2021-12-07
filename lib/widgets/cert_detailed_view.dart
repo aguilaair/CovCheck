@@ -41,29 +41,24 @@ class CertDetailedView extends StatelessWidget {
       ),
       Detail(
         title: S.of(context).age,
-        detail: res["nam"]["gn"],
-      ),
-      Detail(
-        title: S.of(context).age,
         detail: S.of(context).xageold(
             (yearsOld(coseResult.payload[-260][1]["dob"])) ??
                 S.of(context).unk),
       ),
       const SizedBox(
-        height: 10,
+        height: 5,
       ),
       Detail(
         title: S.of(context).country,
         detail: coseResult.payload[1],
       ),
       const SizedBox(
-        height: 5,
+        height: 10,
       ),
     ];
 
     if (certType(coseResult) == S.current.vaccination) {
       detailedInfo = [
-        const Divider(),
         Detail(
           title: S.of(context).manname,
           detail: vaccinationManf((res).values.first[0]["ma"]),
@@ -117,145 +112,53 @@ class CertDetailedView extends StatelessWidget {
       ];
     } else if (certType(coseResult) == S.current.test) {
       detailedInfo = [
-        const Divider(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).manname,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                (res).values.first[0]["nm"],
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).manname,
+          detail: (res).values.first[0]["nm"],
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).targetdisease,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                targetDisease((res).values.first[0]["tg"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).targetdisease,
+          detail: targetDisease((res).values.first[0]["tg"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).testtype,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                testType((res).values.first[0]["tt"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).testtype,
+          detail: testType((res).values.first[0]["tt"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).certres,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                testResult((res).values.first[0]["tr"]),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).certres,
+          detail: testResult((res).values.first[0]["tr"]),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).testdate,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                DateTime.tryParse((res).values.first[0]["sc"])!
-                    .toLocal()
-                    .toString(),
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).testdate,
+          detail: DateTime.tryParse((res).values.first[0]["sc"])!
+              .toLocal()
+              .toString(),
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).testloc,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                (res).values.first[0]["dt"] ?? S.of(context).unk,
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).testloc,
+          detail: (res).values.first[0]["dt"],
         ),
         const SizedBox(
           height: 5,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              S.of(context).country,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Expanded(
-              child: Text(
-                (res).values.first[0]["co"] ?? S.of(context).unk,
-                maxLines: 3,
-                textAlign: TextAlign.end,
-              ),
-            )
-          ],
+        Detail(
+          title: S.of(context).country,
+          detail: (res).values.first[0]["co"],
         ),
         const SizedBox(
           height: 5,
@@ -264,41 +167,16 @@ class CertDetailedView extends StatelessWidget {
     }
 
     final certInfo = [
-      const Divider(),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            S.of(context).certid,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Expanded(
-            child: Text(
-              (res).values.first[0]["ci"] ?? S.of(context).unk,
-              maxLines: 3,
-              textAlign: TextAlign.end,
-            ),
-          )
-        ],
+      Detail(
+        title: S.of(context).certid,
+        detail: (res).values.first[0]["ci"],
       ),
       const SizedBox(
         height: 5,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            S.of(context).certver,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          Text(
-            res["ver"],
-            maxLines: 3,
-            textAlign: TextAlign.end,
-          )
-        ],
+      Detail(
+        title: S.of(context).certver,
+        detail: res["ver"],
       ),
       const SizedBox(
         height: 10,
@@ -321,29 +199,69 @@ class CertDetailedView extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView(
-        children: [
-          ...personalDataInfo,
-          ...detailedInfo,
-          Detail(
-            title: S.of(context).certType,
-            detail: certType(coseResult),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          ...certInfo,
-          const Divider(),
-          Text(
-            S.of(context).rawData,
-            style: Theme.of(context).textTheme.headline6,
-            textAlign: TextAlign.left,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(coseResult.payload.toString()),
-        ],
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ListView(
+          children: [
+            ExpansionTile(
+              title: const Text(
+                "Personal Data",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              childrenPadding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              children: personalDataInfo,
+            ),
+            //...,
+            ExpansionTile(
+              title: Text(
+                certType(coseResult) + " Details",
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              childrenPadding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              children: detailedInfo,
+            ),
+            ExpansionTile(
+              title: const Text(
+                "Certificate Info",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              childrenPadding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              children: [
+                Detail(
+                  title: S.of(context).certType,
+                  detail: certType(coseResult),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                ...certInfo,
+              ],
+            ),
+            ExpansionTile(
+              title: Text(
+                S.of(context).rawData,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              childrenPadding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              children: [
+                Container(
+                  child: SelectableText(coseResult.payload.toString()),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Theme.of(context).backgroundColor,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
