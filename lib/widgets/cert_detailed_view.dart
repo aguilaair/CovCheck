@@ -205,6 +205,7 @@ class CertDetailedView extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             ExpansionTile(
               title: const Text(

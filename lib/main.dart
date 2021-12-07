@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/certs.dart';
+import 'package:covid_checker/utils/gen_swatch.dart';
 import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: createMaterialColor(const Color(0xFF262DC9)),
+        primaryColor: const Color(0xFF262DC9),
         backgroundColor: const Color(0xffECEEFF),
       ),
       home: const MyHomePage(title: 'CovCheck Main Page'),
