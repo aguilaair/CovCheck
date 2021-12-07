@@ -47,6 +47,9 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF262DC9),
         backgroundColor: const Color(0xffECEEFF),
       ),
+      darkTheme: ThemeData.dark().copyWith(
+        backgroundColor: const Color(0xff080B27),
+      ),
       home: const MyHomePage(title: 'CovCheck Main Page'),
     );
   }

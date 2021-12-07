@@ -72,7 +72,7 @@ class ResultCard extends StatelessWidget {
           ],
         ),
         margin: const EdgeInsets.only(top: 20),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
@@ -84,7 +84,7 @@ class ResultCard extends StatelessWidget {
               spreadRadius: -3,
             )
           ],
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
         ),
       ),
     );
