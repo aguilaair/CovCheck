@@ -34,6 +34,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "country": MessageLookupByLibrary.simpleMessage("Vaccination country"),
         "detected": MessageLookupByLibrary.simpleMessage("Detected"),
         "dob": MessageLookupByLibrary.simpleMessage("Date of Brith"),
+        "errordecoding":
+            MessageLookupByLibrary.simpleMessage("Data Read Error"),
+        "errorinvaliddataformat":
+            MessageLookupByLibrary.simpleMessage("Data Format Error"),
+        "errorinvalidformat":
+            MessageLookupByLibrary.simpleMessage("Invalid Format"),
+        "errorinvalidheader":
+            MessageLookupByLibrary.simpleMessage("Invalid Header Format"),
+        "errorkeynotfound": MessageLookupByLibrary.simpleMessage(
+            "Key Not Found, cannot trust signing authority"),
+        "errorkidmismatch":
+            MessageLookupByLibrary.simpleMessage("Signing Mismatch"),
+        "errorunk": MessageLookupByLibrary.simpleMessage("Unknown Error"),
+        "errorunsopportedalgo":
+            MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
         "manname": MessageLookupByLibrary.simpleMessage("Manufacturer"),

@@ -34,5 +34,13 @@
     "testdate": "Fecha de Prueba",
     "testloc": "Localización de Prueba",
     "unk": "Desconocido",
-    "recovered": "Recuperado"
+    "recovered": "Recuperado",
+    "errorkeynotfound": "Clave no encontrada, certificado no es de confianza",
+    "errordecoding": "Error en lectura de datos",
+    "errorinvalidformat": "Formato Inválido",
+    "errorinvalidheader": "Formato de cabecera inválido",
+    "errorinvaliddataformat": "Formato de datos inválido",
+    "errorunsopportedalgo": "Algoritmo no compatible",
+    "errorkidmismatch": "Firma no coincide con certificado",
+    "errorunk": "Error Desconocido"
 }

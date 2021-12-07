@@ -409,6 +409,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Key Not Found, cannot trust signing authority`
+  String get errorkeynotfound {
+    return Intl.message(
+      'Key Not Found, cannot trust signing authority',
+      name: 'errorkeynotfound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Read Error`
+  String get errordecoding {
+    return Intl.message(
+      'Data Read Error',
+      name: 'errordecoding',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Format`
+  String get errorinvalidformat {
+    return Intl.message(
+      'Invalid Format',
+      name: 'errorinvalidformat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid Header Format`
+  String get errorinvalidheader {
+    return Intl.message(
+      'Invalid Header Format',
+      name: 'errorinvalidheader',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Format Error`
+  String get errorinvaliddataformat {
+    return Intl.message(
+      'Data Format Error',
+      name: 'errorinvaliddataformat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unsupported Algorithm`
+  String get errorunsopportedalgo {
+    return Intl.message(
+      'Unsupported Algorithm',
+      name: 'errorunsopportedalgo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signing Mismatch`
+  String get errorkidmismatch {
+    return Intl.message(
+      'Signing Mismatch',
+      name: 'errorkidmismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown Error`
+  String get errorunk {
+    return Intl.message(
+      'Unknown Error',
+      name: 'errorunk',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

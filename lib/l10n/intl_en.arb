@@ -34,5 +34,13 @@
     "testdate": "Test Date",
     "testloc": "Location of Test",
     "unk": "Unknown",
-    "recovered": "Recovered"
+    "recovered": "Recovered",
+    "errorkeynotfound": "Key Not Found, cannot trust signing authority",
+    "errordecoding": "Data Read Error",
+    "errorinvalidformat": "Invalid Format",
+    "errorinvalidheader": "Invalid Header Format",
+    "errorinvaliddataformat": "Data Format Error",
+    "errorunsopportedalgo": "Unsupported Algorithm",
+    "errorkidmismatch": "Signing Mismatch",
+    "errorunk": "Unknown Error"
 }

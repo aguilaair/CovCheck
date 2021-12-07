@@ -37,6 +37,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("País de Administración"),
         "detected": MessageLookupByLibrary.simpleMessage("Detectado"),
         "dob": MessageLookupByLibrary.simpleMessage("Fecha de Nacimiento"),
+        "errordecoding":
+            MessageLookupByLibrary.simpleMessage("Error en lectura de datos"),
+        "errorinvaliddataformat":
+            MessageLookupByLibrary.simpleMessage("Formato de datos inválido"),
+        "errorinvalidformat":
+            MessageLookupByLibrary.simpleMessage("Formato Inválido"),
+        "errorinvalidheader": MessageLookupByLibrary.simpleMessage(
+            "Formato de cabecera inválido"),
+        "errorkeynotfound": MessageLookupByLibrary.simpleMessage(
+            "Clave no encontrada, certificado no es de confianza"),
+        "errorkidmismatch": MessageLookupByLibrary.simpleMessage(
+            "Firma no coincide con certificado"),
+        "errorunk": MessageLookupByLibrary.simpleMessage("Error Desconocido"),
+        "errorunsopportedalgo":
+            MessageLookupByLibrary.simpleMessage("Algoritmo no compatible"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Certificado Inválido"),
         "manname": MessageLookupByLibrary.simpleMessage("Fabricante"),
