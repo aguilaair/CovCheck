@@ -1,5 +1,5 @@
 {
-    "name": "CovCheck",
+    "name": "CovCheck - Check EU Certificates",
     "short_name": "CovCheck",
     "start_url": ".",
     "display": "standalone",
