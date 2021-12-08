@@ -3,7 +3,9 @@
 
 The verification is done by [dart_cose](https://pub.dev/packages/dart_cose).
 ![Banner Screenshot](https://raw.githubusercontent.com/aguilaair/covid-certificate-checker/main/assets/promo/Banner%20Main.png)
-<a href='https://play.google.com/store/apps/details?id=dev.eduardom.covcheck&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=300/></a>
+<a href='https://play.google.com/store/apps/details?id=dev.eduardom.covcheck&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height=100/></a>
+### Coming Soon to the App Store
+<a href='#'><img alt='Get it on Google Play' src='https://www.pngmart.com/files/10/Download-On-The-App-Store-PNG-Photos.png' height=75/></a> 
 
 # Contributing
 Due to the sensitive nature of the content in `lib\utils\certs.dart` no PRs will be accepeted that modify the file. If you want to request an update please open a new issue.
