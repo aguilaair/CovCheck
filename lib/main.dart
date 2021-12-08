@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/certs.dart';
@@ -103,7 +104,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Orientation orientation = MediaQuery.of(context).orientation;
+    MediaQueryData mq = MediaQuery.of(context);
+    Orientation orientation = mq.orientation;
+    Size size = mq.size;
 
     final widgetList = <Widget>[
       if (orientation == Orientation.portrait) const Logo(),
@@ -122,6 +125,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: QRView(
                   key: qrKey,
                   overlay: QrScannerOverlayShape(
+                      cutOutWidth: min(size.width * 0.65, size.height * 0.65),
+                      cutOutHeight: min(size.width * 0.65, size.height * 0.65),
                       borderRadius: 15,
                       overlayColor: Colors.black.withAlpha(100)),
                   onQRViewCreated: _onQRViewCreated,
