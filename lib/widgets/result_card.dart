@@ -36,6 +36,15 @@ class ResultCard extends StatelessWidget {
                 color: coseResult.verified
                     ? const Color(0xff1BCA4C)
                     : const Color(0xffCA451B),
+                boxShadow: [
+                  BoxShadow(
+                    color: coseResult.verified
+                        ? const Color(0xff1BCA4C)
+                        : const Color(0xffCA451B),
+                    blurRadius: 10,
+                    //spreadRadius: 0,
+                  )
+                ],
               ),
               width: double.infinity,
               alignment: Alignment.center,
