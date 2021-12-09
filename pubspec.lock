@@ -342,7 +342,7 @@ packages:
     source: hosted
     version: "0.4.3"
   typed_data:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: typed_data
       url: "https://pub.dartlang.org"
