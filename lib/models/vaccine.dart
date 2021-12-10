@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:covid_checker/utils/processingCertTootls.dart' as processers;
+
 class Vaccination {
   String targetDisease;
   String? targetDiseaseProcessed;
@@ -54,13 +56,17 @@ class Vaccination {
   }) {
     return Vaccination(
       targetDisease: targetDisease ?? this.targetDisease,
-      targetDiseaseProcessed: targetDiseaseProcessed ?? this.targetDiseaseProcessed,
+      targetDiseaseProcessed:
+          targetDiseaseProcessed ?? this.targetDiseaseProcessed,
       vaccineOrProphylaxis: vaccineOrProphylaxis ?? this.vaccineOrProphylaxis,
-      vaccineOrProphylaxisProcessed: vaccineOrProphylaxisProcessed ?? this.vaccineOrProphylaxisProcessed,
+      vaccineOrProphylaxisProcessed:
+          vaccineOrProphylaxisProcessed ?? this.vaccineOrProphylaxisProcessed,
       medicinalProduct: medicinalProduct ?? this.medicinalProduct,
-      medicinalProductProcessed: medicinalProductProcessed ?? this.medicinalProductProcessed,
+      medicinalProductProcessed:
+          medicinalProductProcessed ?? this.medicinalProductProcessed,
       marketingHolder: marketingHolder ?? this.marketingHolder,
-      marketingHolderProcessed: marketingHolderProcessed ?? this.marketingHolderProcessed,
+      marketingHolderProcessed:
+          marketingHolderProcessed ?? this.marketingHolderProcessed,
       dosesGiven: dosesGiven ?? this.dosesGiven,
       dosesRequired: dosesRequired ?? this.dosesRequired,
       complete: complete ?? this.complete,
@@ -111,9 +117,38 @@ class Vaccination {
     );
   }
 
+  Vaccination? fromDGC(Map<dynamic, dynamic> map) {
+    final Map<dynamic, dynamic> vaccineMap;
+
+    try {
+      vaccineMap = map[-260][1]["v"];
+    } catch (e) {
+      return null;
+    }
+    return Vaccination(
+      targetDisease: vaccineMap['tg'] ?? '',
+      targetDiseaseProcessed: processers.targetDisease(vaccineMap['tg']),
+      vaccineOrProphylaxis: vaccineMap['vp'] ?? '',
+      vaccineOrProphylaxisProcessed: processers.vaccineProh(vaccineMap['vp']),
+      medicinalProduct: vaccineMap['mp'] ?? '',
+      medicinalProductProcessed: processers.vaccineProdName(vaccineMap['mp']),
+      marketingHolder: vaccineMap['marketingHolder'] ?? '',
+      marketingHolderProcessed: processers.vaccinationManf(vaccineMap['mp']),
+      dosesGiven: vaccineMap['dosesGiven']?.toInt() ?? 0,
+      dosesRequired: vaccineMap['dosesRequired']?.toInt() ?? 0,
+      complete:
+          (vaccineMap['dn']?.toInt() ?? -1 >= vaccineMap['sd']?.toInt() ?? 0),
+      dateOfVaccination: DateTime.tryParse(vaccineMap['dt']),
+      country: vaccineMap['co'] ?? '',
+      issuer: vaccineMap['is'] ?? '',
+      certId: vaccineMap['ci'] ?? '',
+    );
+  }
+
   String toJson() => json.encode(toMap());
 
-  factory Vaccination.fromJson(String source) => Vaccination.fromMap(json.decode(source));
+  factory Vaccination.fromJson(String source) =>
+      Vaccination.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -123,41 +158,41 @@ class Vaccination {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Vaccination &&
-      other.targetDisease == targetDisease &&
-      other.targetDiseaseProcessed == targetDiseaseProcessed &&
-      other.vaccineOrProphylaxis == vaccineOrProphylaxis &&
-      other.vaccineOrProphylaxisProcessed == vaccineOrProphylaxisProcessed &&
-      other.medicinalProduct == medicinalProduct &&
-      other.medicinalProductProcessed == medicinalProductProcessed &&
-      other.marketingHolder == marketingHolder &&
-      other.marketingHolderProcessed == marketingHolderProcessed &&
-      other.dosesGiven == dosesGiven &&
-      other.dosesRequired == dosesRequired &&
-      other.complete == complete &&
-      other.dateOfVaccination == dateOfVaccination &&
-      other.country == country &&
-      other.issuer == issuer &&
-      other.certId == certId;
+        other.targetDisease == targetDisease &&
+        other.targetDiseaseProcessed == targetDiseaseProcessed &&
+        other.vaccineOrProphylaxis == vaccineOrProphylaxis &&
+        other.vaccineOrProphylaxisProcessed == vaccineOrProphylaxisProcessed &&
+        other.medicinalProduct == medicinalProduct &&
+        other.medicinalProductProcessed == medicinalProductProcessed &&
+        other.marketingHolder == marketingHolder &&
+        other.marketingHolderProcessed == marketingHolderProcessed &&
+        other.dosesGiven == dosesGiven &&
+        other.dosesRequired == dosesRequired &&
+        other.complete == complete &&
+        other.dateOfVaccination == dateOfVaccination &&
+        other.country == country &&
+        other.issuer == issuer &&
+        other.certId == certId;
   }
 
   @override
   int get hashCode {
     return targetDisease.hashCode ^
-      targetDiseaseProcessed.hashCode ^
-      vaccineOrProphylaxis.hashCode ^
-      vaccineOrProphylaxisProcessed.hashCode ^
-      medicinalProduct.hashCode ^
-      medicinalProductProcessed.hashCode ^
-      marketingHolder.hashCode ^
-      marketingHolderProcessed.hashCode ^
-      dosesGiven.hashCode ^
-      dosesRequired.hashCode ^
-      complete.hashCode ^
-      dateOfVaccination.hashCode ^
-      country.hashCode ^
-      issuer.hashCode ^
-      certId.hashCode;
+        targetDiseaseProcessed.hashCode ^
+        vaccineOrProphylaxis.hashCode ^
+        vaccineOrProphylaxisProcessed.hashCode ^
+        medicinalProduct.hashCode ^
+        medicinalProductProcessed.hashCode ^
+        marketingHolder.hashCode ^
+        marketingHolderProcessed.hashCode ^
+        dosesGiven.hashCode ^
+        dosesRequired.hashCode ^
+        complete.hashCode ^
+        dateOfVaccination.hashCode ^
+        country.hashCode ^
+        issuer.hashCode ^
+        certId.hashCode;
   }
 }
