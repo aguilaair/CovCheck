@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:covid_checker/utils/processingCertTootls.dart' as processers;
+import 'package:covid_checker/utils/processing_cert_tools.dart' as processers;
 
 class Vaccination {
   String targetDisease;

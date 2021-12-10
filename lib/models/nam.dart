@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 class Nam {
-  String? surname;
-  String? stdSurname;
-  String? forename;
-  String? stdForename;
-  DateTime? dob;
+  String surname;
+  String stdSurname;
+  String forename;
+  String stdForename;
+  DateTime dob;
 
   Nam({
-    this.surname,
-    this.stdSurname,
-    this.forename,
-    this.stdForename,
-    this.dob,
+    required this.surname,
+    required this.stdSurname,
+    required this.forename,
+    required this.stdForename,
+    required this.dob,
   });
 
   Nam copyWith({
@@ -37,18 +37,32 @@ class Nam {
       'stdSurname': stdSurname,
       'forename': forename,
       'stdForename': stdForename,
-      'dob': dob?.toIso8601String(),
+      'dob': dob.toIso8601String(),
     };
   }
 
   factory Nam.fromMap(Map<String, dynamic> map) {
     return Nam(
-      surname: map['fn'],
-      stdSurname: map['fnt'],
-      forename: map['gn'],
-      stdForename: map['gnt'],
-      dob: DateTime.tryParse(map['dob']),
+      surname: map['surname'],
+      stdSurname: map['stdSurname'],
+      forename: map['forename'],
+      stdForename: map['stdForename'],
+      dob: DateTime.parse(map['dob']),
     );
+  }
+
+  Nam? fromDGC(Map<String, dynamic> map) {
+    try {
+      return Nam(
+        surname: map['fn'],
+        stdSurname: map['fnt'],
+        forename: map['gn'],
+        stdForename: map['gnt'],
+        dob: DateTime.parse(map['dob']),
+      );
+    } on Exception {
+      return null;
+    }
   }
 
   String toJson() => json.encode(toMap());

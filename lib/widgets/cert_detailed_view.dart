@@ -1,6 +1,6 @@
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/utils/certs.dart';
-import 'package:covid_checker/utils/processingCertTootls.dart';
+import 'package:covid_checker/utils/processing_cert_tools.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 
