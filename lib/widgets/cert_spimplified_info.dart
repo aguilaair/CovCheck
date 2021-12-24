@@ -71,6 +71,67 @@ class CertInfoViewer extends StatelessWidget {
             detail: certType(processedResult),
           ),
           const SizedBox(
+            height: 5,
+          ),
+          if (processedResult.vaccination != null)
+            Detail(
+              title: S.of(context).vacdoses,
+              detail:
+                  "${processedResult.vaccination?.dosesGiven ?? S.of(context).unk} / ${processedResult.vaccination?.dosesRequired ?? S.of(context).unk}",
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor:
+                    (processedResult.vaccination?.complete ?? false)
+                        ? Colors.green
+                        : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.vaccination?.complete ?? false)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          if (processedResult.test != null)
+            Detail(
+              title: S.of(context).certres,
+              detail: processedResult.test!.testResultProcessed,
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor: (processedResult.test!.passed ?? false)
+                    ? Colors.green
+                    : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.test!.passed ?? false)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          if (processedResult.recovery != null)
+            Detail(
+              title: S.of(context).recovstate,
+              detail: processedResult.recovery!.valid
+                  ? S.of(context).valid
+                  : S.of(context).invalid,
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor: (processedResult.recovery!.valid)
+                    ? Colors.green
+                    : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.recovery!.valid)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          const SizedBox(
             height: 10,
           ),
           Text(

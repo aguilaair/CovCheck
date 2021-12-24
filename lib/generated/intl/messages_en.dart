@@ -53,17 +53,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorunk": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "errorunsopportedalgo":
             MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
+        "invalid": MessageLookupByLibrary.simpleMessage("Invalid (Expired)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
         "manname": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "moredetails": MessageLookupByLibrary.simpleMessage("More Details"),
         "name": MessageLookupByLibrary.simpleMessage("First Name"),
+        "nopassrecov": MessageLookupByLibrary.simpleMessage(
+            "Outside of Valid Recovery Dates"),
+        "nopasstest":
+            MessageLookupByLibrary.simpleMessage("Test Detected Pathogen"),
+        "nopassvac":
+            MessageLookupByLibrary.simpleMessage("Vaccination Not Complete"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Personal Details"),
         "prodName": MessageLookupByLibrary.simpleMessage("Name of Product"),
         "rawData": MessageLookupByLibrary.simpleMessage("Raw Data"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recovered"),
+        "recovstate": MessageLookupByLibrary.simpleMessage("Validity"),
         "restartcamera": MessageLookupByLibrary.simpleMessage("Restart Camera"),
         "rotatecamera": MessageLookupByLibrary.simpleMessage("Change Camera"),
         "scanqrmessage": MessageLookupByLibrary.simpleMessage("Scan a QR Code"),
@@ -82,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),
         "vacdate": MessageLookupByLibrary.simpleMessage("Vacciantion Date"),
         "vacdoses": MessageLookupByLibrary.simpleMessage("Doses"),
+        "valid": MessageLookupByLibrary.simpleMessage("Valid"),
         "validcert": MessageLookupByLibrary.simpleMessage("Valid Certificate"),
         "xageold": m1
       };

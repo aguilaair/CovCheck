@@ -57,17 +57,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorunk": MessageLookupByLibrary.simpleMessage("Error Desconocido"),
         "errorunsopportedalgo":
             MessageLookupByLibrary.simpleMessage("Algoritmo no compatible"),
+        "invalid": MessageLookupByLibrary.simpleMessage("Inválido (Caducado)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Certificado Inválido"),
         "manname": MessageLookupByLibrary.simpleMessage("Fabricante"),
         "moredetails": MessageLookupByLibrary.simpleMessage("Mas Detalles"),
         "name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "nopassrecov": MessageLookupByLibrary.simpleMessage(
+            "Fuera de Rango Válido de Recuperación"),
+        "nopasstest": MessageLookupByLibrary.simpleMessage(
+            "La pureba ha Detectado un Patogeno"),
+        "nopassvac": MessageLookupByLibrary.simpleMessage(
+            "Pauta de Vacunación No Completa"),
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Datos Personales"),
         "prodName": MessageLookupByLibrary.simpleMessage("Nombre del Producto"),
         "rawData": MessageLookupByLibrary.simpleMessage("Datos sin Procesar"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recuperado"),
+        "recovstate": MessageLookupByLibrary.simpleMessage("Validez"),
         "restartcamera":
             MessageLookupByLibrary.simpleMessage("Reiniciar Cámara"),
         "rotatecamera": MessageLookupByLibrary.simpleMessage("Cambiar Cámara"),
@@ -88,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vaccproph": MessageLookupByLibrary.simpleMessage("Tipo de Vacuna"),
         "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),
         "vacdoses": MessageLookupByLibrary.simpleMessage("Dosis"),
+        "valid": MessageLookupByLibrary.simpleMessage("Válido"),
         "validcert": MessageLookupByLibrary.simpleMessage("Certificado Válido"),
         "xageold": m1
       };

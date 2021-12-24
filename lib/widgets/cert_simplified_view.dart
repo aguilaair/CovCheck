@@ -23,7 +23,7 @@ class CertSimplifiedView extends StatelessWidget {
   Widget build(BuildContext context) {
     if (coseResult != null &&
         barcodeResult != null &&
-        processedResult != null &&
+        //processedResult != null &&
         barcodeResult!.format == BarcodeFormat.qrcode) {
       // Verified
       return Stack(
@@ -34,7 +34,7 @@ class CertSimplifiedView extends StatelessWidget {
             barcodeResult: barcodeResult!,
             coseResult: coseResult!,
             dismiss: dismiss,
-            processedResult: processedResult!,
+            processedResult: processedResult,
           ),
         ],
       );

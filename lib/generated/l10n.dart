@@ -519,6 +519,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Vaccination Not Complete`
+  String get nopassvac {
+    return Intl.message(
+      'Vaccination Not Complete',
+      name: 'nopassvac',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test Detected Pathogen`
+  String get nopasstest {
+    return Intl.message(
+      'Test Detected Pathogen',
+      name: 'nopasstest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Outside of Valid Recovery Dates`
+  String get nopassrecov {
+    return Intl.message(
+      'Outside of Valid Recovery Dates',
+      name: 'nopassrecov',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Validity`
+  String get recovstate {
+    return Intl.message(
+      'Validity',
+      name: 'recovstate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid`
+  String get valid {
+    return Intl.message(
+      'Valid',
+      name: 'valid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid (Expired)`
+  String get invalid {
+    return Intl.message(
+      'Invalid (Expired)',
+      name: 'invalid',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
