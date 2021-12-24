@@ -98,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacdoses": MessageLookupByLibrary.simpleMessage("Dosis"),
         "valid": MessageLookupByLibrary.simpleMessage("Válido"),
         "validcert": MessageLookupByLibrary.simpleMessage("Certificado Válido"),
+        "validfrom": MessageLookupByLibrary.simpleMessage("Válido Desde"),
+        "validuntil": MessageLookupByLibrary.simpleMessage("Válido Hasta"),
         "xageold": m1
       };
 }

@@ -51,5 +51,7 @@
     "nopassrecov": "Fuera de Rango Válido de Recuperación",
     "recovstate": "Validez",
     "valid": "Válido",
-    "invalid": "Inválido (Caducado)"
+    "invalid": "Inválido (Caducado)",
+    "validfrom": "Válido Desde",
+    "validuntil": "Válido Hasta"
 }
