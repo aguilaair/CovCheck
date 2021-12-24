@@ -51,7 +51,7 @@ class Nam {
     );
   }
 
-  Nam? fromDGC(Map<String, dynamic> map) {
+  static Nam? fromDGC(Map<dynamic, dynamic> map) {
     try {
       return Nam(
         surname: map['fn'],

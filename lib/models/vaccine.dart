@@ -117,7 +117,7 @@ class Vaccination {
     );
   }
 
-  Vaccination? fromDGC(Map<dynamic, dynamic> map) {
+  static Vaccination? fromDGC(Map<dynamic, dynamic> map) {
     final Map<dynamic, dynamic> vaccineMap;
 
     try {

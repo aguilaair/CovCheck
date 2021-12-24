@@ -72,7 +72,7 @@ class Test {
     );
   }
 
-  Test? fromDGC(Map<dynamic, dynamic> map) {
+  static Test? fromDGC(Map<dynamic, dynamic> map) {
     final Map<dynamic, dynamic> testMap;
 
     try {

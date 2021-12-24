@@ -25,13 +25,13 @@ class Recovery {
     required this.certId,
   });
 
-  Recovery? fromDGC(Map<dynamic, dynamic> map) {
+  static Recovery? fromDGC(Map<dynamic, dynamic> map) {
     final Map<dynamic, dynamic> recovMap;
 
     try {
       recovMap = map[-260][1]["r"];
     } catch (e) {
-      return null;
+      throw "No Recovery Info";
     }
     return Recovery(
         targetDisease: recovMap['tg'] ?? '',
