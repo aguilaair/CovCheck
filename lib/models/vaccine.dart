@@ -132,12 +132,12 @@ class Vaccination {
       vaccineOrProphylaxisProcessed: processers.vaccineProh(vaccineMap['vp']),
       medicinalProduct: vaccineMap['mp'] ?? '',
       medicinalProductProcessed: processers.vaccineProdName(vaccineMap['mp']),
-      marketingHolder: vaccineMap['marketingHolder'] ?? '',
-      marketingHolderProcessed: processers.vaccinationManf(vaccineMap['mp']),
-      dosesGiven: vaccineMap['dosesGiven']?.toInt() ?? 0,
-      dosesRequired: vaccineMap['dosesRequired']?.toInt() ?? 0,
-      complete:
-          (vaccineMap['dn']?.toInt() ?? -1 >= vaccineMap['sd']?.toInt() ?? 0),
+      marketingHolder: vaccineMap['ma'] ?? '',
+      marketingHolderProcessed: processers.vaccinationManf(vaccineMap['ma']),
+      dosesGiven: vaccineMap['dn']?.toInt() ?? 0,
+      dosesRequired: vaccineMap['sd']?.toInt() ?? 0,
+      complete: ((vaccineMap['dn']?.toInt() ?? -1) >=
+          (vaccineMap['sd']?.toInt() ?? 0)),
       dateOfVaccination: DateTime.tryParse(vaccineMap['dt']),
       country: vaccineMap['co'] ?? '',
       issuer: vaccineMap['is'] ?? '',

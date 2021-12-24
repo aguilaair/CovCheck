@@ -5,14 +5,12 @@ class Nam {
   String stdSurname;
   String forename;
   String stdForename;
-  DateTime dob;
 
   Nam({
     required this.surname,
     required this.stdSurname,
     required this.forename,
     required this.stdForename,
-    required this.dob,
   });
 
   Nam copyWith({
@@ -20,14 +18,12 @@ class Nam {
     String? stdSurname,
     String? forename,
     String? stdForename,
-    DateTime? dob,
   }) {
     return Nam(
       surname: surname ?? this.surname,
       stdSurname: stdSurname ?? this.stdSurname,
       forename: forename ?? this.forename,
       stdForename: stdForename ?? this.stdForename,
-      dob: dob ?? this.dob,
     );
   }
 
@@ -37,7 +33,6 @@ class Nam {
       'stdSurname': stdSurname,
       'forename': forename,
       'stdForename': stdForename,
-      'dob': dob.toIso8601String(),
     };
   }
 
@@ -47,24 +42,22 @@ class Nam {
       stdSurname: map['stdSurname'],
       forename: map['forename'],
       stdForename: map['stdForename'],
-      dob: DateTime.parse(map['dob']),
     );
   }
 
   static Nam? fromDGC(Map<dynamic, dynamic> map) {
     final Map<dynamic, dynamic> namMap;
     try {
-      namMap = map["nam"];
+      namMap = map[-260][1]["nam"];
     } catch (e) {
       return null;
     }
     try {
       return Nam(
-        surname: map['fn'],
-        stdSurname: map['fnt'],
-        forename: map['gn'],
-        stdForename: map['gnt'],
-        dob: DateTime.parse(map['dob']),
+        surname: namMap['fn'],
+        stdSurname: namMap['fnt'],
+        forename: namMap['gn'],
+        stdForename: namMap['gnt'],
       );
     } on Exception {
       return null;
@@ -77,7 +70,7 @@ class Nam {
 
   @override
   String toString() {
-    return 'Nam(surname: $surname, stdSurname: $stdSurname, forename: $forename, stdForename: $stdForename, dob: $dob)';
+    return 'Nam(surname: $surname, stdSurname: $stdSurname, forename: $forename, stdForename: $stdForename)';
   }
 
   @override
@@ -88,8 +81,7 @@ class Nam {
         other.surname == surname &&
         other.stdSurname == stdSurname &&
         other.forename == forename &&
-        other.stdForename == stdForename &&
-        other.dob == dob;
+        other.stdForename == stdForename;
   }
 
   @override
@@ -97,7 +89,6 @@ class Nam {
     return surname.hashCode ^
         stdSurname.hashCode ^
         forename.hashCode ^
-        stdForename.hashCode ^
-        dob.hashCode;
+        stdForename.hashCode;
   }
 }

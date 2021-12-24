@@ -109,8 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Orientation orientation = mq.orientation;
     Size size = mq.size;
 
-    print(processedResult?.toMap());
-
     final widgetList = <Widget>[
       if (orientation == Orientation.portrait) const Logo(),
       Expanded(
@@ -229,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
             processedResult = Result.fromDGC(cose.payload);
           });
         } catch (e) {
+          print(e);
           HapticFeedback.lightImpact();
           setState(() {
             coseResult = CoseResult(

@@ -1,6 +1,6 @@
 import 'package:covid_checker/utils/certs.dart';
 
-String vaccinationManf(String code) {
+String? vaccinationManf(String? code) {
   try {
     return (vaccineManfName["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -8,7 +8,7 @@ String vaccinationManf(String code) {
   }
 }
 
-String targetDisease(String code) {
+String? targetDisease(String? code) {
   try {
     return (diseaseAgentTargeted["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -16,7 +16,7 @@ String targetDisease(String code) {
   }
 }
 
-String vaccineProh(String code) {
+String? vaccineProh(String? code) {
   try {
     return (vaccineProphilaxis["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -24,7 +24,7 @@ String vaccineProh(String code) {
   }
 }
 
-String vaccineProdName(String code) {
+String? vaccineProdName(String? code) {
   try {
     return (vaccineMedicinalProduct["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -32,7 +32,7 @@ String vaccineProdName(String code) {
   }
 }
 
-String testManf(String code) {
+String? testManf(String? code) {
   try {
     return (testManfName["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -40,7 +40,7 @@ String testManf(String code) {
   }
 }
 
-String testType(String code) {
+String? testType(String? code) {
   try {
     return (testTypes["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -48,7 +48,7 @@ String testType(String code) {
   }
 }
 
-String testName(String code) {
+String? testName(String? code) {
   try {
     return (testManfName["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
@@ -56,7 +56,7 @@ String testName(String code) {
   }
 }
 
-String testResult(String code) {
+String? testResult(String? code) {
   try {
     return (testResults["valueSetValues"] as Map)[code]["display"];
   } catch (e) {
