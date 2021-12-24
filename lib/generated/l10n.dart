@@ -579,6 +579,36 @@ class S {
       args: [],
     );
   }
+
+  /// `First Positive Test`
+  String get firstpositivetest {
+    return Intl.message(
+      'First Positive Test',
+      name: 'firstpositivetest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid From`
+  String get validfrom {
+    return Intl.message(
+      'Valid From',
+      name: 'validfrom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Valid Until`
+  String get validuntil {
+    return Intl.message(
+      'Valid Until',
+      name: 'validuntil',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorunk": MessageLookupByLibrary.simpleMessage("Unknown Error"),
         "errorunsopportedalgo":
             MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
+        "firstpositivetest":
+            MessageLookupByLibrary.simpleMessage("First Positive Test"),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid (Expired)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
@@ -92,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "vacdoses": MessageLookupByLibrary.simpleMessage("Doses"),
         "valid": MessageLookupByLibrary.simpleMessage("Valid"),
         "validcert": MessageLookupByLibrary.simpleMessage("Valid Certificate"),
+        "validfrom": MessageLookupByLibrary.simpleMessage("Valid From"),
+        "validuntil": MessageLookupByLibrary.simpleMessage("Valid Until"),
         "xageold": m1
       };
 }

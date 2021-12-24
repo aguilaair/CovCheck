@@ -199,6 +199,78 @@ class CertDetailedView extends StatelessWidget {
           height: 5,
         ),
       ];
+    } else if (processedResult.recovery != null) {
+      detailedInfo = [
+        Detail(
+          title: S.of(context).targetdisease,
+          detail: processedResult.recovery!.targetDiseaseProcessed,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).Country,
+          detail: processedResult.recovery!.country,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).certres,
+          detail: processedResult.recovery!.valid
+              ? S.of(context).valid
+              : S.of(context).invalid,
+          trialing: CircleAvatar(
+            //radius: 40,
+            backgroundColor: (processedResult.recovery!.valid)
+                ? Colors.green
+                : Theme.of(context).errorColor,
+            child: Icon(
+              (processedResult.recovery!.valid)
+                  ? Icons.check_circle_outline_rounded
+                  : Icons.warning_rounded,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).firstpositivetest,
+          detail: processedResult.recovery!.firstPositiveNAATTest != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.firstPositiveNAATTest!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).validfrom,
+          detail: processedResult.recovery!.validFrom != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.validFrom!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).validuntil,
+          detail: processedResult.recovery!.validUntil != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.validUntil!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+      ];
     }
 
     final certInfo = [

@@ -51,5 +51,8 @@
     "nopassrecov": "Outside of Valid Recovery Dates",
     "recovstate": "Validity",
     "valid": "Valid",
-    "invalid": "Invalid (Expired)"
+    "invalid": "Invalid (Expired)",
+    "firstpositivetest": "First Positive Test",
+    "validfrom": "Valid From",
+    "validuntil": "Valid Until"
 }
