@@ -29,9 +29,9 @@ class Recovery {
     final Map<dynamic, dynamic> recovMap;
 
     try {
-      recovMap = map[-260][1]["r"];
+      recovMap = map[-260][1]["r"][0];
     } catch (e) {
-      throw "No Recovery Info";
+      return null;
     }
     return Recovery(
         targetDisease: recovMap['tg'] ?? '',

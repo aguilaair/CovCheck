@@ -21,14 +21,14 @@ class Result {
     this.recovery,
   });
 
-  Result? fromDGC(Map<dynamic, dynamic> map) {
+  static Result? fromDGC(Map<dynamic, dynamic> map) {
     return Result(
         recovery: Recovery.fromDGC(map),
-        dob: DateTime.tryParse(map["dob"]),
+        dob: DateTime.tryParse(map[-260][1]["dob"]),
         nam: Nam.fromDGC(map),
         test: Test.fromDGC(map),
         vaccination: Vaccination.fromDGC(map),
-        ver: map["dob"]);
+        ver: map[-260][1]["ver"]);
   }
 
   Result copyWith({

@@ -52,6 +52,12 @@ class Nam {
   }
 
   static Nam? fromDGC(Map<dynamic, dynamic> map) {
+    final Map<dynamic, dynamic> namMap;
+    try {
+      namMap = map["nam"];
+    } catch (e) {
+      return null;
+    }
     try {
       return Nam(
         surname: map['fn'],

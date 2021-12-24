@@ -121,7 +121,7 @@ class Vaccination {
     final Map<dynamic, dynamic> vaccineMap;
 
     try {
-      vaccineMap = map[-260][1]["v"];
+      vaccineMap = map[-260][1]["v"][0];
     } catch (e) {
       return null;
     }

@@ -76,7 +76,7 @@ class Test {
     final Map<dynamic, dynamic> testMap;
 
     try {
-      testMap = map[-260][1]["t"];
+      testMap = map[-260][1]["t"][0];
     } catch (e) {
       return null;
     }
