@@ -1,12 +1,19 @@
 int? yearsOld(DateTime? birthDate) {
-  // Parsed date to check
-
   if (birthDate == null) {
     return null;
   }
-
-  // Date to check but moved 18 years ahead
-  DateTime adultDate = DateTime.now();
-
-  return ((adultDate.difference(birthDate).inDays) / 365).floor();
+  DateTime currentDate = DateTime.now();
+  int age = currentDate.year - birthDate.year;
+  int monthCurrent = currentDate.month;
+  int monthBirth = birthDate.month;
+  if (monthBirth > monthCurrent) {
+    age--;
+  } else if (monthCurrent == monthBirth) {
+    int dayCurrent = currentDate.day;
+    int dayBirth = birthDate.day;
+    if (dayBirth > dayCurrent) {
+      age--;
+    }
+  }
+  return age;
 }
