@@ -1,6 +1,4 @@
-import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
-import 'package:covid_checker/utils/beautify_cose.dart';
 import 'package:covid_checker/widgets/cert_spimplified_info.dart';
 import 'package:covid_checker/widgets/overall_cer_result.dart';
 import 'package:dart_cose/dart_cose.dart';
