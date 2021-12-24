@@ -1,5 +1,6 @@
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
+import 'package:covid_checker/utils/years_old.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -317,19 +318,6 @@ class CertDetailedView extends StatelessWidget {
       ),
     );
   }
-}
-
-int? yearsOld(DateTime? birthDate) {
-  // Parsed date to check
-
-  if (birthDate == null) {
-    return null;
-  }
-
-  // Date to check but moved 18 years ahead
-  DateTime adultDate = DateTime.now();
-
-  return ((adultDate.difference(birthDate).inDays) / 365).floor();
 }
 
 String certType(Result res) {
