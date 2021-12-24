@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/base45.dart';
-import 'package:covid_checker/utils/certs.dart';
 import 'package:covid_checker/utils/gen_swatch.dart';
 import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';

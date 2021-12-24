@@ -1,4 +1,10 @@
-import 'package:covid_checker/utils/certs.dart';
+import 'package:covid_checker/certs/certs.dart';
+import 'package:covid_checker/certs/test_manufacturer_name.dart';
+import 'package:covid_checker/certs/test_results.dart';
+import 'package:covid_checker/certs/test_types.dart';
+import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
+import 'package:covid_checker/certs/vaccine_product_name.dart';
+import 'package:covid_checker/certs/vaccine_prophylaxis.dart';
 
 String? vaccinationManf(String? code) {
   try {

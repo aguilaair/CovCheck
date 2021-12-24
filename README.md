@@ -8,7 +8,7 @@ The verification is done by [dart_cose](https://pub.dev/packages/dart_cose).
 <a href='#'><img alt='Get it on Google Play' src='https://www.pngmart.com/files/10/Download-On-The-App-Store-PNG-Photos.png' height=75/></a> 
 
 # Contributing
-Due to the sensitive nature of the content in `lib\utils\certs.dart` no PRs will be accepeted that modify the file. If you want to request an update please open a new issue.
+Due to the sensitive nature of the content in `lib\certs\` no PRs will be accepeted that modify any files in that directory. If you want to request an update please open a new issue.
 
 
 
