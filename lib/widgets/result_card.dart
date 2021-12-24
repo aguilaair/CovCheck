@@ -1,5 +1,8 @@
 import 'package:covid_checker/generated/l10n.dart';
+import 'package:covid_checker/models/result.dart';
+import 'package:covid_checker/utils/beautify_cose.dart';
 import 'package:covid_checker/widgets/cert_spimplified_info.dart';
+import 'package:covid_checker/widgets/overall_cer_result.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -9,12 +12,14 @@ class ResultCard extends StatelessWidget {
     required this.barcodeResult,
     required this.coseResult,
     required this.dismiss,
+    required this.processedResult,
     Key? key,
   }) : super(key: key);
 
   final CoseResult coseResult;
   final Barcode barcodeResult;
   final Function dismiss;
+  final Result? processedResult;
 
   @override
   Widget build(BuildContext context) {
@@ -28,56 +33,21 @@ class ResultCard extends StatelessWidget {
         width: double.infinity,
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.all(15),
-              padding: const EdgeInsets.all(25),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: coseResult.verified
-                    ? const Color(0xff1BCA4C)
-                    : const Color(0xffCA451B),
-                boxShadow: [
-                  BoxShadow(
-                    color: coseResult.verified
-                        ? const Color(0xff1BCA4C)
-                        : const Color(0xffCA451B),
-                    blurRadius: 10,
-                    //spreadRadius: 0,
-                  )
-                ],
-              ),
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Text(
-                    coseResult.verified
-                        ? S.of(context).validcert
-                        : S.of(context).invalidcert,
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  if (!coseResult.verified)
-                    Text(
-                      beautifyCose(coseResult.errorCode),
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                ],
-              ),
+            OverallResult(
+              coseResult: coseResult,
+              processedResult: processedResult,
             ),
-            Expanded(
-              //height: 30,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: CertInfoViewer(coseResult: coseResult),
-              ),
-            )
+            if (processedResult != null)
+              Expanded(
+                //height: 30,
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: CertInfoViewer(
+                    coseResult: coseResult,
+                    processedResult: processedResult!,
+                  ),
+                ),
+              )
           ],
         ),
         margin: const EdgeInsets.only(top: 20),
@@ -100,26 +70,4 @@ class ResultCard extends StatelessWidget {
       ),
     );
   }
-}
-
-String beautifyCose(CoseErrorCode error) {
-  if (error == CoseErrorCode.cbor_decoding_error) {
-    return S.current.errordecoding;
-  } else if (error == CoseErrorCode.invalid_format ||
-      error == CoseErrorCode.payload_format_error ||
-      error == CoseErrorCode.unsupported_format) {
-    return S.current.errorinvalidformat;
-  } else if (error == CoseErrorCode.invalid_header_format ||
-      error == CoseErrorCode.unsupported_header_format) {
-    return S.current.errorinvalidheader;
-  } else if (error == CoseErrorCode.key_not_found) {
-    return S.current.errorkeynotfound;
-  } else if (error == CoseErrorCode.kid_mismatch) {
-    return S.current.errorkidmismatch;
-  } else if (error == CoseErrorCode.payload_format_error) {
-    return S.current.errorinvaliddataformat;
-  } else if (error == CoseErrorCode.unsupported_algorithm) {
-    return S.current.errorunsopportedalgo;
-  }
-  return S.current.errorunk;
 }

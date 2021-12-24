@@ -45,5 +45,14 @@
     "errorunk": "Unknown Error",
     "detialtype": "{type} Details",
     "personaldetails": "Personal Details",
-    "certinfo": "Certificate Info"
+    "certinfo": "Certificate Info",
+    "nopassvac": "Vaccination Not Complete",
+    "nopasstest": "Test Detected Pathogen",
+    "nopassrecov": "Outside of Valid Recovery Dates",
+    "recovstate": "Validity",
+    "valid": "Valid",
+    "invalid": "Invalid (Expired)",
+    "firstpositivetest": "First Positive Test",
+    "validfrom": "Valid From",
+    "validuntil": "Valid Until"
 }

@@ -1,4 +1,6 @@
 // Generated from https://dgcg.covidbevis.se/tp/
+
+// TODO: Brwak this up into separate files
 const certs = {
   "aud": null,
   "dsc_trust_list": {
@@ -3051,6 +3053,8 @@ const diseaseAgentTargeted = {
     }
   }
 };
+
+// TODO: Extract values from https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat (Ref: https://ec.europa.eu/health/sites/default/files/ehealth/docs/covid-certificate_json_specification_en.pdf)
 
 const testManfName = {
   "valueSetId": "covid-19-lab-test-manufacturer-and-name",

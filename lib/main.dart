@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/certs.dart';
 import 'package:covid_checker/utils/gen_swatch.dart';
@@ -83,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
   QRViewController? controller;
   CoseResult? coseResult;
   Map<String, String> certMap = {};
+  Result? processedResult;
 
   @override
   void initState() {
@@ -190,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
               coseResult: coseResult,
               barcodeResult: result,
               dismiss: dismissResults,
+              processedResult: processedResult,
             ),
           )),
     ];
@@ -222,6 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             coseResult = cose;
             result = scanData;
+            processedResult = Result.fromDGC(cose.payload);
           });
         } catch (e) {
           HapticFeedback.lightImpact();
@@ -242,6 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       coseResult = null;
       result = null;
+      processedResult = null;
     });
   }
 

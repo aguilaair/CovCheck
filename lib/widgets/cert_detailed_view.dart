@@ -1,88 +1,91 @@
 import 'package:covid_checker/generated/l10n.dart';
-import 'package:covid_checker/utils/certs.dart';
-import 'package:dart_cose/dart_cose.dart';
+import 'package:covid_checker/models/result.dart';
+import 'package:covid_checker/utils/years_old.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'detail.dart';
 
 class CertDetailedView extends StatelessWidget {
-  const CertDetailedView({required this.coseResult, Key? key})
-      : super(key: key);
+  const CertDetailedView({
+    required this.processedResult,
+    Key? key,
+  }) : super(key: key);
 
-  final CoseResult coseResult;
+  final Result processedResult;
 
   @override
   Widget build(BuildContext context) {
-    final res = coseResult.payload[-260][1] as Map<dynamic, dynamic>;
-
     List<Widget> detailedInfo = [];
 
     final personalDataInfo = [
       Detail(
         title: S.of(context).name,
-        detail: res["nam"]["gn"],
+        detail: processedResult.nam?.forename,
       ),
       const SizedBox(
         height: 5,
       ),
       Detail(
         title: S.of(context).surname,
-        detail: res["nam"]["fn"],
+        detail: processedResult.nam?.surname,
       ),
       const SizedBox(
         height: 5,
       ),
       Detail(
         title: S.of(context).dob,
-        detail: res["dob"],
+        detail: DateFormat.yMd(Localizations.localeOf(context).countryCode)
+            .format(processedResult.dob!),
       ),
       const SizedBox(
         height: 5,
       ),
       Detail(
         title: S.of(context).age,
-        detail: S.of(context).xageold(
-            (yearsOld(coseResult.payload[-260][1]["dob"])) ??
-                S.of(context).unk),
+        detail: S
+            .of(context)
+            .xageold((yearsOld(processedResult.dob)) ?? S.of(context).unk),
       ),
       const SizedBox(
         height: 5,
       ),
       Detail(
         title: S.of(context).country,
-        detail: coseResult.payload[1],
+        detail: processedResult.country,
       ),
       const SizedBox(
         height: 10,
       ),
     ];
 
-    if (certType(coseResult) == S.current.vaccination) {
+    if (processedResult.vaccination != null) {
       detailedInfo = [
         Detail(
           title: S.of(context).manname,
-          detail: vaccinationManf((res).values.first[0]["ma"]),
+          detail: processedResult.vaccination?.marketingHolderProcessed ??
+              processedResult.vaccination?.marketingHolder,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).targetdisease,
-          detail: targetDisease((res).values.first[0]["tg"]),
+          detail: processedResult.vaccination?.targetDiseaseProcessed,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).vaccproph,
-          detail: vaccineProh((res).values.first[0]["vp"]),
+          detail: processedResult.vaccination?.vaccineOrProphylaxisProcessed,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).prodName,
-          detail: vaccineProdName((res).values.first[0]["mp"]),
+          detail: processedResult.vaccination?.medicinalProductProcessed,
         ),
         const SizedBox(
           height: 5,
@@ -90,75 +93,179 @@ class CertDetailedView extends StatelessWidget {
         Detail(
           title: S.of(context).vacdoses,
           detail:
-              "${(res).values.first[0]["dn"] ?? S.of(context).unk} / ${(res).values.first[0]["sd"] ?? S.of(context).unk}",
+              "${processedResult.vaccination?.dosesGiven ?? S.of(context).unk} / ${processedResult.vaccination?.dosesRequired ?? S.of(context).unk}",
+          trialing: CircleAvatar(
+            //radius: 40,
+            backgroundColor: (processedResult.vaccination?.complete ?? false)
+                ? Colors.green
+                : Theme.of(context).errorColor,
+            child: Icon(
+              (processedResult.vaccination?.complete ?? false)
+                  ? Icons.check_circle_outline_rounded
+                  : Icons.warning_rounded,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).vacdate,
-          detail: (res).values.first[0]["dt"],
+          detail: processedResult.vaccination!.dateOfVaccination != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.vaccination!.dateOfVaccination!)
+              : null,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).country,
-          detail: (res).values.first[0]["co"],
+          detail: processedResult.vaccination?.country,
         ),
         const SizedBox(
           height: 5,
         ),
       ];
-    } else if (certType(coseResult) == S.current.test) {
+    } else if (processedResult.test != null) {
       detailedInfo = [
         Detail(
           title: S.of(context).manname,
-          detail: (res).values.first[0]["nm"],
+          detail: processedResult.test!.testName ??
+              processedResult.test!.testDeviceIDProcessed,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).targetdisease,
-          detail: targetDisease((res).values.first[0]["tg"]),
+          detail: processedResult.test!.targetDiseaseProcessed,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).testtype,
-          detail: testType((res).values.first[0]["tt"]),
+          detail: processedResult.test!.testTypeProcessed,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).certres,
-          detail: testResult((res).values.first[0]["tr"]),
+          detail: processedResult.test!.testResultProcessed,
+          trialing: CircleAvatar(
+            //radius: 40,
+            backgroundColor: (processedResult.test!.passed ?? false)
+                ? Colors.green
+                : Theme.of(context).errorColor,
+            child: Icon(
+              (processedResult.test!.passed ?? false)
+                  ? Icons.check_circle_outline_rounded
+                  : Icons.warning_rounded,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).testdate,
-          detail: DateTime.tryParse((res).values.first[0]["sc"])!
-              .toLocal()
-              .toString(),
+          detail: processedResult.test!.dateOfSampleCollection != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .add_Hm()
+                  .format(processedResult.test!.dateOfSampleCollection!)
+              : null,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).testloc,
-          detail: (res).values.first[0]["dt"],
+          detail: processedResult.test!.testFacility,
         ),
         const SizedBox(
           height: 5,
         ),
         Detail(
           title: S.of(context).country,
-          detail: (res).values.first[0]["co"],
+          detail: processedResult.test!.country,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+      ];
+    } else if (processedResult.recovery != null) {
+      detailedInfo = [
+        Detail(
+          title: S.of(context).targetdisease,
+          detail: processedResult.recovery!.targetDiseaseProcessed,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).Country,
+          detail: processedResult.recovery!.country,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).certres,
+          detail: processedResult.recovery!.valid
+              ? S.of(context).valid
+              : S.of(context).invalid,
+          trialing: CircleAvatar(
+            //radius: 40,
+            backgroundColor: (processedResult.recovery!.valid)
+                ? Colors.green
+                : Theme.of(context).errorColor,
+            child: Icon(
+              (processedResult.recovery!.valid)
+                  ? Icons.check_circle_outline_rounded
+                  : Icons.warning_rounded,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).firstpositivetest,
+          detail: processedResult.recovery!.firstPositiveNAATTest != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.firstPositiveNAATTest!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).validfrom,
+          detail: processedResult.recovery!.validFrom != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.validFrom!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        Detail(
+          title: S.of(context).validuntil,
+          detail: processedResult.recovery!.validUntil != null
+              ? DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                  .format(processedResult.recovery!.validUntil!)
+              : null,
+        ),
+        const SizedBox(
+          height: 5,
         ),
         const SizedBox(
           height: 5,
@@ -169,14 +276,16 @@ class CertDetailedView extends StatelessWidget {
     final certInfo = [
       Detail(
         title: S.of(context).certid,
-        detail: (res).values.first[0]["ci"],
+        detail: processedResult.vaccination?.certId ??
+            processedResult.test?.certId ??
+            processedResult.recovery?.certId,
       ),
       const SizedBox(
         height: 5,
       ),
       Detail(
         title: S.of(context).certver,
-        detail: res["ver"],
+        detail: processedResult.ver,
       ),
       const SizedBox(
         height: 10,
@@ -191,7 +300,10 @@ class CertDetailedView extends StatelessWidget {
       ),
       Center(
         child: Text(
-          (res).values.first[0]["is"] ?? S.of(context).unk,
+          (processedResult.vaccination?.issuer ??
+              processedResult.test?.issuer ??
+              processedResult.recovery?.issuer ??
+              S.of(context).unk),
           textAlign: TextAlign.center,
         ),
       ),
@@ -224,7 +336,7 @@ class CertDetailedView extends StatelessWidget {
             //...,
             ExpansionTile(
               title: Text(
-                S.of(context).detialtype(certType(coseResult)),
+                S.of(context).detialtype(certType(processedResult)),
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
@@ -243,7 +355,7 @@ class CertDetailedView extends StatelessWidget {
               children: [
                 Detail(
                   title: S.of(context).certType,
-                  detail: certType(coseResult),
+                  detail: certType(processedResult),
                 ),
                 const SizedBox(
                   height: 5,
@@ -261,7 +373,8 @@ class CertDetailedView extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               children: [
                 Container(
-                  child: SelectableText(coseResult.payload.toString()),
+                  child:
+                      SelectableText(processedResult.raw ?? S.of(context).unk),
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
@@ -279,92 +392,13 @@ class CertDetailedView extends StatelessWidget {
   }
 }
 
-int? yearsOld(String time) {
-  // Parsed date to check
-  DateTime? birthDate = DateTime.tryParse(time);
-
-  if (birthDate == null) {
-    return null;
-  }
-
-  // Date to check but moved 18 years ahead
-  DateTime adultDate = DateTime.now();
-
-  return ((adultDate.difference(birthDate).inDays) / 365).floor();
-}
-
-String certType(CoseResult res) {
-  var type = (res.payload[-260][1] as Map<dynamic, dynamic>).keys.first;
-  if (type == "v") {
+String certType(Result res) {
+  if (res.vaccination != null) {
     return S.current.vaccination;
-  } else if (type == "r") {
+  } else if (res.recovery != null) {
     return S.current.recovered;
-  } else if (type == "t") {
+  } else if (res.test != null) {
     return S.current.test;
   }
-  return type;
-}
-
-String vaccinationManf(String code) {
-  try {
-    return (vaccineManfName["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String targetDisease(String code) {
-  try {
-    return (diseaseAgentTargeted["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String vaccineProh(String code) {
-  try {
-    return (vaccineProphilaxis["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String vaccineProdName(String code) {
-  try {
-    return (vaccineMedicinalProduct["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String testManf(String code) {
-  try {
-    return (testManfName["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String testType(String code) {
-  try {
-    return (testTypes["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String testName(String code) {
-  try {
-    return (testManfName["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
-}
-
-String testResult(String code) {
-  try {
-    return (testResults["valueSetValues"] as Map)[code]["display"];
-  } catch (e) {
-    return code;
-  }
+  return S.current.unk;
 }

@@ -1,16 +1,21 @@
 import 'package:circle_flags/circle_flags.dart';
 import 'package:covid_checker/generated/l10n.dart';
+import 'package:covid_checker/models/result.dart';
+import 'package:covid_checker/utils/years_old.dart';
 import 'package:covid_checker/widgets/cert_detailed_view.dart';
 import 'package:covid_checker/widgets/detail.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CertInfoViewer extends StatelessWidget {
   const CertInfoViewer({
     required this.coseResult,
+    required this.processedResult,
     Key? key,
   }) : super(key: key);
   final CoseResult? coseResult;
+  final Result processedResult;
 
   @override
   Widget build(BuildContext context) {
@@ -22,48 +27,110 @@ class CertInfoViewer extends StatelessWidget {
         children: [
           Detail(
             title: S.of(context).name,
-            detail: (coseResult!.payload[-260][1]["nam"]["gn"] ??
-                    coseResult!.payload[-260][1]["nam"]["gnt"]) ??
-                S.of(context).unk,
+            detail: processedResult.nam?.forename,
           ),
           const SizedBox(
             height: 5,
           ),
           Detail(
             title: S.of(context).surname,
-            detail: coseResult!.payload[-260][1]["nam"]["fn"],
+            detail: processedResult.nam?.surname,
           ),
           const SizedBox(
             height: 5,
           ),
           Detail(
             title: S.of(context).dob,
-            detail: coseResult!.payload[-260][1]["dob"],
+            detail: DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                .format(processedResult.dob!),
           ),
           const SizedBox(
             height: 5,
           ),
           Detail(
             title: S.of(context).age,
-            detail: S.of(context).xageold(
-                (yearsOld(coseResult!.payload[-260][1]["dob"])) ??
-                    S.of(context).unk),
+            detail: S
+                .of(context)
+                .xageold((yearsOld(processedResult.dob)) ?? S.of(context).unk),
           ),
           const SizedBox(
             height: 10,
           ),
           Detail(
             title: S.of(context).country,
-            detail: coseResult!.payload[1],
-            trialing: CircleFlag(coseResult!.payload[1]),
+            detail: processedResult.country,
+            trialing: processedResult.country == null
+                ? null
+                : CircleFlag(processedResult.country!),
           ),
           const SizedBox(
             height: 5,
           ),
           Detail(
             title: S.of(context).certType,
-            detail: certType(coseResult!),
+            detail: certType(processedResult),
           ),
+          const SizedBox(
+            height: 5,
+          ),
+          if (processedResult.vaccination != null)
+            Detail(
+              title: S.of(context).vacdoses,
+              detail:
+                  "${processedResult.vaccination?.dosesGiven ?? S.of(context).unk} / ${processedResult.vaccination?.dosesRequired ?? S.of(context).unk}",
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor:
+                    (processedResult.vaccination?.complete ?? false)
+                        ? Colors.green
+                        : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.vaccination?.complete ?? false)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          if (processedResult.test != null)
+            Detail(
+              title: S.of(context).certres,
+              detail: processedResult.test!.testResultProcessed,
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor: (processedResult.test!.passed ?? false)
+                    ? Colors.green
+                    : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.test!.passed ?? false)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
+          if (processedResult.recovery != null)
+            Detail(
+              title: S.of(context).recovstate,
+              detail: processedResult.recovery!.valid
+                  ? S.of(context).valid
+                  : S.of(context).invalid,
+              trialing: CircleAvatar(
+                //radius: 40,
+                backgroundColor: (processedResult.recovery!.valid)
+                    ? Colors.green
+                    : Theme.of(context).errorColor,
+                child: Icon(
+                  (processedResult.recovery!.valid)
+                      ? Icons.check_circle_outline_rounded
+                      : Icons.warning_rounded,
+                  color: Colors.white,
+                  size: 25,
+                ),
+              ),
+            ),
           const SizedBox(
             height: 10,
           ),
@@ -77,9 +144,9 @@ class CertInfoViewer extends StatelessWidget {
           ),
           Center(
             child: Text(
-              (coseResult!.payload[-260][1] as Map<dynamic, dynamic>)
-                      .values
-                      .first[0]["is"] ??
+              processedResult.vaccination?.issuer ??
+                  processedResult.test?.issuer ??
+                  processedResult.recovery?.issuer ??
                   S.of(context).unk,
               textAlign: TextAlign.center,
             ),
@@ -101,7 +168,9 @@ class CertInfoViewer extends StatelessWidget {
                             ? null
                             : Colors.white30,
                     builder: (context) {
-                      return CertDetailedView(coseResult: coseResult!);
+                      return CertDetailedView(
+                        processedResult: processedResult,
+                      );
                     },
                   );
                 },
@@ -112,30 +181,4 @@ class CertInfoViewer extends StatelessWidget {
       ),
     );
   }
-}
-
-int? yearsOld(String time) {
-  // Parsed date to check
-  DateTime? birthDate = DateTime.tryParse(time);
-
-  if (birthDate == null) {
-    return null;
-  }
-
-  // Date to check but moved 18 years ahead
-  DateTime adultDate = DateTime.now();
-
-  return ((adultDate.difference(birthDate).inDays) / 365).floor();
-}
-
-String certType(CoseResult res) {
-  var type = (res.payload[-260][1] as Map<dynamic, dynamic>).keys.first;
-  if (type == "v") {
-    return S.current.vaccination;
-  } else if (type == "r") {
-    return S.current.recovered;
-  } else if (type == "t") {
-    return S.current.test;
-  }
-  return type;
 }

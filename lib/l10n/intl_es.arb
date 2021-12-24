@@ -45,5 +45,11 @@
     "errorunk": "Error Desconocido",
     "detialtype": "Detalles de {type}",
     "personaldetails": "Datos Personales",
-    "certinfo": "Información del certificado"
+    "certinfo": "Información del certificado",
+    "nopassvac": "Pauta de Vacunación No Completa",
+    "nopasstest": "La pureba ha Detectado un Patogeno",
+    "nopassrecov": "Fuera de Rango Válido de Recuperación",
+    "recovstate": "Validez",
+    "valid": "Válido",
+    "invalid": "Inválido (Caducado)"
 }
