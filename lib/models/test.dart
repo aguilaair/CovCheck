@@ -17,6 +17,7 @@ class Test {
   String country;
   String issuer;
   String certId;
+  bool? passed;
 
   Test({
     required this.targetDisease,
@@ -33,6 +34,7 @@ class Test {
     required this.country,
     required this.issuer,
     required this.certId,
+    this.passed,
   });
 
   Test copyWith({
@@ -50,6 +52,7 @@ class Test {
     String? country,
     String? issuer,
     String? certId,
+    bool? passed,
   }) {
     return Test(
       targetDisease: targetDisease ?? this.targetDisease,
@@ -69,6 +72,7 @@ class Test {
       country: country ?? this.country,
       issuer: issuer ?? this.issuer,
       certId: certId ?? this.certId,
+      passed: passed ?? this.passed,
     );
   }
 
@@ -95,6 +99,7 @@ class Test {
       country: testMap['co'] ?? '',
       issuer: testMap['is'] ?? '',
       certId: testMap['ci'] ?? '',
+      passed: processers.testResult(testMap['tr']) == "Not detected",
     );
   }
 
@@ -114,6 +119,7 @@ class Test {
       'country': country,
       'issuer': issuer,
       'certId': certId,
+      'passed': passed,
     };
   }
 
@@ -134,6 +140,7 @@ class Test {
       country: map['country'] ?? '',
       issuer: map['issuer'] ?? '',
       certId: map['certId'] ?? '',
+      passed: map['passed'] ?? '',
     );
   }
 
@@ -143,7 +150,7 @@ class Test {
 
   @override
   String toString() {
-    return 'Test(targetDisease: $targetDisease, targetDiseaseProcessed: $targetDiseaseProcessed, testType: $testType, testTypeProcessed: $testTypeProcessed, testName: $testName, testDeviceID: $testDeviceID, testDeviceIDProcessed: $testDeviceIDProcessed, dateOfSampleCollection: $dateOfSampleCollection, testResult: $testResult, testResultProcessed: $testResultProcessed, testFacility: $testFacility, country: $country, issuer: $issuer, certId: $certId)';
+    return 'Test(targetDisease: $targetDisease, targetDiseaseProcessed: $targetDiseaseProcessed, testType: $testType, testTypeProcessed: $testTypeProcessed, testName: $testName, testDeviceID: $testDeviceID, testDeviceIDProcessed: $testDeviceIDProcessed, dateOfSampleCollection: $dateOfSampleCollection, testResult: $testResult, testResultProcessed: $testResultProcessed, testFacility: $testFacility, country: $country, issuer: $issuer, certId: $certId, passed: $passed)';
   }
 
   @override
@@ -164,7 +171,8 @@ class Test {
         other.testFacility == testFacility &&
         other.country == country &&
         other.issuer == issuer &&
-        other.certId == certId;
+        other.certId == certId &&
+        other.passed == passed;
   }
 
   @override
@@ -182,6 +190,7 @@ class Test {
         testFacility.hashCode ^
         country.hashCode ^
         issuer.hashCode ^
-        certId.hashCode;
+        certId.hashCode ^
+        passed.hashCode;
   }
 }

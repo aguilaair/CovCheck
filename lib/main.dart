@@ -192,6 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
               coseResult: coseResult,
               barcodeResult: result,
               dismiss: dismissResults,
+              processedResult: processedResult,
             ),
           )),
     ];
@@ -227,7 +228,6 @@ class _MyHomePageState extends State<MyHomePage> {
             processedResult = Result.fromDGC(cose.payload);
           });
         } catch (e) {
-          print(e);
           HapticFeedback.lightImpact();
           setState(() {
             coseResult = CoseResult(

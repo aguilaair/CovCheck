@@ -1,4 +1,6 @@
 import 'package:covid_checker/generated/l10n.dart';
+import 'package:covid_checker/models/result.dart';
+import 'package:covid_checker/utils/beautify_cose.dart';
 import 'package:covid_checker/widgets/cert_spimplified_info.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +11,14 @@ class ResultCard extends StatelessWidget {
     required this.barcodeResult,
     required this.coseResult,
     required this.dismiss,
+    required this.processedResult,
     Key? key,
   }) : super(key: key);
 
   final CoseResult coseResult;
   final Barcode barcodeResult;
   final Function dismiss;
+  final Result processedResult;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +79,10 @@ class ResultCard extends StatelessWidget {
               //height: 30,
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
-                child: CertInfoViewer(coseResult: coseResult),
+                child: CertInfoViewer(
+                  coseResult: coseResult,
+                  processedResult: processedResult,
+                ),
               ),
             )
           ],
@@ -100,26 +107,4 @@ class ResultCard extends StatelessWidget {
       ),
     );
   }
-}
-
-String beautifyCose(CoseErrorCode error) {
-  if (error == CoseErrorCode.cbor_decoding_error) {
-    return S.current.errordecoding;
-  } else if (error == CoseErrorCode.invalid_format ||
-      error == CoseErrorCode.payload_format_error ||
-      error == CoseErrorCode.unsupported_format) {
-    return S.current.errorinvalidformat;
-  } else if (error == CoseErrorCode.invalid_header_format ||
-      error == CoseErrorCode.unsupported_header_format) {
-    return S.current.errorinvalidheader;
-  } else if (error == CoseErrorCode.key_not_found) {
-    return S.current.errorkeynotfound;
-  } else if (error == CoseErrorCode.kid_mismatch) {
-    return S.current.errorkidmismatch;
-  } else if (error == CoseErrorCode.payload_format_error) {
-    return S.current.errorinvaliddataformat;
-  } else if (error == CoseErrorCode.unsupported_algorithm) {
-    return S.current.errorunsopportedalgo;
-  }
-  return S.current.errorunk;
 }

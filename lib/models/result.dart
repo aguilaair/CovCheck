@@ -12,6 +12,8 @@ class Result {
   Vaccination? vaccination;
   Test? test;
   Recovery? recovery;
+  String? country;
+  String? raw;
   Result({
     this.ver,
     this.dob,
@@ -19,16 +21,21 @@ class Result {
     this.vaccination,
     this.test,
     this.recovery,
+    this.country,
+    this.raw,
   });
 
   static Result? fromDGC(Map<dynamic, dynamic> map) {
     return Result(
-        recovery: Recovery.fromDGC(map),
-        dob: DateTime.tryParse(map[-260][1]["dob"]),
-        nam: Nam.fromDGC(map),
-        test: Test.fromDGC(map),
-        vaccination: Vaccination.fromDGC(map),
-        ver: map[-260][1]["ver"]);
+      recovery: Recovery.fromDGC(map),
+      dob: DateTime.tryParse(map[-260][1]["dob"]),
+      nam: Nam.fromDGC(map),
+      test: Test.fromDGC(map),
+      vaccination: Vaccination.fromDGC(map),
+      ver: map[-260][1]["ver"],
+      country: map[1],
+      raw: map.toString(),
+    );
   }
 
   Result copyWith({
@@ -38,6 +45,7 @@ class Result {
     Vaccination? vaccination,
     Test? test,
     Recovery? recovery,
+    String? raw,
   }) {
     return Result(
       ver: ver ?? this.ver,
@@ -46,6 +54,7 @@ class Result {
       vaccination: vaccination ?? this.vaccination,
       test: test ?? this.test,
       recovery: recovery ?? this.recovery,
+      raw: raw ?? this.raw,
     );
   }
 
@@ -57,6 +66,7 @@ class Result {
       'vaccination': vaccination?.toMap(),
       'test': test?.toMap(),
       'recovery': recovery?.toMap(),
+      'raw': raw,
     };
   }
 
@@ -73,6 +83,7 @@ class Result {
       test: map['test'] != null ? Test.fromMap(map['test']) : null,
       recovery:
           map['recovery'] != null ? Recovery.fromMap(map['recovery']) : null,
+      raw: map['raw'],
     );
   }
 
@@ -82,7 +93,7 @@ class Result {
 
   @override
   String toString() {
-    return 'Result(ver: $ver, dob: $dob, nam: $nam, vaccination: $vaccination, test: $test, recovery: $recovery)';
+    return 'Result(ver: $ver, dob: $dob, nam: $nam, vaccination: $vaccination, test: $test, recovery: $recovery, raw: $raw)';
   }
 
   @override
@@ -95,7 +106,8 @@ class Result {
         other.nam == nam &&
         other.vaccination == vaccination &&
         other.test == test &&
-        other.recovery == recovery;
+        other.recovery == recovery &&
+        other.raw == raw;
   }
 
   @override
@@ -105,6 +117,7 @@ class Result {
         nam.hashCode ^
         vaccination.hashCode ^
         test.hashCode ^
-        recovery.hashCode;
+        recovery.hashCode ^
+        raw.hashCode;
   }
 }
