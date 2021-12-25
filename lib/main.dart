@@ -1,18 +1,22 @@
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
+import 'dart:js' as js;
 
 import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/gen_swatch.dart';
+import 'package:covid_checker/web/pako.dart';
 import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:universal_io/prefer_universal/io.dart';
 import 'generated/l10n.dart';
 
 void main() {
@@ -259,7 +263,11 @@ class _MyHomePageState extends State<MyHomePage> {
           scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
 
           /// Decode the gzip data which was decoded from the base45 string
-          scanres = GZipCodec(gzip: true).decode(scanres.toList());
+          if (kIsWeb) {
+            scanres = js.context["pako"].callMethod("inflate", [scanres]);
+          } else {
+            scanres = GZipCodec(gzip: true).decode(scanres);
+          }
 
           /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
           var cose = Cose.decodeAndVerify(scanres, certMap);
@@ -276,6 +284,8 @@ class _MyHomePageState extends State<MyHomePage> {
             processedResult = Result.fromDGC(cose.payload);
           });
         } catch (e) {
+          print(e);
+
           /// If there are any issues assume QR was corrupted, set as invalid format.
           HapticFeedback.lightImpact();
           setState(() {
