@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:covid_checker/certs/certs.dart';
@@ -14,6 +13,10 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
+
+import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which just throws UnsupportedError
+    if (dart.library.io) "package:covid_checker/utils/gzip/gzip_decode_io.dart"
+    if (dart.library.js) "package:covid_checker/utils/gzip/gzip_decode_js.dart";
 
 void main() {
   runApp(const CovCheckApp());
@@ -255,11 +258,11 @@ class _MyHomePageState extends State<MyHomePage> {
         /// Create variable to store gzip and base45 decoded data
         List<int> scanres;
         try {
-          /// Decode the base 45 data after removing the HC!: prefix
+          /// Decode the base 45 data after removing the HC1: prefix
           scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
 
-          /// Decode the gzpi data which was decoded from the base45 string
-          scanres = gzip.decode(scanres.toList());
+          /// Decode the gzip data which was decoded from the base45 string
+          scanres = gzipDecode(scanres);
 
           /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
           var cose = Cose.decodeAndVerify(scanres, certMap);
