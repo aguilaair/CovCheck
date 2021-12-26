@@ -53,5 +53,7 @@
     "valid": "Válido",
     "invalid": "Inválido (Caducado)",
     "validfrom": "Válido Desde",
-    "validuntil": "Válido Hasta"
+    "validuntil": "Válido Hasta",
+    "webwarntitle": "Atención: Experienca web limitada",
+    "webwarntext": "La versión web de CovCheck está diseñada para demostración y no todas las funciones pueden disponibles. Por favor, instala la app en tu dispositivo."
 }

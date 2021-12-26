@@ -7,6 +7,7 @@ import 'package:covid_checker/utils/gen_swatch.dart';
 import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Result? processedResult;
 
   /// Store if we should show the snackbar, only on web
-  bool isSnackbarDismissed = false;
+  bool isWarningDismissed = false;
 
   @override
   void initState() {
@@ -124,6 +125,28 @@ class _MyHomePageState extends State<MyHomePage> {
 
     /// Size from mediaquery
     Size size = mq.size;
+
+    if (kIsWeb && !isWarningDismissed) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(
+              S.of(context).webwarntext,
+            ),
+            title: Text(S.of(context).webwarntitle),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    isWarningDismissed = true;
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Ok"))
+            ],
+          );
+        },
+      );
+    }
 
     /// Main widget Stack, it is in a separtate varialble to make lasyouts much easier
     final widgetList = <Widget>[

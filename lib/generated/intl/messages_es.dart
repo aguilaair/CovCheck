@@ -100,6 +100,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "validcert": MessageLookupByLibrary.simpleMessage("Certificado Válido"),
         "validfrom": MessageLookupByLibrary.simpleMessage("Válido Desde"),
         "validuntil": MessageLookupByLibrary.simpleMessage("Válido Hasta"),
+        "webwarntext": MessageLookupByLibrary.simpleMessage(
+            "La versión web de CovCheck está diseñada para demostración y no todas las funciones pueden disponibles. Por favor, instala la app en tu dispositivo."),
+        "webwarntitle": MessageLookupByLibrary.simpleMessage(
+            "Atención: Experienca web limitada"),
         "xageold": m1
       };
 }

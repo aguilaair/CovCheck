@@ -609,6 +609,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Warning: Web Experience may be limited`
+  String get webwarntitle {
+    return Intl.message(
+      'Warning: Web Experience may be limited',
+      name: 'webwarntitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone.`
+  String get webwarntext {
+    return Intl.message(
+      'CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone.',
+      name: 'webwarntext',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
