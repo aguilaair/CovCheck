@@ -132,15 +132,16 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) {
           return AlertDialog(
             content: Text(
-              "The Web Experience should is intended for test use, please install the mobile app for the best experience",
+              S.of(context).webwarntext,
             ),
-            title: Text("Web Experience"),
+            title: Text(S.of(context).webwarntitle),
             actions: [
               TextButton(
                   onPressed: () {
+                    isWarningDismissed = true;
                     Navigator.of(context).pop();
                   },
-                  child: Text("Ok"))
+                  child: const Text("Ok"))
             ],
           );
         },

@@ -54,5 +54,7 @@
     "invalid": "Invalid (Expired)",
     "firstpositivetest": "First Positive Test",
     "validfrom": "Valid From",
-    "validuntil": "Valid Until"
+    "validuntil": "Valid Until",
+    "webwarntitle": "Warning: Web Experience may be limited",
+    "webwarntext": "CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone."
 }
