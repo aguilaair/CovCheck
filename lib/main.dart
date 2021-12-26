@@ -91,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Processed Result will store all of the data in a easy-to-use model, ready for viewing within the app
   Result? processedResult;
 
+  /// Store if we should show the snackbar, only on web
+  bool isSnackbarDismissed = false;
+
   @override
   void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
