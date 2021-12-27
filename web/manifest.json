@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "CovCheck allows you to validate EU Vaccination ceritificates easily and quickly.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
