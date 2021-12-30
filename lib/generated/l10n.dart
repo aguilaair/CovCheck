@@ -620,10 +620,10 @@ class S {
     );
   }
 
-  /// `CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone.`
+  /// `CovCheck on the web may not offer the best experience, with some features not working and performace being reduced. Please install the app on your phone.`
   String get webwarntext {
     return Intl.message(
-      'CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone.',
+      'CovCheck on the web may not offer the best experience, with some features not working and performace being reduced. Please install the app on your phone.',
       name: 'webwarntext',
       desc: '',
       args: [],

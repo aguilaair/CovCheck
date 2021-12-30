@@ -97,7 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "validfrom": MessageLookupByLibrary.simpleMessage("Valid From"),
         "validuntil": MessageLookupByLibrary.simpleMessage("Valid Until"),
         "webwarntext": MessageLookupByLibrary.simpleMessage(
-            "CovCheck on the web may not offer the best experience, with some featires not working and performace being reduced. Please install the app on your phone."),
+            "CovCheck on the web may not offer the best experience, with some features not working and performace being reduced. Please install the app on your phone."),
         "webwarntitle": MessageLookupByLibrary.simpleMessage(
             "Warning: Web Experience may be limited"),
         "xageold": m1
