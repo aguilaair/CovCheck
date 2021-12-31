@@ -6,6 +6,8 @@ import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/utils/gen_swatch.dart';
+import 'package:covid_checker/widgets/camera/camera_overlay.dart';
+import 'package:covid_checker/widgets/camera/camera_view.dart';
 import 'package:covid_checker/widgets/cert_simplified_view.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:dart_cose/dart_cose.dart';
@@ -58,15 +60,6 @@ class CovCheckApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -225,99 +218,30 @@ class _MyHomePageState extends State<MyHomePage>
             alignment: Alignment.topRight,
             children: [
               /// Camera View
-              Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                clipBehavior: Clip.antiAlias,
-                padding: const EdgeInsets.all(10),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: QRView(
-                    key: qrKey,
-                    overlay: !kIsWeb
-                        ? QrScannerOverlayShape(
-                            cutOutWidth:
-                                min(size.width * 0.65, size.height * 0.65),
-                            cutOutHeight:
-                                min(size.width * 0.65, size.height * 0.65),
-                            borderRadius: 15,
-                            overlayColor: Colors.black.withAlpha(100))
-                        : null,
-                    onQRViewCreated: _onQRViewCreated,
-                  ),
-                ),
-              ),
+              CameraView(
+                  onQRViewCreated: _onQRViewCreated, qrKey: qrKey, size: size),
 
               /// Utility buttons for changing camera, flash and restarting the camera if it crashes.
-              if (!kIsWeb)
-                Positioned(
-                  right: 20,
-                  top: 10,
-                  child: Row(
-                    children: [
-                      /// Flash
-                      Tooltip(
-                        message: S.of(context).toggleflash,
-                        child: IconButton(
-                          onPressed: () {
-                            controller!.toggleFlash();
-                          },
-                          icon: const Icon(
-                            Icons.flash_on_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-
-                      /// Rotate/Change camera
-                      Tooltip(
-                        message: S.of(context).rotatecamera,
-                        child: IconButton(
-                          onPressed: () {
-                            controller!.flipCamera();
-                          },
-                          icon: const Icon(
-                            Icons.cameraswitch_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-
-                      /// Restart Camera
-                      Tooltip(
-                        message: S.of(context).restartcamera,
-                        child: IconButton(
-                          onPressed: () {
-                            controller!.pauseCamera();
-                            controller!.resumeCamera();
-                          },
-                          icon: const Icon(
-                            Icons.restart_alt_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              if (!kIsWeb) CameraOverlay(controller: controller),
             ],
           ),
         ),
 
       /// Details Section
       Expanded(
-          flex: 1,
-          child: Padding(
-            padding: orientation == Orientation.portrait
-                ? EdgeInsets.zero
-                : const EdgeInsets.only(right: 10),
-            child: CertSimplifiedView(
-              coseResult: coseResult,
-              barcodeResult: result,
-              dismiss: dismissResults,
-              processedResult: processedResult,
-            ),
-          )),
+        flex: 1,
+        child: Padding(
+          padding: orientation == Orientation.portrait
+              ? EdgeInsets.zero
+              : const EdgeInsets.only(right: 10),
+          child: CertSimplifiedView(
+            coseResult: coseResult,
+            barcodeResult: result,
+            dismiss: dismissResults,
+            processedResult: processedResult,
+          ),
+        ),
+      ),
     ];
 
     /// UI declaration
