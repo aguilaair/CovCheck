@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage>
   HoneywellScanner? honeywellScanner;
 
   @override
-  void initState() async {
+  void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
     (certs["dsc_trust_list"] as Map).forEach((key, value) {
@@ -125,7 +125,9 @@ class _MyHomePageState extends State<MyHomePage>
       // Check if it is supported and that the widget is still available
       if (!(await honeywellScanner!.isSupported()) && mounted) {
         // Not Supported, so set as null and forget about it, fallsback to QR code camera scanner
-        honeywellScanner = null;
+        setState(() {
+          honeywellScanner = null;
+        });
       } else {
         // Supported, so set up the scanner with QR code scanning capabilities
         honeywellScanner!.setScannerCallBack(this);
@@ -134,10 +136,11 @@ class _MyHomePageState extends State<MyHomePage>
           'DEC_CODABAR_START_STOP_TRANSMIT': true,
           'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
         });
-        honeywellScanner!.startScanner();
-        controller?.stopCamera();
-        controller?.dispose();
-        setState(() {});
+        setState(() {
+          honeywellScanner!.startScanner();
+          controller?.stopCamera();
+          controller?.dispose();
+        });
       }
     }
   }
