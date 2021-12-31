@@ -11,6 +11,8 @@ class CertSimplifiedView extends StatelessWidget {
     required this.barcodeResult,
     required this.dismiss,
     required this.processedResult,
+    required this.toggleCamPda,
+    required this.isPda,
     Key? key,
   }) : super(key: key);
 
@@ -18,6 +20,8 @@ class CertSimplifiedView extends StatelessWidget {
   final Barcode? barcodeResult;
   final Function dismiss;
   final Result? processedResult;
+  final bool isPda;
+  final Function toggleCamPda;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,10 @@ class CertSimplifiedView extends StatelessWidget {
       return Stack(
         alignment: AlignmentDirectional.center,
         children: [
-          const EmptyResult(),
+          EmptyResult(
+            isPda: isPda,
+            toggleCamPda: toggleCamPda,
+          ),
           ResultCard(
             barcodeResult: barcodeResult!,
             coseResult: coseResult!,
@@ -40,14 +47,22 @@ class CertSimplifiedView extends StatelessWidget {
       );
     }
     // No Result
-    return const EmptyResult();
+    return EmptyResult(
+      isPda: isPda,
+      toggleCamPda: toggleCamPda,
+    );
   }
 }
 
 class EmptyResult extends StatelessWidget {
   const EmptyResult({
     Key? key,
+    required this.isPda,
+    required this.toggleCamPda,
   }) : super(key: key);
+
+  final bool isPda;
+  final Function toggleCamPda;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +81,29 @@ class EmptyResult extends StatelessWidget {
             S.of(context).scanqrmessage,
             style: Theme.of(context).textTheme.headline6,
           ),
+          const SizedBox(
+            height: 5,
+          ),
+          if (isPda)
+            Text(
+              S.of(context).pdadetected,
+              style: Theme.of(context)
+                  .textTheme
+                  .subtitle2!
+                  .copyWith(fontWeight: FontWeight.w100),
+            ),
+          if (isPda)
+            const SizedBox(
+              height: 10,
+            ),
+          if (isPda)
+            TextButton.icon(
+              onPressed: () {
+                toggleCamPda();
+              },
+              icon: const Icon(Icons.cameraswitch_sharp),
+              label: Text(S.of(context).pdaswitch),
+            )
         ],
       ),
     );

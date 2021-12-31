@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/models/result.dart';
@@ -96,6 +95,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   HoneywellScanner? honeywellScanner;
 
+  bool? isPda = true;
+
   @override
   void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
@@ -111,29 +112,45 @@ class _MyHomePageState extends State<MyHomePage>
 
   void initPda() async {
     // PDA Checking
-    if (!kIsWeb && Platform.isAndroid) {
-      // Instantiate honeywell scanner
-      honeywellScanner = HoneywellScanner();
+    if ((isPda ?? true)) {
+      if ((kIsWeb || !Platform.isAndroid) && mounted) {
+        // If on web or not Android there is no way it can support PDA.
+        setState(() {
+          isPda = false;
+        });
+      } else if (!kIsWeb && Platform.isAndroid) {
+        if (isPda == null || (isPda = true && honeywellScanner == null)) {
+          // Instantiate honeywell scanner
+          honeywellScanner = HoneywellScanner();
 
-      // Check if it is supported and that the widget is still available
-      if (!(await honeywellScanner!.isSupported()) && mounted) {
-        // Not Supported, so set as null and forget about it, fallsback to QR code camera scanner
-        setState(() {
-          honeywellScanner = null;
-        });
-      } else {
-        // Supported, so set up the scanner with QR code scanning capabilities
-        honeywellScanner!.setScannerCallBack(this);
-        honeywellScanner!.setProperties({
-          ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
-          'DEC_CODABAR_START_STOP_TRANSMIT': true,
-          'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
-        });
-        setState(() {
-          honeywellScanner!.startScanner();
-          controller?.stopCamera();
-          controller?.dispose();
-        });
+          // Check PDA availability
+          if (isPda == null) {
+            isPda = await honeywellScanner!.isSupported();
+            if (!isPda!) {
+              setState(() {
+                honeywellScanner = null;
+              });
+              return;
+            }
+          }
+        }
+
+        // Check if it is supported and that the widget is still available
+        if (isPda!) {
+          // Supported, so set up the scanner with QR code scanning capabilities
+          honeywellScanner?.setScannerCallBack(this);
+          honeywellScanner?.setProperties({
+            ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
+            'DEC_CODABAR_START_STOP_TRANSMIT': true,
+            'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
+          });
+          setState(() {
+            honeywellScanner?.startScanner();
+            controller?.stopCamera();
+            controller?.dispose();
+            controller = null;
+          });
+        }
       }
     }
   }
@@ -166,9 +183,15 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   void reassemble() {
-    /// In some cases we need to restart the camera when rotating and in development, thsi will do it for us
-    controller?.pauseCamera();
-    controller?.resumeCamera();
+    /// In some cases we need to restart the camera when rotating and in development, this will do it for us
+    try {
+      controller?.pauseCamera();
+      controller?.resumeCamera();
+    } catch (e) {
+      controller?.dispose();
+      controller = null;
+    }
+
     super.reassemble();
   }
 
@@ -235,6 +258,8 @@ class _MyHomePageState extends State<MyHomePage>
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
           child: CertSimplifiedView(
+            isPda: isPda ?? false,
+            toggleCamPda: togglePdaMode,
             coseResult: coseResult,
             barcodeResult: result,
             dismiss: dismissResults,
@@ -288,6 +313,16 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void onError(Exception error) {
     // Do Nothing
+  }
+
+  void togglePdaMode() {
+    if (isPda! && honeywellScanner == null) {
+      initPda();
+    } else {
+      setState(() {
+        honeywellScanner = null;
+      });
+    }
   }
 
   /// Utility function so that the dismissal clears the card

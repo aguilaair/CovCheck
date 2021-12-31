@@ -68,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "nopassvac":
             MessageLookupByLibrary.simpleMessage("Vaccination Not Complete"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
+        "pdadetected": MessageLookupByLibrary.simpleMessage(
+            "Scanning on PDA mode available"),
+        "pdaswitch": MessageLookupByLibrary.simpleMessage("Switch Scan Mode"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Personal Details"),
         "prodName": MessageLookupByLibrary.simpleMessage("Name of Product"),

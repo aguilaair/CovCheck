@@ -629,6 +629,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Scanning on PDA mode available`
+  String get pdadetected {
+    return Intl.message(
+      'Scanning on PDA mode available',
+      name: 'pdadetected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch Scan Mode`
+  String get pdaswitch {
+    return Intl.message(
+      'Switch Scan Mode',
+      name: 'pdaswitch',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -56,5 +56,7 @@
     "validfrom": "Valid From",
     "validuntil": "Valid Until",
     "webwarntitle": "Warning: Web Experience may be limited",
-    "webwarntext": "CovCheck on the web may not offer the best experience, with some features not working and performace being reduced. Please install the app on your phone."
+    "webwarntext": "CovCheck on the web may not offer the best experience, with some features not working and performace being reduced. Please install the app on your phone.",
+    "pdadetected": "Scanning on PDA mode available",
+    "pdaswitch": "Switch Scan Mode"
 }

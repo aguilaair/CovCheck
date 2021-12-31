@@ -70,6 +70,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "nopassvac": MessageLookupByLibrary.simpleMessage(
             "Pauta de Vacunación No Completa"),
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
+        "pdadetected": MessageLookupByLibrary.simpleMessage(
+            "Escaneo en modo PDA disponible"),
+        "pdaswitch":
+            MessageLookupByLibrary.simpleMessage("Cambiar Modo de Escaneo"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Datos Personales"),
         "prodName": MessageLookupByLibrary.simpleMessage("Nombre del Producto"),
