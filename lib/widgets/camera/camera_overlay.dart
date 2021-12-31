@@ -8,7 +8,7 @@ class CameraOverlay extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final QRViewController controller;
+  final QRViewController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CameraOverlay extends StatelessWidget {
             message: S.of(context).toggleflash,
             child: IconButton(
               onPressed: () {
-                controller.toggleFlash();
+                controller?.toggleFlash();
               },
               icon: const Icon(
                 Icons.flash_on_rounded,
@@ -36,7 +36,7 @@ class CameraOverlay extends StatelessWidget {
             message: S.of(context).rotatecamera,
             child: IconButton(
               onPressed: () {
-                controller.flipCamera();
+                controller?.flipCamera();
               },
               icon: const Icon(
                 Icons.cameraswitch_rounded,
@@ -50,8 +50,8 @@ class CameraOverlay extends StatelessWidget {
             message: S.of(context).restartcamera,
             child: IconButton(
               onPressed: () {
-                controller.pauseCamera();
-                controller.resumeCamera();
+                controller?.pauseCamera();
+                controller?.resumeCamera();
               },
               icon: const Icon(
                 Icons.restart_alt_rounded,

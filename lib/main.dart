@@ -1,4 +1,3 @@
-
 import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/base45.dart';
@@ -159,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             /// Utility buttons for changing camera, flash and restarting the camera if it crashes.
-            if (!kIsWeb) CameraOverlay(controller: controller!),
+            if (!kIsWeb) CameraOverlay(controller: controller),
           ],
         ),
       ),
@@ -250,6 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       }
     });
+    setState(() {});
   }
 
   /// Utility function so that the dismissal clears the card
