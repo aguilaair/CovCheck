@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^1.0.0
   circle_flags: ^0.0.2
   intl: ^0.17.0
+  honeywell_scanner: ^3.1.4+12
 
 dev_dependencies:
   flutter_test:

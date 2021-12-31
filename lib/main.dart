@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:covid_checker/certs/certs.dart';
@@ -14,6 +16,8 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
+
+import 'package:honeywell_scanner/honeywell_scanner.dart';
 
 import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which just throws UnsupportedError
     if (dart.library.io) "package:covid_checker/utils/gzip/gzip_decode_io.dart"
@@ -70,7 +74,9 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with WidgetsBindingObserver
+    implements ScannerCallBack {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   /// Barcode Result will store the raw data and type of Barcode which has been scanned
@@ -95,8 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Store if we should show the snackbar, only on web
   bool isWarningDismissed = false;
 
+  HoneywellScanner? honeywellScanner;
+
   @override
-  void initState() {
+  void initState() async {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
     (certs["dsc_trust_list"] as Map).forEach((key, value) {
@@ -104,6 +112,20 @@ class _MyHomePageState extends State<MyHomePage> {
         certMap[element["kid"]] = element["x5c"][0];
       }
     });
+
+    if (!kIsWeb && Platform.isAndroid) {
+      honeywellScanner = HoneywellScanner();
+      if (!(await honeywellScanner!.isSupported()) && mounted) {
+        honeywellScanner = null;
+      } else {
+        honeywellScanner!.setScannerCallBack(this);
+        honeywellScanner!.setProperties({
+          ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
+          'DEC_CODABAR_START_STOP_TRANSMIT': true,
+          'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
+        });
+      }
+    }
     super.initState();
   }
 
@@ -281,49 +303,23 @@ class _MyHomePageState extends State<MyHomePage> {
     this.controller = controller;
 
     /// We listen to QR codes that might be sannned
-    controller.scannedDataStream.listen((scanData) {
-      /// Ignore all QR codes with are empty, do not start with HC1:, or are the same as the last scanned code.
-      if (scanData.code != null &&
-          scanData.code!.startsWith("HC1:") &&
-          scanData.code! != (result?.code)) {
-        /// Create variable to store gzip and base45 decoded data
-        List<int> scanres;
-        try {
-          /// Decode the base 45 data after removing the HC1: prefix
-          scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
+    controller.scannedDataStream.listen(
+      (scanData) {
+        scanDataProcessing(scanData);
+      },
+    );
+  }
 
-          /// Decode the gzip data which was decoded from the base45 string
-          scanres = gzipDecode(scanres);
+  @override
+  void onDecoded(String? hwDecodedQR) {
+    final scanData = Barcode(hwDecodedQR, BarcodeFormat.qrcode,
+        hwDecodedQR != null ? utf8.encode(hwDecodedQR) : null);
+    scanDataProcessing(scanData);
+  }
 
-          /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
-          var cose = Cose.decodeAndVerify(scanres, certMap);
-
-          /// Vibrate as we're done
-          HapticFeedback.lightImpact();
-
-          setState(() {
-            /// Update the state and set cose and scanData
-            coseResult = cose;
-            result = scanData;
-
-            /// Process payload from cose and extract the data
-            processedResult = Result.fromDGC(cose.payload);
-          });
-        } catch (e) {
-          /// If there are any issues assume QR was corrupted, set as invalid format.
-          HapticFeedback.lightImpact();
-          setState(() {
-            coseResult = CoseResult(
-                payload: {},
-                verified: false,
-                errorCode: CoseErrorCode.invalid_format,
-                certificate: null);
-            result = scanData;
-            processedResult = null;
-          });
-        }
-      }
-    });
+  @override
+  void onError(Exception error) {
+    // Do Nothing
   }
 
   /// Utility function so that the dismissal clears the card
@@ -340,5 +336,48 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  void scanDataProcessing(Barcode scanData) {
+    if (scanData.code != null &&
+        scanData.code!.startsWith("HC1:") &&
+        scanData.code! != (result?.code)) {
+      /// Create variable to store gzip and base45 decoded data
+      List<int> scanres;
+      try {
+        /// Decode the base 45 data after removing the HC1: prefix
+        scanres = Base45.decode(scanData.code!.replaceAll("HC1:", ""));
+
+        /// Decode the gzip data which was decoded from the base45 string
+        scanres = gzipDecode(scanres);
+
+        /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
+        var cose = Cose.decodeAndVerify(scanres, certMap);
+
+        /// Vibrate as we're done
+        HapticFeedback.lightImpact();
+
+        setState(() {
+          /// Update the state and set cose and scanData
+          coseResult = cose;
+          result = scanData;
+
+          /// Process payload from cose and extract the data
+          processedResult = Result.fromDGC(cose.payload);
+        });
+      } catch (e) {
+        /// If there are any issues assume QR was corrupted, set as invalid format.
+        HapticFeedback.lightImpact();
+        setState(() {
+          coseResult = CoseResult(
+              payload: {},
+              verified: false,
+              errorCode: CoseErrorCode.invalid_format,
+              certificate: null);
+          result = scanData;
+          processedResult = null;
+        });
+      }
+    }
   }
 }
