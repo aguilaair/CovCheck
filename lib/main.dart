@@ -112,7 +112,11 @@ class _MyHomePageState extends State<MyHomePage>
         certMap[element["kid"]] = element["x5c"][0];
       }
     });
+    initPda();
+    super.initState();
+  }
 
+  void initPda() async {
     // PDA Checking
     if (!kIsWeb && Platform.isAndroid) {
       // Instantiate honeywell scanner
@@ -131,9 +135,11 @@ class _MyHomePageState extends State<MyHomePage>
           'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
         });
         honeywellScanner!.startScanner();
+        controller?.stopCamera();
+        controller?.dispose();
+        setState(() {});
       }
     }
-    super.initState();
   }
 
   @override
