@@ -275,6 +275,7 @@ class _MyHomePageState extends State<MyHomePage>
         scanDataProcessing(scanData);
       },
     );
+    setState(() {});
   }
 
   @override
