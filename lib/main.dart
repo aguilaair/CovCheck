@@ -176,90 +176,91 @@ class _MyHomePageState extends State<MyHomePage>
       if (orientation == Orientation.portrait) const Logo(),
 
       /// Camera Stack
-      Expanded(
-        flex: 1,
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            /// Camera View
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
-              clipBehavior: Clip.antiAlias,
-              padding: const EdgeInsets.all(10),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: QRView(
-                  key: qrKey,
-                  overlay: !kIsWeb
-                      ? QrScannerOverlayShape(
-                          cutOutWidth:
-                              min(size.width * 0.65, size.height * 0.65),
-                          cutOutHeight:
-                              min(size.width * 0.65, size.height * 0.65),
-                          borderRadius: 15,
-                          overlayColor: Colors.black.withAlpha(100))
-                      : null,
-                  onQRViewCreated: _onQRViewCreated,
+      if (honeywellScanner == null)
+        Expanded(
+          flex: 1,
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              /// Camera View
+              Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                clipBehavior: Clip.antiAlias,
+                padding: const EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: QRView(
+                    key: qrKey,
+                    overlay: !kIsWeb
+                        ? QrScannerOverlayShape(
+                            cutOutWidth:
+                                min(size.width * 0.65, size.height * 0.65),
+                            cutOutHeight:
+                                min(size.width * 0.65, size.height * 0.65),
+                            borderRadius: 15,
+                            overlayColor: Colors.black.withAlpha(100))
+                        : null,
+                    onQRViewCreated: _onQRViewCreated,
+                  ),
                 ),
               ),
-            ),
 
-            /// Utility buttons for changing camera, flash and restarting the camera if it crashes.
-            if (!kIsWeb)
-              Positioned(
-                right: 20,
-                top: 10,
-                child: Row(
-                  children: [
-                    /// Flash
-                    Tooltip(
-                      message: S.of(context).toggleflash,
-                      child: IconButton(
-                        onPressed: () {
-                          controller!.toggleFlash();
-                        },
-                        icon: const Icon(
-                          Icons.flash_on_rounded,
-                          color: Colors.white,
+              /// Utility buttons for changing camera, flash and restarting the camera if it crashes.
+              if (!kIsWeb)
+                Positioned(
+                  right: 20,
+                  top: 10,
+                  child: Row(
+                    children: [
+                      /// Flash
+                      Tooltip(
+                        message: S.of(context).toggleflash,
+                        child: IconButton(
+                          onPressed: () {
+                            controller!.toggleFlash();
+                          },
+                          icon: const Icon(
+                            Icons.flash_on_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
 
-                    /// Rotate/Change camera
-                    Tooltip(
-                      message: S.of(context).rotatecamera,
-                      child: IconButton(
-                        onPressed: () {
-                          controller!.flipCamera();
-                        },
-                        icon: const Icon(
-                          Icons.cameraswitch_rounded,
-                          color: Colors.white,
+                      /// Rotate/Change camera
+                      Tooltip(
+                        message: S.of(context).rotatecamera,
+                        child: IconButton(
+                          onPressed: () {
+                            controller!.flipCamera();
+                          },
+                          icon: const Icon(
+                            Icons.cameraswitch_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
 
-                    /// Restart Camera
-                    Tooltip(
-                      message: S.of(context).restartcamera,
-                      child: IconButton(
-                        onPressed: () {
-                          controller!.pauseCamera();
-                          controller!.resumeCamera();
-                        },
-                        icon: const Icon(
-                          Icons.restart_alt_rounded,
-                          color: Colors.white,
+                      /// Restart Camera
+                      Tooltip(
+                        message: S.of(context).restartcamera,
+                        child: IconButton(
+                          onPressed: () {
+                            controller!.pauseCamera();
+                            controller!.resumeCamera();
+                          },
+                          icon: const Icon(
+                            Icons.restart_alt_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
-      ),
 
       /// Details Section
       Expanded(
