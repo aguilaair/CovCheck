@@ -113,27 +113,60 @@ class _MyHomePageState extends State<MyHomePage>
       }
     });
 
+    // PDA Checking
     if (!kIsWeb && Platform.isAndroid) {
+      // Instantiate honeywell scanner
       honeywellScanner = HoneywellScanner();
+
+      // Check if it is supported and that the widget is still available
       if (!(await honeywellScanner!.isSupported()) && mounted) {
+        // Not Supported, so set as null and forget about it, fallsback to QR code camera scanner
         honeywellScanner = null;
       } else {
+        // Supported, so set up the scanner with QR code scanning capabilities
         honeywellScanner!.setScannerCallBack(this);
         honeywellScanner!.setProperties({
           ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
           'DEC_CODABAR_START_STOP_TRANSMIT': true,
           'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
         });
+        honeywellScanner!.startScanner();
       }
     }
     super.initState();
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        controller?.resumeCamera();
+        honeywellScanner?.resumeScanner();
+        break;
+      case AppLifecycleState.inactive:
+        controller?.pauseCamera();
+        honeywellScanner?.pauseScanner();
+        break;
+      case AppLifecycleState
+          .paused: //AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
+        honeywellScanner?.pauseScanner();
+        controller?.pauseCamera();
+        break;
+      case AppLifecycleState.detached:
+        honeywellScanner?.pauseScanner();
+        controller?.pauseCamera();
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
   void reassemble() {
     /// In some cases we need to restart the camera when rotating and in development, thsi will do it for us
-    controller!.pauseCamera();
-    controller!.resumeCamera();
+    controller?.pauseCamera();
+    controller?.resumeCamera();
     super.reassemble();
   }
 
@@ -336,6 +369,7 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void dispose() {
     controller?.dispose();
+    honeywellScanner?.stopScanner();
     super.dispose();
   }
 
