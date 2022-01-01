@@ -41,7 +41,7 @@ dependencies:
   honeywell_scanner: ^3.1.4+12
   hive: ^2.0.5
   hive_flutter: ^1.1.0
-  settings_ui: ^1.0.0
+  flutter_settings_ui: ^2.0.1
   adaptive_theme: ^2.3.0
 
 dev_dependencies:

@@ -3,7 +3,7 @@ import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/logo.dart';
 import 'package:flutter/material.dart';
 
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
 import 'models/settings.dart';
 
