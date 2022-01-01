@@ -33,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Logo(
+            const Logo(
               height: 50,
             ),
             Expanded(
@@ -43,7 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   SettingsSection(
                     tiles: [
                       SettingsTile(
-                        title: 'Language',
+                        title: S.of(context).language,
                         leading: const Icon(Icons.language_rounded),
                         trailing: DropdownButton(
                           items: S.delegate.supportedLocales.map((element) {
@@ -65,7 +65,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       SettingsTile(
-                        title: 'Theme',
+                        title: S.of(context).theme,
                         leading: Icon(AdaptiveTheme.of(context).mode ==
                                 AdaptiveThemeMode.light
                             ? Icons.light_mode_rounded
@@ -76,15 +76,15 @@ class _SettingScreenState extends State<SettingScreen> {
                         trailing: DropdownButton(
                           items: const [
                             DropdownMenuItem(
-                              child: Text("Light"),
+                              child: Text(S.of(context).),
                               value: AdaptiveThemeMode.light,
                             ),
                             DropdownMenuItem(
-                              child: Text("Dark"),
+                              child: Text(S.of(context).dark),
                               value: AdaptiveThemeMode.dark,
                             ),
                             DropdownMenuItem(
-                              child: Text("System"),
+                              child: Text(S.of(context).system),
                               value: AdaptiveThemeMode.system,
                             ),
                           ],
@@ -101,9 +101,9 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       SettingsTile.switchTile(
-                        title: 'PDA Mode',
+                        title: S.of(context).pdamode,
                         leading: const Icon(Icons.qr_code_scanner_rounded),
-                        subtitle: 'Honeywell PDAs only',
+                        subtitle: S.of(context).pdamodedesc,
                         switchValue: newSettings!.isPda,
                         onToggle: (bool value) {
                           setState(() {
@@ -117,17 +117,18 @@ class _SettingScreenState extends State<SettingScreen> {
                     ],
                   ),
                   SettingsSection(
-                    title: "App Info",
+                    title: S.of(context).appinfo,
                     tiles: [
                       SettingsTile(
-                        title: 'App Info',
+                        title: S.of(context).appinfo,
                         leading: const Icon(Icons.info_outline_rounded),
                         onPressed: (BuildContext context) {
                           showAboutDialog(
-                              context: context,
-                              applicationLegalese: "Licensed under AGPL 3.0",
-                              applicationVersion:
-                                  "By Eduardo Moreno | eduardom.dev");
+                            context: context,
+                            applicationLegalese: "Licensed under AGPL 3.0",
+                            applicationVersion:
+                                "By Eduardo Moreno | eduardom.dev",
+                          );
                         },
                       ),
                     ],

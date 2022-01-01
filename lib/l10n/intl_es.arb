@@ -57,5 +57,13 @@
     "webwarntitle": "Atención: Experienca web limitada",
     "webwarntext": "La versión web de CovCheck está diseñada para demostración y no todas las funciones pueden disponibles. Por favor, instala la app en tu dispositivo.",
     "pdadetected": "Escaneo en modo PDA disponible",
-    "pdaswitch": "Cambiar Modo de Escaneo"
+    "pdaswitch": "Cambiar Modo de Escaneo",
+    "language": "Idioma",
+    "theme": "Tema",
+    "pdamode": "Modo PDA",
+    "pdamodedesc": "Solo PDAs de Honeywell",
+    "appinfo": "Info. de la app",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "system": "Sistema"
 }

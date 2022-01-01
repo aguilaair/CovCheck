@@ -649,6 +649,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PDA Mode`
+  String get pdamode {
+    return Intl.message(
+      'PDA Mode',
+      name: 'pdamode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Honeywell PDAs only`
+  String get pdamodedesc {
+    return Intl.message(
+      'Honeywell PDAs only',
+      name: 'pdamodedesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Info`
+  String get appinfo {
+    return Intl.message(
+      'App Info',
+      name: 'appinfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Country": MessageLookupByLibrary.simpleMessage("País"),
         "age": MessageLookupByLibrary.simpleMessage("Edad"),
+        "appinfo": MessageLookupByLibrary.simpleMessage("Info. de la app"),
         "certType": MessageLookupByLibrary.simpleMessage("Tipo de Certificado"),
         "certid": MessageLookupByLibrary.simpleMessage("ID de Certificado"),
         "certinfo":
@@ -39,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Versión del Certificado"),
         "country":
             MessageLookupByLibrary.simpleMessage("País de Administración"),
+        "dark": MessageLookupByLibrary.simpleMessage("Oscuro"),
         "detected": MessageLookupByLibrary.simpleMessage("Detectado"),
         "detialtype": m0,
         "dob": MessageLookupByLibrary.simpleMessage("Fecha de Nacimiento"),
@@ -60,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalid": MessageLookupByLibrary.simpleMessage("Inválido (Caducado)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Certificado Inválido"),
+        "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+        "light": MessageLookupByLibrary.simpleMessage("Claro"),
         "manname": MessageLookupByLibrary.simpleMessage("Fabricante"),
         "moredetails": MessageLookupByLibrary.simpleMessage("Mas Detalles"),
         "name": MessageLookupByLibrary.simpleMessage("Nombre"),
@@ -72,6 +76,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
         "pdadetected": MessageLookupByLibrary.simpleMessage(
             "Escaneo en modo PDA disponible"),
+        "pdamode": MessageLookupByLibrary.simpleMessage("Modo PDA"),
+        "pdamodedesc":
+            MessageLookupByLibrary.simpleMessage("Solo PDAs de Honeywell"),
         "pdaswitch":
             MessageLookupByLibrary.simpleMessage("Cambiar Modo de Escaneo"),
         "personaldetails":
@@ -88,12 +95,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "signingauth":
             MessageLookupByLibrary.simpleMessage("Autoridad de Firmado"),
         "surname": MessageLookupByLibrary.simpleMessage("Apellido(s)"),
+        "system": MessageLookupByLibrary.simpleMessage("Sistema"),
         "targetdisease": MessageLookupByLibrary.simpleMessage("Emfermedad"),
         "test": MessageLookupByLibrary.simpleMessage("Prueba"),
         "testdate": MessageLookupByLibrary.simpleMessage("Fecha de Prueba"),
         "testloc":
             MessageLookupByLibrary.simpleMessage("Localización de Prueba"),
         "testtype": MessageLookupByLibrary.simpleMessage("Tipo de Test"),
+        "theme": MessageLookupByLibrary.simpleMessage("Tema"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
         "unk": MessageLookupByLibrary.simpleMessage("Desconocido"),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacunación"),
