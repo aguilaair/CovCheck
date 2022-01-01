@@ -71,11 +71,11 @@ class _MyHomePageState extends State<MyHomePage>
         certMap[element["kid"]] = element["x5c"][0];
       }
     });
-    loadSettingsSettings();
+    loadSettings();
     super.initState();
   }
 
-  void loadSettingsSettings() async {
+  void loadSettings() async {
     final settingsLoaded = Hive.box('settings').get(
       "settings",
     );
@@ -190,7 +190,11 @@ class _MyHomePageState extends State<MyHomePage>
     /// Main widget Stack, it is in a separtate varialble to make lasyouts much easier
     final widgetList = <Widget>[
       /// Logo will only be shown if in portrait, dunno whe it can go in landsacpe
-      if (orientation == Orientation.portrait) const Logo(),
+      if (orientation == Orientation.portrait)
+        Logo(
+          settings: settings,
+          updateSettings: setSettings,
+        ),
 
       /// Camera Stack
       if (honeywellScanner == null)
@@ -220,7 +224,11 @@ class _MyHomePageState extends State<MyHomePage>
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (orientation == Orientation.landscape) const Logo(),
+              if (orientation == Orientation.landscape)
+                Logo(
+                  settings: settings,
+                  updateSettings: setSettings,
+                ),
               CertSimplifiedView(
                 isPda: settings?.isPda ?? false,
                 toggleCamPda: togglePdaMode,
@@ -350,6 +358,16 @@ class _MyHomePageState extends State<MyHomePage>
           processedResult = null;
         });
       }
+    }
+  }
+
+  void setSettings(Settings newSettings) {
+    if (newSettings != settings) {
+      if (settings!.locale != newSettings.locale) {
+        widget.setLocale(Locale(newSettings.locale));
+      }
+      Hive.box('settings').put('settings', newSettings.toJson());
+      settings = newSettings;
     }
   }
 }

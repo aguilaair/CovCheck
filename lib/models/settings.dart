@@ -8,13 +8,11 @@ import 'package:honeywell_scanner/honeywell_scanner.dart';
 class Settings {
   bool isPda;
   bool isPdaModeEnabled;
-  bool isDarkMode;
   String locale;
 
   Settings({
     required this.isPda,
     required this.isPdaModeEnabled,
-    required this.isDarkMode,
     required this.locale,
   });
 
@@ -27,7 +25,6 @@ class Settings {
     final locale = Localizations.localeOf(ctx);
     final newInstance = Settings(
       isPda: isPda,
-      isDarkMode: isDarkMode,
       isPdaModeEnabled: isPdaModeEnabled,
       locale: locale.languageCode,
     );
@@ -43,7 +40,6 @@ class Settings {
     return Settings(
       isPda: isPda ?? this.isPda,
       isPdaModeEnabled: isPdaModeEnabled ?? this.isPdaModeEnabled,
-      isDarkMode: isDarkMode ?? this.isDarkMode,
       locale: locale ?? this.locale,
     );
   }
@@ -52,7 +48,6 @@ class Settings {
     return {
       'isPda': isPda,
       'isPdaModeEnabled': isPdaModeEnabled,
-      'isDarkMode': isDarkMode,
       'locale': locale,
     };
   }
@@ -61,7 +56,6 @@ class Settings {
     return Settings(
       isPda: map['isPda'] ?? false,
       isPdaModeEnabled: map['isPdaModeEnabled'] ?? false,
-      isDarkMode: map['isDarkMode'] ?? false,
       locale: map['locale'] ?? '',
     );
   }
@@ -73,7 +67,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, isDarkMode: $isDarkMode, locale: $locale)';
+    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, locale: $locale)';
   }
 
   @override
@@ -83,15 +77,11 @@ class Settings {
     return other is Settings &&
         other.isPda == isPda &&
         other.isPdaModeEnabled == isPdaModeEnabled &&
-        other.isDarkMode == isDarkMode &&
         other.locale == locale;
   }
 
   @override
   int get hashCode {
-    return isPda.hashCode ^
-        isPdaModeEnabled.hashCode ^
-        isDarkMode.hashCode ^
-        locale.hashCode;
+    return isPda.hashCode ^ isPdaModeEnabled.hashCode ^ locale.hashCode;
   }
 }
