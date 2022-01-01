@@ -97,6 +97,22 @@ class _SettingScreenState extends State<SettingScreen> {
                       ),
                     ],
                   ),
+                  SettingsSection(
+                    title: "App Info",
+                    tiles: [
+                      SettingsTile(
+                        title: 'App Info',
+                        leading: const Icon(Icons.info_outline_rounded),
+                        onPressed: (BuildContext context) {
+                          showAboutDialog(
+                              context: context,
+                              applicationLegalese: "Licensed under AGPL 3.0",
+                              applicationVersion:
+                                  "By Eduardo Moreno | eduardom.dev");
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
