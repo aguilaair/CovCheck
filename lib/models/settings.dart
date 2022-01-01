@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 
@@ -17,7 +19,9 @@ class Settings {
   });
 
   static Future<Settings> getNewSettings(BuildContext ctx) async {
-    final isPda = await HoneywellScanner().isSupported();
+    final isPda = (Platform.isAndroid && !kIsWeb)
+        ? await HoneywellScanner().isSupported()
+        : false;
     final isDarkMode = (Theme.of(ctx).brightness == Brightness.dark);
     final isPdaModeEnabled = isPda;
     final locale = Localizations.localeOf(ctx);

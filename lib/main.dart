@@ -26,6 +26,8 @@ import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which
     if (dart.library.io) "package:covid_checker/utils/gzip/gzip_decode_io.dart"
     if (dart.library.js) "package:covid_checker/utils/gzip/gzip_decode_js.dart";
 
+import 'models/settings.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -100,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   HoneywellScanner? honeywellScanner;
 
-  bool? isPda = true;
+  Settings? settings;
 
   @override
   void initState() {
@@ -111,60 +113,42 @@ class _MyHomePageState extends State<MyHomePage>
         certMap[element["kid"]] = element["x5c"][0];
       }
     });
-    isPda = Hive.box('settings').get("pdaCompat", defaultValue: null);
-    final bool pdaModeActive =
-        Hive.box('settings').get("pdaModeActive", defaultValue: true);
-
-    if (pdaModeActive && (isPda ?? true)) initPda();
     super.initState();
+  }
+
+  void loadSettingsSettings() async {
+    settings = Settings.fromJson(Hive.box('settings').get(
+      "settings",
+      defaultValue: (await Settings.getNewSettings(context)).toJson(),
+    ));
+
+    if (settings!.isPdaModeEnabled && settings!.isPda) initPda();
+
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void initPda() async {
     // PDA Checking
-    if ((isPda ?? true)) {
-      if ((kIsWeb || !Platform.isAndroid) && mounted) {
-        // If on web or not Android there is no way it can support PDA.
-        Hive.box('settings').put("pdaCompat", false);
-        setState(() {
-          isPda = false;
-        });
-      } else if (!kIsWeb && Platform.isAndroid) {
-        if (isPda == null || (isPda = true && honeywellScanner == null)) {
-          // Instantiate honeywell scanner
-          honeywellScanner = HoneywellScanner();
 
-          // Check PDA availability
-          if (isPda == null) {
-            isPda = await honeywellScanner!.isSupported();
-            Hive.box('settings').put("pdaCompat", isPda);
+    honeywellScanner ??= HoneywellScanner();
 
-            if (!isPda!) {
-              setState(() {
-                honeywellScanner = null;
-              });
-              return;
-            }
-          }
-        }
-
-        // Check if it is supported and that the widget is still available
-        if (isPda!) {
-          // Supported, so set up the scanner with QR code scanning capabilities
-          honeywellScanner?.setScannerCallBack(this);
-          honeywellScanner?.setProperties({
-            ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
-            'DEC_CODABAR_START_STOP_TRANSMIT': true,
-            'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
-          });
-          setState(() {
-            honeywellScanner?.startScanner();
-            controller?.stopCamera();
-            controller?.dispose();
-            controller = null;
-          });
-        }
-      }
-    }
+    honeywellScanner!.setScannerCallBack(this);
+    honeywellScanner!.setProperties({
+      ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
+      'DEC_CODABAR_START_STOP_TRANSMIT': true,
+      'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
+    });
+    setState(() {
+      honeywellScanner!.startScanner();
+      controller?.stopCamera();
+      controller?.dispose();
+      controller = null;
+      Hive.box('settings')
+          .put("settings", settings!.copyWith(isPdaModeEnabled: true).toJson());
+      settings = settings!.copyWith(isPdaModeEnabled: true);
+    });
   }
 
   @override
@@ -275,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage>
             children: [
               if (orientation == Orientation.landscape) const Logo(),
               CertSimplifiedView(
-                isPda: isPda ?? false,
+                isPda: settings?.isPda ?? false,
                 toggleCamPda: togglePdaMode,
                 coseResult: coseResult,
                 barcodeResult: result,
@@ -335,11 +319,14 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void togglePdaMode() {
-    if (isPda! && honeywellScanner == null) {
+    if (!settings!.isPdaModeEnabled) {
       initPda();
     } else {
       setState(() {
         honeywellScanner = null;
+        Hive.box('settings').put(
+            "settings", settings!.copyWith(isPdaModeEnabled: false).toJson());
+        settings = settings!.copyWith(isPdaModeEnabled: false);
       });
     }
   }
