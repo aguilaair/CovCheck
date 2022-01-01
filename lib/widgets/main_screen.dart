@@ -25,7 +25,7 @@ import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.setLocale}) : super(key: key);
 
-  final void Function(Locale) setLocale;
+  final void Function(Locale, {bool shouldSetState}) setLocale;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -88,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage>
     }
 
     if (settings!.isPdaModeEnabled && settings!.isPda) initPda();
+    widget.setLocale(Locale(settings!.locale), shouldSetState: false);
 
     if (mounted) {
       setState(() {});
@@ -220,14 +221,17 @@ class _MyHomePageState extends State<MyHomePage>
           padding: orientation == Orientation.portrait
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            //mainAxisSize: MainAxisSize.min,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (orientation == Orientation.landscape)
-                Logo(
-                  settings: settings,
-                  updateSettings: setSettings,
+                Positioned(
+                  top: 5,
+                  child: Logo(
+                    settings: settings,
+                    updateSettings: setSettings,
+                  ),
                 ),
               CertSimplifiedView(
                 isPda: settings?.isPda ?? false,
@@ -366,8 +370,14 @@ class _MyHomePageState extends State<MyHomePage>
       if (settings!.locale != newSettings.locale) {
         widget.setLocale(Locale(newSettings.locale));
       }
+      if ((newSettings.isPda == false) &&
+          (settings!.isPdaModeEnabled == true)) {
+        togglePdaMode();
+        newSettings = newSettings.copyWith(isPdaModeEnabled: false);
+      }
       Hive.box('settings').put('settings', newSettings.toJson());
       settings = newSettings;
+      setState(() {});
     }
   }
 }

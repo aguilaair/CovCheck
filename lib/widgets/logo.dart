@@ -18,13 +18,19 @@ class Logo extends StatelessWidget {
       width: double.infinity,
       child: Stack(
         children: [
-          if (settings != null && updateSettings != null)
-            Positioned(
-              right: 5,
-              child: Tooltip(
-                message: "Settings",
-                child: IconButton(
-                  onPressed: () {
+          //if (settings != null && updateSettings != null)
+          Positioned(
+            right: (settings != null && updateSettings != null) ? 5 : null,
+            left: (settings != null && updateSettings != null) ? null : 5,
+            child: Tooltip(
+              message: (settings != null && updateSettings != null)
+                  ? "Back"
+                  : "Settings",
+              child: IconButton(
+                onPressed: () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.of(context).pop();
+                  } else {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) {
                         return SettingScreen(
@@ -33,12 +39,15 @@ class Logo extends StatelessWidget {
                         );
                       },
                     ));
-                  },
-                  icon: const Icon(Icons.settings),
-                  color: Theme.of(context).iconTheme.color!.withOpacity(0.8),
-                ),
+                  }
+                },
+                icon: !(settings != null && updateSettings != null)
+                    ? const Icon(Icons.arrow_back_rounded)
+                    : const Icon(Icons.settings),
+                color: Theme.of(context).iconTheme.color!.withOpacity(0.8),
               ),
             ),
+          ),
           Positioned(
             child: Align(
               alignment: Alignment.center,
