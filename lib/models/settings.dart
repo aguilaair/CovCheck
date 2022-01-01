@@ -20,7 +20,6 @@ class Settings {
     final isPda = (Platform.isAndroid && !kIsWeb)
         ? await HoneywellScanner().isSupported()
         : false;
-    final isDarkMode = (Theme.of(ctx).brightness == Brightness.dark);
     final isPdaModeEnabled = isPda;
     final locale = Localizations.localeOf(ctx);
     final newInstance = Settings(
