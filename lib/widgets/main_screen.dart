@@ -221,18 +221,10 @@ class _MyHomePageState extends State<MyHomePage>
           padding: orientation == Orientation.portrait
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
-          child: Stack(
-            //mainAxisSize: MainAxisSize.min,
-            //mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (orientation == Orientation.landscape)
-                Positioned(
-                  top: 5,
-                  child: Logo(
-                    settings: settings,
-                    updateSettings: setSettings,
-                  ),
-                ),
               CertSimplifiedView(
                 isPda: settings?.isPda ?? false,
                 toggleCamPda: togglePdaMode,
@@ -240,6 +232,8 @@ class _MyHomePageState extends State<MyHomePage>
                 barcodeResult: result,
                 dismiss: dismissResults,
                 processedResult: processedResult,
+                setSettings: setSettings,
+                settings: settings!,
               ),
             ],
           ),
