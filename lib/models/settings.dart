@@ -25,12 +25,14 @@ class Settings {
     final isDarkMode = (Theme.of(ctx).brightness == Brightness.dark);
     final isPdaModeEnabled = isPda;
     final locale = Localizations.localeOf(ctx);
-    return Settings(
+    final newInstance = Settings(
       isPda: isPda,
       isDarkMode: isDarkMode,
       isPdaModeEnabled: isPdaModeEnabled,
       locale: locale.languageCode,
     );
+    print(newInstance);
+    return newInstance;
   }
 
   Settings copyWith({
