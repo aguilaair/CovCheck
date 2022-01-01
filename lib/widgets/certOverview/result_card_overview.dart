@@ -1,12 +1,12 @@
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/models/settings.dart';
-import 'package:covid_checker/widgets/result_card.dart';
+import 'package:covid_checker/widgets/certOverview/result_card.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'logo.dart';
+import '../molecules/logo.dart';
 
 class CertSimplifiedView extends StatelessWidget {
   const CertSimplifiedView({

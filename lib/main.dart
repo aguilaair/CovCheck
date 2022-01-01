@@ -1,5 +1,5 @@
 import 'package:covid_checker/utils/gen_swatch.dart';
-import 'package:covid_checker/widgets/main_screen.dart';
+import 'package:covid_checker/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';

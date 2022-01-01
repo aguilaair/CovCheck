@@ -1,6 +1,6 @@
 import 'package:covid_checker/models/result.dart';
-import 'package:covid_checker/widgets/cert_spimplified_info.dart';
-import 'package:covid_checker/widgets/overall_cer_result.dart';
+import 'package:covid_checker/widgets/certOverview/cert_spimplified_info.dart';
+import 'package:covid_checker/widgets/molecules/overall_cer_result.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';

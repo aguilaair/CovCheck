@@ -13,10 +13,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import 'camera/camera_overlay.dart';
-import 'camera/camera_view.dart';
-import 'cert_simplified_view.dart';
-import 'logo.dart';
+import '../widgets/camera/camera_overlay.dart';
+import '../widgets/camera/camera_view.dart';
+import '../widgets/certOverview/result_card_overview.dart';
+import '../widgets/molecules/logo.dart';
 
 import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which just throws UnsupportedError
     if (dart.library.io) "package:covid_checker/utils/gzip/gzip_decode_io.dart"

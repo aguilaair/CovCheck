@@ -1,5 +1,5 @@
 import 'package:covid_checker/models/settings.dart';
-import 'package:covid_checker/settings.dart';
+import 'package:covid_checker/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -4,7 +4,7 @@ import 'package:covid_checker/utils/years_old.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'detail.dart';
+import '../molecules/detail.dart';
 
 class CertDetailedView extends StatelessWidget {
   const CertDetailedView({

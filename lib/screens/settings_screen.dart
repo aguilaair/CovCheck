@@ -1,11 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:covid_checker/generated/l10n.dart';
-import 'package:covid_checker/widgets/logo.dart';
+import 'package:covid_checker/widgets/molecules/logo.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 
-import 'models/settings.dart';
+import '../models/settings.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({
