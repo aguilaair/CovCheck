@@ -51,7 +51,7 @@ class CertDetailedView extends StatelessWidget {
         height: 5,
       ),
       Detail(
-        title: S.of(context).country,
+        title: S.of(context).Country,
         detail: processedResult.country,
       ),
       const SizedBox(
