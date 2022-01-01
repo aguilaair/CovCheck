@@ -113,9 +113,9 @@ class _MyHomePageState extends State<MyHomePage>
     });
     isPda = Hive.box('settings').get("pdaCompat", defaultValue: null);
     final bool pdaModeActive =
-        Hive.box('settings').get("pdaModeActive", defaultValue: false);
+        Hive.box('settings').get("pdaModeActive", defaultValue: true);
 
-    if (pdaModeActive) initPda();
+    if (pdaModeActive && (isPda ?? true)) initPda();
     super.initState();
   }
 
