@@ -20,11 +20,16 @@ import 'generated/l10n.dart';
 
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 
+import 'package:hive_flutter/hive_flutter.dart';
+
 import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which just throws UnsupportedError
     if (dart.library.io) "package:covid_checker/utils/gzip/gzip_decode_io.dart"
     if (dart.library.js) "package:covid_checker/utils/gzip/gzip_decode_js.dart";
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('settings');
   runApp(const CovCheckApp());
 }
 
@@ -106,7 +111,11 @@ class _MyHomePageState extends State<MyHomePage>
         certMap[element["kid"]] = element["x5c"][0];
       }
     });
-    initPda();
+    isPda = Hive.box('settings').get("pdaCompat", defaultValue: null);
+    final bool pdaModeActive =
+        Hive.box('settings').get("pdaModeActive", defaultValue: false);
+
+    if (pdaModeActive) initPda();
     super.initState();
   }
 
@@ -115,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage>
     if ((isPda ?? true)) {
       if ((kIsWeb || !Platform.isAndroid) && mounted) {
         // If on web or not Android there is no way it can support PDA.
+        Hive.box('settings').put("pdaCompat", false);
         setState(() {
           isPda = false;
         });
@@ -126,6 +136,8 @@ class _MyHomePageState extends State<MyHomePage>
           // Check PDA availability
           if (isPda == null) {
             isPda = await honeywellScanner!.isSupported();
+            Hive.box('settings').put("pdaCompat", isPda);
+
             if (!isPda!) {
               setState(() {
                 honeywellScanner = null;
@@ -257,13 +269,20 @@ class _MyHomePageState extends State<MyHomePage>
           padding: orientation == Orientation.portrait
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
-          child: CertSimplifiedView(
-            isPda: isPda ?? false,
-            toggleCamPda: togglePdaMode,
-            coseResult: coseResult,
-            barcodeResult: result,
-            dismiss: dismissResults,
-            processedResult: processedResult,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (orientation == Orientation.landscape) const Logo(),
+              CertSimplifiedView(
+                isPda: isPda ?? false,
+                toggleCamPda: togglePdaMode,
+                coseResult: coseResult,
+                barcodeResult: result,
+                dismiss: dismissResults,
+                processedResult: processedResult,
+              ),
+            ],
           ),
         ),
       ),
@@ -280,7 +299,7 @@ class _MyHomePageState extends State<MyHomePage>
                 children: widgetList,
               )
 
-            /// If porrtait set out in column
+            /// If portrait set out in column
             /// (Camera)
             /// (Details)
             : Column(

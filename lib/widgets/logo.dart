@@ -8,13 +8,34 @@ class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 15),
-      child: SvgPicture.asset(
-        brightness == Brightness.light
-            ? "assets/logo-light.svg"
-            : "assets/logo-dark.svg",
-        height: height,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          Positioned(
+            right: 5,
+            child: Tooltip(
+              message: "Settings",
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+                color: Theme.of(context).iconTheme.color!.withOpacity(0.8),
+              ),
+            ),
+          ),
+          Positioned(
+            child: Align(
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                brightness == Brightness.light
+                    ? "assets/logo-light.svg"
+                    : "assets/logo-dark.svg",
+                height: height,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

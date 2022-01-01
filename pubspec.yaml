@@ -39,6 +39,8 @@ dependencies:
   circle_flags: ^0.0.2
   intl: ^0.17.0
   honeywell_scanner: ^3.1.4+12
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
