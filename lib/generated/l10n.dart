@@ -839,6 +839,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Here you can update CovCheck's database for new certificates and other info.`
+  String get certsettingssubtitle {
+    return Intl.message(
+      'Here you can update CovCheck\'s database for new certificates and other info.',
+      name: 'certsettingssubtitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

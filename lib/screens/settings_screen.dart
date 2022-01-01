@@ -1,12 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:covid_checker/certs/certs.dart';
-import 'package:covid_checker/certs/disease_agent_targeted.dart';
 import 'package:covid_checker/certs/test_manufacturer_name.dart';
-import 'package:covid_checker/certs/test_results.dart';
-import 'package:covid_checker/certs/test_types.dart';
 import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
 import 'package:covid_checker/certs/vaccine_product_name.dart';
-import 'package:covid_checker/certs/vaccine_prophylaxis.dart';
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/widgets/molecules/logo.dart';
 import 'package:flutter/material.dart';
@@ -144,16 +140,29 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                   SettingsSection(
                     title: S.of(context).infocertssection,
-                    subtitle: TextButton.icon(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Coming Soon"),
+                    subtitle: Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            S.of(context).certsettingssubtitle,
+                            maxLines: 20,
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontSize: 13),
                           ),
-                        );
-                      },
-                      icon: Icon(Icons.system_update_alt_rounded),
-                      label: Text(S.of(context).updateall),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Coming Soon"),
+                              ),
+                            );
+                          },
+                          child: Text(S.of(context).updateall),
+                        ),
+                      ],
                     ),
                     tiles: [
                       SettingsTile(
@@ -240,48 +249,6 @@ class _SettingScreenState extends State<SettingScreen> {
                               ),
                             );
                           },
-                        ),
-                      ),
-                      SettingsTile(
-                        title: S.of(context).lastdiseaseupdate,
-                        leading: const Icon(Icons.radar_rounded),
-                        subtitleMaxLines: 10,
-                        subtitle: DateFormat.yMMMMd(
-                                Localizations.localeOf(context).countryCode)
-                            .format(
-                          DateTime.parse(
-                              diseaseAgentTargeted['valueSetDate'] as String),
-                        ),
-                      ),
-                      SettingsTile(
-                        title: S.of(context).lasttestresult,
-                        leading: const Icon(Icons.check_circle_outline),
-                        subtitleMaxLines: 10,
-                        subtitle: DateFormat.yMMMMd(
-                                Localizations.localeOf(context).countryCode)
-                            .format(
-                          DateTime.parse(testResults['valueSetDate'] as String),
-                        ),
-                      ),
-                      SettingsTile(
-                        title: S.of(context).lasttesttypeupdate,
-                        leading: const Icon(Icons.merge_type_rounded),
-                        subtitleMaxLines: 10,
-                        subtitle: DateFormat.yMMMMd(
-                                Localizations.localeOf(context).countryCode)
-                            .format(
-                          DateTime.parse(testTypes['valueSetDate'] as String),
-                        ),
-                      ),
-                      SettingsTile(
-                        title: S.of(context).lastvaccineproph,
-                        leading: const Icon(Icons.account_tree_rounded),
-                        subtitleMaxLines: 10,
-                        subtitle: DateFormat.yMMMMd(
-                                Localizations.localeOf(context).countryCode)
-                            .format(
-                          DateTime.parse(
-                              vaccineProphilaxis['valueSetDate'] as String),
                         ),
                       ),
                     ],

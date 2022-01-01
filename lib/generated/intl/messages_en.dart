@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),
         "certinfo": MessageLookupByLibrary.simpleMessage("Certificate Info"),
         "certres": MessageLookupByLibrary.simpleMessage("Result"),
+        "certsettingssubtitle": MessageLookupByLibrary.simpleMessage(
+            "Here you can update CovCheck\'s database for new certificates and other info."),
         "certtype": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certver": MessageLookupByLibrary.simpleMessage("Certificate Version"),
         "country": MessageLookupByLibrary.simpleMessage("Vaccination country"),

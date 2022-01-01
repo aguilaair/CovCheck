@@ -76,5 +76,6 @@
     "lastdiseaseupdate": "Ultima Actualización de Agentes Objetivos",
     "lasttestresult": "Ultima Actualización de Resultados",
     "lasttesttypeupdate": "Ultima Actualización de Tipos de Test",
-    "lastvaccineproph": "Ultima Actualización de Profilaxis de Vacuna"
+    "lastvaccineproph": "Ultima Actualización de Profilaxis de Vacuna",
+    "certsettingssubtitle": "Aqui puedes actualizar los certificados y otros datos en la base de datos de CovCheck."
 }

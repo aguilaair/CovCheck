@@ -77,5 +77,6 @@
     "lastdiseaseupdate": "Last Disease Agent Targeted Update",
     "lasttestresult": "Last Test Result Update",
     "lasttesttypeupdate": "Last Test Type Update",
-    "lastvaccineproph": "Last Vaccine Prophixalis Update"
+    "lastvaccineproph": "Last Vaccine Prophixalis Update",
+    "certsettingssubtitle": "Here you can update CovCheck's database for new certificates and other info."
 }
