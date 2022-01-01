@@ -1,4 +1,4 @@
-import 'package:covid_checker/certs/certs.dart';
+import 'package:covid_checker/certs/disease_agent_targeted.dart';
 import 'package:covid_checker/certs/test_manufacturer_name.dart';
 import 'package:covid_checker/certs/test_results.dart';
 import 'package:covid_checker/certs/test_types.dart';
