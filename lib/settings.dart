@@ -74,9 +74,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                 ? Icons.auto_awesome
                                 : Icons.dark_mode_rounded),
                         trailing: DropdownButton(
-                          items: const [
+                          items: [
                             DropdownMenuItem(
-                              child: Text(S.of(context).),
+                              child: Text(S.of(context).light),
                               value: AdaptiveThemeMode.light,
                             ),
                             DropdownMenuItem(
