@@ -59,10 +59,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorunk": MessageLookupByLibrary.simpleMessage("Error Desconocido"),
         "errorunsopportedalgo":
             MessageLookupByLibrary.simpleMessage("Algoritmo no compatible"),
+        "infocertssection": MessageLookupByLibrary.simpleMessage(
+            "Certificate & Database Info."),
         "invalid": MessageLookupByLibrary.simpleMessage("Inválido (Caducado)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Certificado Inválido"),
         "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+        "lastauthholderupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Empresas de Vacunación"),
+        "lastcertupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Certificados"),
+        "lastdiseaseupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Agentes Objetivos"),
+        "lasttestresult": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Resultados"),
+        "lasttesttypeupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Tipos de Test"),
+        "lasttestupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Pruebas"),
+        "lastvaccineproph": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Profilaxis de Vacuna"),
+        "lastvaxupdate": MessageLookupByLibrary.simpleMessage(
+            "Ultima Actualización de Vacunas"),
         "light": MessageLookupByLibrary.simpleMessage("Claro"),
         "manname": MessageLookupByLibrary.simpleMessage("Fabricante"),
         "moredetails": MessageLookupByLibrary.simpleMessage("Mas Detalles"),
@@ -105,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Tema"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
         "unk": MessageLookupByLibrary.simpleMessage("Desconocido"),
+        "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
+        "updateall": MessageLookupByLibrary.simpleMessage("Actualizar Todo"),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacunación"),
         "vaccproph": MessageLookupByLibrary.simpleMessage("Tipo de Vacuna"),
         "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),

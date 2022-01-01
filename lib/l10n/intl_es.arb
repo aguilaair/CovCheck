@@ -65,5 +65,16 @@
     "appinfo": "Info. de la app",
     "dark": "Oscuro",
     "light": "Claro",
-    "system": "Sistema"
+    "system": "Sistema",
+    "infocertssection": "Certificate & Database Info.",
+    "update": "Actualizar",
+    "updateall": "Actualizar Todo",
+    "lastcertupdate": "Ultima Actualización de Certificados",
+    "lasttestupdate": "Ultima Actualización de Pruebas",
+    "lastauthholderupdate": "Ultima Actualización de Empresas de Vacunación",
+    "lastvaxupdate": "Ultima Actualización de Vacunas",
+    "lastdiseaseupdate": "Ultima Actualización de Agentes Objetivos",
+    "lasttestresult": "Ultima Actualización de Resultados",
+    "lasttesttypeupdate": "Ultima Actualización de Tipos de Test",
+    "lastvaccineproph": "Ultima Actualización de Profilaxis de Vacuna"
 }

@@ -66,5 +66,16 @@
     "appinfo": "App Info",
     "dark": "Dark",
     "light": "Light",
-    "system": "System"
+    "system": "System",
+    "infocertssection": "Certificate & Database Info.",
+    "update": "Update",
+    "updateall": "Update All",
+    "lastcertupdate": "Last Certificate Update",
+    "lasttestupdate": "Last Tests Update",
+    "lastauthholderupdate": "Last Vaccine Auth Holders Update",
+    "lastvaxupdate": "Last Vaccine Update",
+    "lastdiseaseupdate": "Last Disease Agent Targeted Update",
+    "lasttestresult": "Last Test Result Update",
+    "lasttesttypeupdate": "Last Test Type Update",
+    "lastvaccineproph": "Last Vaccine Prophixalis Update"
 }

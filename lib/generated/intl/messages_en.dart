@@ -57,10 +57,28 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
         "firstpositivetest":
             MessageLookupByLibrary.simpleMessage("First Positive Test"),
+        "infocertssection": MessageLookupByLibrary.simpleMessage(
+            "Certificate & Database Info."),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid (Expired)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lastauthholderupdate": MessageLookupByLibrary.simpleMessage(
+            "Last Vaccine Auth Holders Update"),
+        "lastcertupdate":
+            MessageLookupByLibrary.simpleMessage("Last Certificate Update"),
+        "lastdiseaseupdate": MessageLookupByLibrary.simpleMessage(
+            "Last Disease Agent Targeted Update"),
+        "lasttestresult":
+            MessageLookupByLibrary.simpleMessage("Last Test Result Update"),
+        "lasttesttypeupdate":
+            MessageLookupByLibrary.simpleMessage("Last Test Type Update"),
+        "lasttestupdate":
+            MessageLookupByLibrary.simpleMessage("Last Tests Update"),
+        "lastvaccineproph": MessageLookupByLibrary.simpleMessage(
+            "Last Vaccine Prophixalis Update"),
+        "lastvaxupdate":
+            MessageLookupByLibrary.simpleMessage("Last Vaccine Update"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "manname": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "moredetails": MessageLookupByLibrary.simpleMessage("More Details"),
@@ -99,6 +117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
         "unk": MessageLookupByLibrary.simpleMessage("Unknown"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "updateall": MessageLookupByLibrary.simpleMessage("Update All"),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacciantion"),
         "vaccproph":
             MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),

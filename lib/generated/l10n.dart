@@ -729,6 +729,116 @@ class S {
       args: [],
     );
   }
+
+  /// `Certificate & Database Info.`
+  String get infocertssection {
+    return Intl.message(
+      'Certificate & Database Info.',
+      name: 'infocertssection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update All`
+  String get updateall {
+    return Intl.message(
+      'Update All',
+      name: 'updateall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Certificate Update`
+  String get lastcertupdate {
+    return Intl.message(
+      'Last Certificate Update',
+      name: 'lastcertupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Tests Update`
+  String get lasttestupdate {
+    return Intl.message(
+      'Last Tests Update',
+      name: 'lasttestupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Auth Holders Update`
+  String get lastauthholderupdate {
+    return Intl.message(
+      'Last Vaccine Auth Holders Update',
+      name: 'lastauthholderupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Update`
+  String get lastvaxupdate {
+    return Intl.message(
+      'Last Vaccine Update',
+      name: 'lastvaxupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Disease Agent Targeted Update`
+  String get lastdiseaseupdate {
+    return Intl.message(
+      'Last Disease Agent Targeted Update',
+      name: 'lastdiseaseupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Test Result Update`
+  String get lasttestresult {
+    return Intl.message(
+      'Last Test Result Update',
+      name: 'lasttestresult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Test Type Update`
+  String get lasttesttypeupdate {
+    return Intl.message(
+      'Last Test Type Update',
+      name: 'lasttesttypeupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Prophixalis Update`
+  String get lastvaccineproph {
+    return Intl.message(
+      'Last Vaccine Prophixalis Update',
+      name: 'lastvaccineproph',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
