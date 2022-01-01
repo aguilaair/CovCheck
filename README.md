@@ -1,4 +1,5 @@
 # CovCheck - Check EU Vaccination Status
+[![Codemagic build status](https://api.codemagic.io/apps/61ae30a600c5fee93a2b32db/61af835df16a5919d7c363fc/status_badge.svg)](https://codemagic.io/apps/61ae30a600c5fee93a2b32db/61af835df16a5919d7c363fc/latest_build) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/aguilaair/covid-certificate-checker) ![GitHub](https://img.shields.io/github/license/aguilaair/covid-certificate-checker)
 ![Banner](https://raw.githubusercontent.com/aguilaair/covid-certificate-checker/main/assets/promo/banner-en.svg)Covcheck is a Flutter app designed to view and validate EU Digital COVID Certificates, including vaccination status, testing results and recovery status. It follows the [schema set out by the EU](https://ec.europa.eu/health/sites/health/files/ehealth/docs/covid-certificate_json_specification_en.pdf) to extract the data as well as verifying the signature of the QR code using the certificates and data provided by the [Swedish eHealth Agency](https://dgcg.covidbevis.se/tp/).
 
 The verification is done by [dart_cose](https://pub.dev/packages/dart_cose).
