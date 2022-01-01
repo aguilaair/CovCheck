@@ -31,7 +31,6 @@ class Settings {
       isPdaModeEnabled: isPdaModeEnabled,
       locale: locale.languageCode,
     );
-    print(newInstance);
     return newInstance;
   }
 

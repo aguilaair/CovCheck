@@ -23,9 +23,9 @@ import "package:covid_checker/utils/gzip/gzip_decode_stub.dart" // Version which
     if (dart.library.js) "package:covid_checker/utils/gzip/gzip_decode_js.dart";
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.setLocale}) : super(key: key);
 
-  final String title;
+  final void Function(Locale) setLocale;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();

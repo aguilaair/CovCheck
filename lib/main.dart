@@ -14,8 +14,16 @@ void main() async {
   runApp(const CovCheckApp());
 }
 
-class CovCheckApp extends StatelessWidget {
+class CovCheckApp extends StatefulWidget {
   const CovCheckApp({Key? key}) : super(key: key);
+
+  @override
+  State<CovCheckApp> createState() => _CovCheckAppState();
+}
+
+class _CovCheckAppState extends State<CovCheckApp> {
+  Locale? locale;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,6 +34,7 @@ class CovCheckApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
+      locale: locale,
       title: 'CovCheck',
       theme: ThemeData(
         primarySwatch: createMaterialColor(const Color(0xFF262DC9)),
@@ -38,7 +47,13 @@ class CovCheckApp extends StatelessWidget {
         primaryColor: const Color(0xFF262DC9),
         primaryColorDark: const Color(0xFF262DC9),
       ),
-      home: const MyHomePage(title: 'CovCheck'),
+      home: MyHomePage(setLocale: setLocale),
     );
+  }
+
+  void setLocale(Locale newLocale) {
+    setState(() {
+      locale = newLocale;
+    });
   }
 }
