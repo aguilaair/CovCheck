@@ -43,9 +43,12 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             Expanded(
               child: SettingsList(
+                physics: const BouncingScrollPhysics(),
                 backgroundColor: Theme.of(context).backgroundColor,
                 sections: [
                   SettingsSection(
+                    platform: TargetPlatform.android,
+                    title: S.of(context).appsettings,
                     tiles: [
                       SettingsTile(
                         title: S.of(context).language,
@@ -119,11 +122,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           });
                         },
                       ),
-                    ],
-                  ),
-                  SettingsSection(
-                    title: S.of(context).appinfo,
-                    tiles: [
+                      SettingsTile(
+                        title: S.of(context).honeywellpda,
+                        leading: const Icon(Icons.h_plus_mobiledata_rounded),
+                        subtitle: (newSettings?.isHoneywellPda ?? false)
+                            ? S.of(context).supported
+                            : S.of(context).notsupported,
+                      ),
                       SettingsTile(
                         title: S.of(context).appinfo,
                         leading: const Icon(Icons.info_outline_rounded),
@@ -136,9 +141,52 @@ class _SettingScreenState extends State<SettingScreen> {
                           );
                         },
                       ),
+                      SettingsTile(
+                        title: S.of(context).resetsettings,
+                        leading: const Icon(Icons.restore_rounded),
+                        trailing: TextButton.icon(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: Text(
+                                      S.of(context).areyousurereset,
+                                    ),
+                                    title: Text(S.of(context).resetsettings),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(S.of(context).cancel),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          AdaptiveTheme.of(context).setSystem();
+                                          newSettings =
+                                              await Settings.getNewSettings(
+                                                  context);
+                                          widget.updateSettings(newSettings!);
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(S.of(context).reset),
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            icon: const Icon(Icons.restore_rounded),
+                            label: Text(S.of(context).reset)),
+                      ),
                     ],
                   ),
                   SettingsSection(
+                    titlePadding:
+                        const EdgeInsets.only(top: 10, left: 15, right: 15),
+                    subtitlePadding: const EdgeInsets.only(left: 15, right: 15),
+                    platform: TargetPlatform.android,
                     title: S.of(context).infocertssection,
                     subtitle: Row(
                       children: [
@@ -151,6 +199,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                 .caption!
                                 .copyWith(fontSize: 13),
                           ),
+                        ),
+                        const SizedBox(
+                          width: 10,
                         ),
                         TextButton(
                           onPressed: () {

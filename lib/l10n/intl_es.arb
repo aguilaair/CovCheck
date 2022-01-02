@@ -63,6 +63,7 @@
     "pdamode": "Modo PDA",
     "pdamodedesc": "BETA: Cualquier tipo de escaner",
     "appinfo": "Info. de la app",
+    "appsettings": "Ajustes de la App",
     "dark": "Oscuro",
     "light": "Claro",
     "system": "Sistema",
@@ -77,5 +78,12 @@
     "lasttestresult": "Ultima Actualización de Resultados",
     "lasttesttypeupdate": "Ultima Actualización de Tipos de Test",
     "lastvaccineproph": "Ultima Actualización de Profilaxis de Vacuna",
-    "certsettingssubtitle": "Aqui puedes actualizar los certificados y otros datos en la base de datos de CovCheck."
+    "certsettingssubtitle": "Aqui puedes actualizar los certificados y otros datos en la base de datos de CovCheck.",
+    "honeywellpda": "Modo PDA Honeywell",
+    "supported": "Compatible",
+    "notsupported": "No Compatible",
+    "resetsettings": "Reestablecer Ajustes",
+    "reset": "Reestablecer",
+    "areyousurereset": "Esto restablecerá todos los ajustes.",
+    "cancel": "Cancelar"
 }

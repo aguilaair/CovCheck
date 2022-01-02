@@ -29,6 +29,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "Country": MessageLookupByLibrary.simpleMessage("Country"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
         "appinfo": MessageLookupByLibrary.simpleMessage("App Info"),
+        "appsettings": MessageLookupByLibrary.simpleMessage("App Settings"),
+        "areyousurereset": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to reset all settings?"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "certType": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),
         "certinfo": MessageLookupByLibrary.simpleMessage("Certificate Info"),
@@ -59,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
         "firstpositivetest":
             MessageLookupByLibrary.simpleMessage("First Positive Test"),
+        "honeywellpda":
+            MessageLookupByLibrary.simpleMessage("Honeywell PDA mode"),
         "infocertssection": MessageLookupByLibrary.simpleMessage(
             "Certificate & Database Info."),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid (Expired)"),
@@ -92,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nopassvac":
             MessageLookupByLibrary.simpleMessage("Vaccination Not Complete"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
+        "notsupported": MessageLookupByLibrary.simpleMessage("Not Supported"),
         "pdadetected": MessageLookupByLibrary.simpleMessage(
             "Scanning on PDA mode available"),
         "pdamode": MessageLookupByLibrary.simpleMessage("PDA Mode"),
@@ -104,11 +111,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "rawData": MessageLookupByLibrary.simpleMessage("Raw Data"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recovered"),
         "recovstate": MessageLookupByLibrary.simpleMessage("Validity"),
+        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "resetsettings": MessageLookupByLibrary.simpleMessage("Reset Settings"),
         "restartcamera": MessageLookupByLibrary.simpleMessage("Restart Camera"),
         "rotatecamera": MessageLookupByLibrary.simpleMessage("Change Camera"),
         "scanqrmessage": MessageLookupByLibrary.simpleMessage("Scan a QR Code"),
         "signingauth":
             MessageLookupByLibrary.simpleMessage("Signing Authority"),
+        "supported": MessageLookupByLibrary.simpleMessage("Supported"),
         "surname": MessageLookupByLibrary.simpleMessage("Last Name"),
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "targetdisease": MessageLookupByLibrary.simpleMessage("Disease"),

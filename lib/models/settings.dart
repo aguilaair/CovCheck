@@ -9,18 +9,22 @@ import 'package:universal_io/io.dart';
 class Settings {
   bool isPda;
   bool isPdaModeEnabled;
+  bool isHoneywellPda;
   String locale;
 
   Settings({
     required this.isPda,
     required this.isPdaModeEnabled,
+    required this.isHoneywellPda,
     required this.locale,
   });
 
   static Future<Settings> getNewSettings(BuildContext ctx) async {
-    final isPda = (Platform.isAndroid && !kIsWeb)
+    final isHoneywellPda = (Platform.isAndroid && !kIsWeb)
         ? await HoneywellScanner().isSupported()
         : false;
+    final isPda =
+        isHoneywellPda; // We can only autodetect Honeywell PDAs, so we will assume.
     final isPdaModeEnabled = isPda;
     final langCode = Locale(Platform.localeName.split("-").first);
     final locale =
@@ -28,6 +32,7 @@ class Settings {
     final newInstance = Settings(
       isPda: isPda,
       isPdaModeEnabled: isPdaModeEnabled,
+      isHoneywellPda: isHoneywellPda,
       locale: locale.languageCode,
     );
     return newInstance;
@@ -36,12 +41,13 @@ class Settings {
   Settings copyWith({
     bool? isPda,
     bool? isPdaModeEnabled,
-    bool? isDarkMode,
+    bool? isHoneywellPda,
     String? locale,
   }) {
     return Settings(
       isPda: isPda ?? this.isPda,
       isPdaModeEnabled: isPdaModeEnabled ?? this.isPdaModeEnabled,
+      isHoneywellPda: isHoneywellPda ?? this.isHoneywellPda,
       locale: locale ?? this.locale,
     );
   }
@@ -50,6 +56,7 @@ class Settings {
     return {
       'isPda': isPda,
       'isPdaModeEnabled': isPdaModeEnabled,
+      'isHoneywellPda': isHoneywellPda,
       'locale': locale,
     };
   }
@@ -58,6 +65,7 @@ class Settings {
     return Settings(
       isPda: map['isPda'] ?? false,
       isPdaModeEnabled: map['isPdaModeEnabled'] ?? false,
+      isHoneywellPda: map['isHoneywellPda'] ?? false,
       locale: map['locale'] ?? '',
     );
   }
@@ -69,7 +77,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, locale: $locale)';
+    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, isHoneywellPda: $isHoneywellPda, locale: $locale)';
   }
 
   @override
@@ -79,11 +87,15 @@ class Settings {
     return other is Settings &&
         other.isPda == isPda &&
         other.isPdaModeEnabled == isPdaModeEnabled &&
+        other.isHoneywellPda == isHoneywellPda &&
         other.locale == locale;
   }
 
   @override
   int get hashCode {
-    return isPda.hashCode ^ isPdaModeEnabled.hashCode ^ locale.hashCode;
+    return isPda.hashCode ^
+        isPdaModeEnabled.hashCode ^
+        isHoneywellPda.hashCode ^
+        locale.hashCode;
   }
 }

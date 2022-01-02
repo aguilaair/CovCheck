@@ -690,6 +690,16 @@ class S {
     );
   }
 
+  /// `App Settings`
+  String get appsettings {
+    return Intl.message(
+      'App Settings',
+      name: 'appsettings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `App Info`
   String get appinfo {
     return Intl.message(
@@ -845,6 +855,76 @@ class S {
     return Intl.message(
       'Here you can update CovCheck\'s database for new certificates and other info.',
       name: 'certsettingssubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Honeywell PDA mode`
+  String get honeywellpda {
+    return Intl.message(
+      'Honeywell PDA mode',
+      name: 'honeywellpda',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Supported`
+  String get supported {
+    return Intl.message(
+      'Supported',
+      name: 'supported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Supported`
+  String get notsupported {
+    return Intl.message(
+      'Not Supported',
+      name: 'notsupported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Settings`
+  String get resetsettings {
+    return Intl.message(
+      'Reset Settings',
+      name: 'resetsettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to reset all settings?`
+  String get areyousurereset {
+    return Intl.message(
+      'Are you sure you want to reset all settings?',
+      name: 'areyousurereset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
       desc: '',
       args: [],
     );

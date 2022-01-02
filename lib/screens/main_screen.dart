@@ -89,7 +89,9 @@ class _MyHomePageState extends State<MyHomePage>
       settings = Settings.fromJson(settingsLoaded);
     }
 
-    if (settings!.isPdaModeEnabled && settings!.isPda) initPda();
+    if (settings!.isPdaModeEnabled &&
+        settings!.isPda &&
+        settings!.isHoneywellPda) initPda();
     widget.setLocale(Locale(settings!.locale), shouldSetState: false);
 
     if (mounted) setState(() {});
@@ -98,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage>
   void initPda() {
     // PDA Checking
 
-    if (Platform.isAndroid) {
+    if (Platform.isAndroid && settings!.isHoneywellPda) {
       honeywellScanner ??= HoneywellScanner();
 
       honeywellScanner!.setScannerCallBack(this);
@@ -225,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage>
         flex: 1,
         child: Padding(
           padding: (orientation == Orientation.portrait &&
-                  (honeywellScanner == null))
+                  settings!.isPdaModeEnabled)
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
           child: Column(

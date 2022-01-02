@@ -63,6 +63,7 @@
     "theme": "Theme",
     "pdamode": "PDA Mode",
     "pdamodedesc": "BETA: Any scanner type",
+    "appsettings": "App Settings",
     "appinfo": "App Info",
     "dark": "Dark",
     "light": "Light",
@@ -78,5 +79,12 @@
     "lasttestresult": "Last Test Result Update",
     "lasttesttypeupdate": "Last Test Type Update",
     "lastvaccineproph": "Last Vaccine Prophixalis Update",
-    "certsettingssubtitle": "Here you can update CovCheck's database for new certificates and other info."
+    "certsettingssubtitle": "Here you can update CovCheck's database for new certificates and other info.",
+    "honeywellpda": "Honeywell PDA mode",
+    "supported": "Supported",
+    "notsupported": "Not Supported",
+    "resetsettings": "Reset Settings",
+    "reset": "Reset",
+    "areyousurereset": "Are you sure you want to reset all settings?",
+    "cancel": "Cancel"
 }
