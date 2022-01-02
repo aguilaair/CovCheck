@@ -96,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Scanning on PDA mode available"),
         "pdamode": MessageLookupByLibrary.simpleMessage("PDA Mode"),
         "pdamodedesc":
-            MessageLookupByLibrary.simpleMessage("Honeywell PDAs only"),
+            MessageLookupByLibrary.simpleMessage("BETA: Any scanner type"),
         "pdaswitch": MessageLookupByLibrary.simpleMessage("Switch Scan Mode"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Personal Details"),

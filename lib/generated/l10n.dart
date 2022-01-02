@@ -680,10 +680,10 @@ class S {
     );
   }
 
-  /// `Honeywell PDAs only`
+  /// `BETA: Any scanner type`
   String get pdamodedesc {
     return Intl.message(
-      'Honeywell PDAs only',
+      'BETA: Any scanner type',
       name: 'pdamodedesc',
       desc: '',
       args: [],

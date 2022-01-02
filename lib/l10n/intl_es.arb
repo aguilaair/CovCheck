@@ -61,7 +61,7 @@
     "language": "Idioma",
     "theme": "Tema",
     "pdamode": "Modo PDA",
-    "pdamodedesc": "Solo PDAs de Honeywell",
+    "pdamodedesc": "BETA: Cualquier tipo de escaner",
     "appinfo": "Info. de la app",
     "dark": "Oscuro",
     "light": "Claro",

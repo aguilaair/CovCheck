@@ -62,7 +62,7 @@
     "language": "Language",
     "theme": "Theme",
     "pdamode": "PDA Mode",
-    "pdamodedesc": "Honeywell PDAs only",
+    "pdamodedesc": "BETA: Any scanner type",
     "appinfo": "App Info",
     "dark": "Dark",
     "light": "Light",
