@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:universal_io/io.dart';
 
 import '../widgets/camera/camera_overlay.dart';
 import '../widgets/camera/camera_view.dart';
@@ -63,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage>
   Settings? settings;
 
   FocusNode? universalPdaFocusNode;
+  TextEditingController? universalPdaTextEditingController;
 
   @override
   void initState() {
@@ -99,25 +101,34 @@ class _MyHomePageState extends State<MyHomePage>
     // PDA Checking
 
     universalPdaFocusNode ??= FocusNode();
+    universalPdaTextEditingController ??= TextEditingController();
 
     universalPdaFocusNode!.requestFocus();
+    print("Getting focus");
 
     universalPdaFocusNode!.addListener(() {
       if (!universalPdaFocusNode!.hasFocus) {
+        print("Getting focus");
         universalPdaFocusNode!.requestFocus();
       }
     });
 
-    honeywellScanner ??= HoneywellScanner();
+    if (Platform.isAndroid) {
+      honeywellScanner ??= HoneywellScanner();
 
-    honeywellScanner!.setScannerCallBack(this);
-    honeywellScanner!.setProperties({
-      ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
-      'DEC_CODABAR_START_STOP_TRANSMIT': true,
-      'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
-    });
-    honeywellScanner!.startScanner();
-    controller?.stopCamera();
+      honeywellScanner!.setScannerCallBack(this);
+      honeywellScanner!.setProperties({
+        ...CodeFormatUtils.getAsPropertiesComplement([CodeFormat.QR_CODE]),
+        'DEC_CODABAR_START_STOP_TRANSMIT': true,
+        'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
+      });
+      honeywellScanner!.startScanner();
+    }
+    try {
+      controller?.stopCamera();
+    } catch (e) {
+      print("Cannot stop camera");
+    }
     controller?.dispose();
     controller = null;
     Hive.box('settings')
@@ -134,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage>
         honeywellScanner?.resumeScanner();
         if (!(universalPdaFocusNode?.hasFocus ?? false)) {
           universalPdaFocusNode!.requestFocus();
+          print("Getting focus");
         }
         break;
       case AppLifecycleState.inactive:
@@ -211,22 +223,12 @@ class _MyHomePageState extends State<MyHomePage>
         ),
 
       /// Camera Stack
-      if (honeywellScanner == null)
+      if (!(settings?.isPdaModeEnabled ?? true))
         Expanded(
           flex: 1,
           child: Stack(
             alignment: Alignment.topRight,
             children: [
-              if (universalPdaFocusNode != null)
-                Visibility(
-                    child: TextField(
-                      focusNode: universalPdaFocusNode,
-                      keyboardType: TextInputType.none,
-                    ),
-                    visible: false,
-                    maintainInteractivity: true,
-                    maintainState: true),
-
               /// Camera View
               CameraView(
                   onQRViewCreated: _onQRViewCreated, qrKey: qrKey, size: size),
@@ -244,10 +246,31 @@ class _MyHomePageState extends State<MyHomePage>
           padding: orientation == Orientation.portrait
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
+              if (universalPdaFocusNode != null &&
+                  universalPdaTextEditingController != null)
+                SizedBox(
+                  width: 1,
+                  height: 1,
+                  child: Visibility(
+                    child: TextField(
+                      focusNode: universalPdaFocusNode,
+                      keyboardType: TextInputType.none,
+                      onSubmitted: (value) {
+                        onDecoded(value);
+                        universalPdaTextEditingController?.clear();
+                      },
+                      controller: universalPdaTextEditingController,
+                    ),
+                    visible: false,
+                    maintainSize: true,
+                    maintainInteractivity: true,
+                    maintainState: true,
+                    maintainAnimation: true,
+                  ),
+                ),
               CertSimplifiedView(
                 isPda: settings?.isPda ?? false,
                 toggleCamPda: togglePdaMode,
@@ -316,8 +339,11 @@ class _MyHomePageState extends State<MyHomePage>
       setState(() {
         honeywellScanner?.stopScanner();
         honeywellScanner = null;
+        universalPdaFocusNode?.unfocus();
         universalPdaFocusNode?.dispose();
+        universalPdaTextEditingController?.dispose();
         universalPdaFocusNode = null;
+        universalPdaTextEditingController = null;
         Hive.box('settings').put(
             "settings", settings!.copyWith(isPdaModeEnabled: false).toJson());
         settings = settings!.copyWith(isPdaModeEnabled: false);
@@ -340,6 +366,9 @@ class _MyHomePageState extends State<MyHomePage>
     controller?.dispose();
     honeywellScanner?.stopScanner();
     universalPdaFocusNode?.dispose();
+    universalPdaTextEditingController?.dispose();
+    universalPdaFocusNode = null;
+    universalPdaTextEditingController = null;
     super.dispose();
   }
 
