@@ -25,10 +25,7 @@ class _InvisibleTextFieldState extends State<InvisibleTextField> {
         child: Focus(
           onFocusChange: (hasFocus) {
             if (!hasFocus) {
-              print("Not Focused");
               universalPdaFocusNode.requestFocus();
-            } else {
-              print("Focused");
             }
           },
           child: TextField(
