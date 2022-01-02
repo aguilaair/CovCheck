@@ -89,9 +89,7 @@ class _MyHomePageState extends State<MyHomePage>
       settings = Settings.fromJson(settingsLoaded);
     }
 
-    if (settings!.isPdaModeEnabled &&
-        settings!.isPda &&
-        settings!.isHoneywellPda) initPda();
+    if (settings!.isPdaModeEnabled && settings!.isPda) initPda();
     widget.setLocale(Locale(settings!.locale), shouldSetState: false);
 
     if (mounted) setState(() {});

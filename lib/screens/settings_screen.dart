@@ -144,7 +144,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       SettingsTile(
                         title: S.of(context).resetsettings,
                         leading: const Icon(Icons.restore_rounded),
-                        trailing: TextButton.icon(
+                        trailing: TextButton(
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -177,8 +177,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 },
                               );
                             },
-                            icon: const Icon(Icons.restore_rounded),
-                            label: Text(S.of(context).reset)),
+                            child: Text(S.of(context).reset)),
                       ),
                     ],
                   ),
