@@ -125,7 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       SettingsTile(
                         title: S.of(context).honeywellpda,
                         leading: const Icon(Icons.h_plus_mobiledata_rounded),
-                        subtitle: (newSettings?.isHoneywellPda ?? false)
+                        subtitle: (newSettings?.isHoneywellSupported ?? false)
                             ? S.of(context).supported
                             : S.of(context).notsupported,
                       ),

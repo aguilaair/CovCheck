@@ -9,30 +9,34 @@ import 'package:universal_io/io.dart';
 class Settings {
   bool isPda;
   bool isPdaModeEnabled;
-  bool isHoneywellPda;
+  bool isHoneywellSupported;
+  bool isCameraSupported;
   String locale;
 
   Settings({
     required this.isPda,
     required this.isPdaModeEnabled,
-    required this.isHoneywellPda,
+    required this.isHoneywellSupported,
+    required this.isCameraSupported,
     required this.locale,
   });
 
   static Future<Settings> getNewSettings(BuildContext ctx) async {
-    final isHoneywellPda = (Platform.isAndroid && !kIsWeb)
+    final isHoneywellSupported = (Platform.isAndroid && !kIsWeb)
         ? await HoneywellScanner().isSupported()
         : false;
     final isPda =
-        isHoneywellPda; // We can only autodetect Honeywell PDAs, so we will assume.
-    final isPdaModeEnabled = isPda;
+        isHoneywellSupported; // We can only autodetect Honeywell PDAs, so we will assume.
     final langCode = Locale(Platform.localeName.split("-").first);
     final locale =
         S.delegate.isSupported(langCode) ? langCode : const Locale('en');
+    final isCameraSupported = (Platform.isAndroid || Platform.isIOS || kIsWeb);
+    final isPdaModeEnabled = !isCameraSupported;
     final newInstance = Settings(
       isPda: isPda,
       isPdaModeEnabled: isPdaModeEnabled,
-      isHoneywellPda: isHoneywellPda,
+      isHoneywellSupported: isHoneywellSupported,
+      isCameraSupported: isCameraSupported,
       locale: locale.languageCode,
     );
     return newInstance;
@@ -41,13 +45,15 @@ class Settings {
   Settings copyWith({
     bool? isPda,
     bool? isPdaModeEnabled,
-    bool? isHoneywellPda,
+    bool? isHoneywellSupported,
+    bool? isCameraSupported,
     String? locale,
   }) {
     return Settings(
       isPda: isPda ?? this.isPda,
       isPdaModeEnabled: isPdaModeEnabled ?? this.isPdaModeEnabled,
-      isHoneywellPda: isHoneywellPda ?? this.isHoneywellPda,
+      isHoneywellSupported: isHoneywellSupported ?? this.isHoneywellSupported,
+      isCameraSupported: isCameraSupported ?? this.isCameraSupported,
       locale: locale ?? this.locale,
     );
   }
@@ -56,7 +62,8 @@ class Settings {
     return {
       'isPda': isPda,
       'isPdaModeEnabled': isPdaModeEnabled,
-      'isHoneywellPda': isHoneywellPda,
+      'isHoneywellSupported': isHoneywellSupported,
+      'isCameraSupported': isCameraSupported,
       'locale': locale,
     };
   }
@@ -64,9 +71,12 @@ class Settings {
   factory Settings.fromMap(Map<String, dynamic> map) {
     return Settings(
       isPda: map['isPda'] ?? false,
-      isPdaModeEnabled: map['isPdaModeEnabled'] ?? false,
-      isHoneywellPda: map['isHoneywellPda'] ?? false,
-      locale: map['locale'] ?? '',
+      isPdaModeEnabled: map['isPdaModeEnabled'] ??
+          !(Platform.isAndroid || Platform.isIOS || kIsWeb),
+      isHoneywellSupported: map['isHoneywellSupported'] ?? false,
+      isCameraSupported: map['isCameraSupported'] ??
+          (Platform.isAndroid || Platform.isIOS || kIsWeb),
+      locale: map['locale'] ?? 'en',
     );
   }
 
@@ -77,7 +87,7 @@ class Settings {
 
   @override
   String toString() {
-    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, isHoneywellPda: $isHoneywellPda, locale: $locale)';
+    return 'Settings(isPda: $isPda, isPdaModeEnabled: $isPdaModeEnabled, isHoneywellSupported: $isHoneywellSupported, isCameraSupported: $isCameraSupported, locale: $locale)';
   }
 
   @override
@@ -87,7 +97,8 @@ class Settings {
     return other is Settings &&
         other.isPda == isPda &&
         other.isPdaModeEnabled == isPdaModeEnabled &&
-        other.isHoneywellPda == isHoneywellPda &&
+        other.isHoneywellSupported == isHoneywellSupported &&
+        other.isCameraSupported == isCameraSupported &&
         other.locale == locale;
   }
 
@@ -95,7 +106,8 @@ class Settings {
   int get hashCode {
     return isPda.hashCode ^
         isPdaModeEnabled.hashCode ^
-        isHoneywellPda.hashCode ^
+        isHoneywellSupported.hashCode ^
+        isCameraSupported.hashCode ^
         locale.hashCode;
   }
 }

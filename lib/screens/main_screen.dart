@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage>
   void initPda() {
     // PDA Checking
 
-    if (Platform.isAndroid && settings!.isHoneywellPda) {
+    if (Platform.isAndroid && settings!.isHoneywellSupported) {
       honeywellScanner ??= HoneywellScanner();
 
       honeywellScanner!.setScannerCallBack(this);
@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage>
         ),
 
       /// Camera Stack
-      if (!(settings?.isPdaModeEnabled ?? true))
+      if (!(settings?.isPdaModeEnabled ?? true) && settings!.isCameraSupported)
         Expanded(
           flex: 1,
           child: Stack(
