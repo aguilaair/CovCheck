@@ -39,7 +39,7 @@ class CertSimplifiedView extends StatelessWidget {
       // Verified
       return Expanded(
         child: Stack(
-          alignment: AlignmentDirectional.center,
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
             EmptyResult(
               isPda: isPda,

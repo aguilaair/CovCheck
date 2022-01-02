@@ -162,6 +162,7 @@ class CertInfoViewer extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    constraints: const BoxConstraints(maxWidth: 800),
                     context: context,
                     barrierColor:
                         Theme.of(context).brightness == Brightness.light

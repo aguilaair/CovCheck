@@ -225,7 +225,7 @@ class _MyHomePageState extends State<MyHomePage>
         flex: 1,
         child: Padding(
           padding: (orientation == Orientation.portrait &&
-                  (settings?.isPdaModeEnabled ?? false))
+                  (honeywellScanner == null))
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
           child: Column(

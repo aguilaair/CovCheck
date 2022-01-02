@@ -23,7 +23,7 @@ class Logo extends StatelessWidget {
             right: (settings != null && updateSettings != null) ? 5 : null,
             left: (settings != null && updateSettings != null) ? null : 5,
             child: Tooltip(
-              message: (settings != null && updateSettings != null)
+              message: !(settings != null && updateSettings != null)
                   ? "Back"
                   : "Settings",
               child: IconButton(
