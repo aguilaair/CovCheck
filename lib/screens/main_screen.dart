@@ -104,11 +104,9 @@ class _MyHomePageState extends State<MyHomePage>
     //universalPdaTextEditingController ??= TextEditingController();
 
     universalPdaFocusNode!.requestFocus();
-    print("Getting focus");
 
     universalPdaFocusNode!.addListener(() {
       if (!universalPdaFocusNode!.hasFocus && settings!.isPdaModeEnabled) {
-        print("Getting focus");
         universalPdaFocusNode!.requestFocus();
       }
     });
@@ -126,9 +124,7 @@ class _MyHomePageState extends State<MyHomePage>
     }
     try {
       controller?.stopCamera();
-    } catch (e) {
-      print("Cannot stop camera");
-    }
+    } catch (_) {}
     controller?.dispose();
     controller = null;
     Hive.box('settings')
@@ -145,7 +141,6 @@ class _MyHomePageState extends State<MyHomePage>
         honeywellScanner?.resumeScanner();
         if (!(universalPdaFocusNode?.hasFocus ?? false)) {
           universalPdaFocusNode!.requestFocus();
-          print("Getting focus");
         }
         break;
       case AppLifecycleState.inactive:
