@@ -171,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage>
     Size size = mq.size;
 
     if (kIsWeb && !isWarningDismissed) {
+      isWarningDismissed = true;
       WidgetsBinding.instance!.addPostFrameCallback(
         (_) => showDialog(
           context: context,
@@ -183,7 +184,6 @@ class _MyHomePageState extends State<MyHomePage>
               actions: [
                 TextButton(
                     onPressed: () {
-                      isWarningDismissed = true;
                       Navigator.of(context).pop();
                     },
                     child: const Text("Ok"))

@@ -25,13 +25,14 @@ class Settings {
     final isHoneywellSupported = (Platform.isAndroid && !kIsWeb)
         ? await HoneywellScanner().isSupported()
         : false;
-    final isPda =
-        isHoneywellSupported; // We can only autodetect Honeywell PDAs, so we will assume.
+
     final langCode = Locale(Platform.localeName.split("-").first);
     final locale =
         S.delegate.isSupported(langCode) ? langCode : const Locale('en');
     final isCameraSupported = (Platform.isAndroid || Platform.isIOS || kIsWeb);
     final isPdaModeEnabled = !isCameraSupported;
+    final isPda = isHoneywellSupported ||
+        !isCameraSupported; // We can only autodetect Honeywell PDAs, so we will assume.
     final newInstance = Settings(
       isPda: isPda,
       isPdaModeEnabled: isPdaModeEnabled,

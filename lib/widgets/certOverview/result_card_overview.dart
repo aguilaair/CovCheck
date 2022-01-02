@@ -125,7 +125,7 @@ class EmptyResult extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                if (isPda)
+                if (isPda && (settings?.isCameraSupported ?? true))
                   TextButton.icon(
                     onPressed: () {
                       toggleCamPda();
