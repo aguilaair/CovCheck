@@ -170,26 +170,28 @@ class _MyHomePageState extends State<MyHomePage>
     /// Size from mediaquery
     Size size = mq.size;
 
-    if (kIsWeb && isWarningDismissed) {
-      WidgetsBinding.instance?.addPostFrameCallback((_) => showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                content: Text(
-                  S.of(context).webwarntext,
-                ),
-                title: Text(S.of(context).webwarntitle),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        isWarningDismissed = true;
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("Ok"))
-                ],
-              );
-            },
-          ));
+    if (kIsWeb && !isWarningDismissed) {
+      WidgetsBinding.instance!.addPostFrameCallback(
+        (_) => showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              content: Text(
+                S.of(context).webwarntext,
+              ),
+              title: Text(S.of(context).webwarntitle),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      isWarningDismissed = true;
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Ok"))
+              ],
+            );
+          },
+        ),
+      );
     }
 
     /// Main widget Stack, it is in a separtate varialble to make lasyouts much easier
