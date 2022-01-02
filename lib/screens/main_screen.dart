@@ -246,14 +246,14 @@ class _MyHomePageState extends State<MyHomePage>
           padding: orientation == Orientation.portrait
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
-          child: Stack(
-            alignment: Alignment.center,
+          child: Column(
+            //alignment: Alignment.center,
             children: [
               if (universalPdaFocusNode != null &&
                   universalPdaTextEditingController != null)
                 SizedBox(
                   width: 1,
-                  height: 1,
+                  height: 0,
                   child: Visibility(
                     child: TextField(
                       focusNode: universalPdaFocusNode,
