@@ -37,22 +37,24 @@ class CertSimplifiedView extends StatelessWidget {
         //processedResult != null &&
         barcodeResult!.format == BarcodeFormat.qrcode) {
       // Verified
-      return Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          EmptyResult(
-            isPda: isPda,
-            toggleCamPda: toggleCamPda,
-            setSettings: setSettings,
-            settings: settings,
-          ),
-          ResultCard(
-            barcodeResult: barcodeResult!,
-            coseResult: coseResult!,
-            dismiss: dismiss,
-            processedResult: processedResult,
-          ),
-        ],
+      return Expanded(
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            EmptyResult(
+              isPda: isPda,
+              toggleCamPda: toggleCamPda,
+              setSettings: setSettings,
+              settings: settings,
+            ),
+            ResultCard(
+              barcodeResult: barcodeResult!,
+              coseResult: coseResult!,
+              dismiss: dismiss,
+              processedResult: processedResult,
+            ),
+          ],
+        ),
       );
     }
     // No Result
