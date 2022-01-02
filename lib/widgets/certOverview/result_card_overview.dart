@@ -47,11 +47,22 @@ class CertSimplifiedView extends StatelessWidget {
               setSettings: setSettings,
               settings: settings,
             ),
-            ResultCard(
-              barcodeResult: barcodeResult!,
-              coseResult: coseResult!,
-              dismiss: dismiss,
-              processedResult: processedResult,
+            TweenAnimationBuilder(
+              tween: Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)),
+              duration: const Duration(milliseconds: 50),
+              curve: Curves.easeIn,
+              builder: (context, Offset value, child) {
+                return FractionalTranslation(
+                  translation: value,
+                  child: child!,
+                );
+              },
+              child: ResultCard(
+                barcodeResult: barcodeResult!,
+                coseResult: coseResult!,
+                dismiss: dismiss,
+                processedResult: processedResult,
+              ),
             ),
           ],
         ),
