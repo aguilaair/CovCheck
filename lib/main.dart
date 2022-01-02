@@ -60,6 +60,6 @@ class _CovCheckAppState extends State<CovCheckApp> {
 
   void setLocale(Locale newLocale, {bool shouldSetState = true}) {
     locale = newLocale;
-    if (shouldSetState) setState(() {});
+    if (shouldSetState && mounted) setState(() {});
   }
 }

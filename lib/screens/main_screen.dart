@@ -62,6 +62,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   Settings? settings;
 
+  FocusNode? universalPdaFocusNode;
+
   @override
   void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
@@ -90,13 +92,21 @@ class _MyHomePageState extends State<MyHomePage>
     if (settings!.isPdaModeEnabled && settings!.isPda) initPda();
     widget.setLocale(Locale(settings!.locale), shouldSetState: false);
 
-    if (mounted) {
-      setState(() {});
-    }
+    if (mounted) setState(() {});
   }
 
-  void initPda() async {
+  void initPda() {
     // PDA Checking
+
+    universalPdaFocusNode ??= FocusNode();
+
+    universalPdaFocusNode!.requestFocus();
+
+    universalPdaFocusNode!.addListener(() {
+      if (!universalPdaFocusNode!.hasFocus) {
+        universalPdaFocusNode!.requestFocus();
+      }
+    });
 
     honeywellScanner ??= HoneywellScanner();
 
@@ -122,6 +132,9 @@ class _MyHomePageState extends State<MyHomePage>
       case AppLifecycleState.resumed:
         controller?.resumeCamera();
         honeywellScanner?.resumeScanner();
+        if (!(universalPdaFocusNode?.hasFocus ?? false)) {
+          universalPdaFocusNode!.requestFocus();
+        }
         break;
       case AppLifecycleState.inactive:
         controller?.pauseCamera();
@@ -166,26 +179,26 @@ class _MyHomePageState extends State<MyHomePage>
     /// Size from mediaquery
     Size size = mq.size;
 
-    if (kIsWeb && !isWarningDismissed) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(
-              S.of(context).webwarntext,
-            ),
-            title: Text(S.of(context).webwarntitle),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    isWarningDismissed = true;
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Ok"))
-            ],
-          );
-        },
-      );
+    if (kIsWeb && isWarningDismissed) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) => showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text(
+                  S.of(context).webwarntext,
+                ),
+                title: Text(S.of(context).webwarntitle),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        isWarningDismissed = true;
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("Ok"))
+                ],
+              );
+            },
+          ));
     }
 
     /// Main widget Stack, it is in a separtate varialble to make lasyouts much easier
@@ -204,6 +217,16 @@ class _MyHomePageState extends State<MyHomePage>
           child: Stack(
             alignment: Alignment.topRight,
             children: [
+              if (universalPdaFocusNode != null)
+                Visibility(
+                    child: TextField(
+                      focusNode: universalPdaFocusNode,
+                      keyboardType: TextInputType.none,
+                    ),
+                    visible: false,
+                    maintainInteractivity: true,
+                    maintainState: true),
+
               /// Camera View
               CameraView(
                   onQRViewCreated: _onQRViewCreated, qrKey: qrKey, size: size),
@@ -233,7 +256,7 @@ class _MyHomePageState extends State<MyHomePage>
                 dismiss: dismissResults,
                 processedResult: processedResult,
                 setSettings: setSettings,
-                settings: settings!,
+                settings: settings,
               ),
             ],
           ),
@@ -291,7 +314,10 @@ class _MyHomePageState extends State<MyHomePage>
       });
     } else {
       setState(() {
+        honeywellScanner?.stopScanner();
         honeywellScanner = null;
+        universalPdaFocusNode?.dispose();
+        universalPdaFocusNode = null;
         Hive.box('settings').put(
             "settings", settings!.copyWith(isPdaModeEnabled: false).toJson());
         settings = settings!.copyWith(isPdaModeEnabled: false);
@@ -313,6 +339,7 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     controller?.dispose();
     honeywellScanner?.stopScanner();
+    universalPdaFocusNode?.dispose();
     super.dispose();
   }
 
@@ -371,7 +398,7 @@ class _MyHomePageState extends State<MyHomePage>
       }
       Hive.box('settings').put('settings', newSettings.toJson());
       settings = newSettings;
-      setState(() {});
+      if (mounted) setState(() {});
     }
   }
 }

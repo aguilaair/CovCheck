@@ -28,7 +28,7 @@ class CertSimplifiedView extends StatelessWidget {
   final bool isPda;
   final Function toggleCamPda;
   final void Function(Settings)? setSettings;
-  final Settings settings;
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class EmptyResult extends StatelessWidget {
   final bool isPda;
   final Function toggleCamPda;
   final void Function(Settings)? setSettings;
-  final Settings settings;
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {

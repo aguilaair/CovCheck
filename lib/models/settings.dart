@@ -1,9 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:covid_checker/generated/l10n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
+import 'package:universal_io/io.dart';
 
 class Settings {
   bool isPda;
@@ -21,7 +22,9 @@ class Settings {
         ? await HoneywellScanner().isSupported()
         : false;
     final isPdaModeEnabled = isPda;
-    final locale = Localizations.localeOf(ctx);
+    final langCode = Locale(Platform.localeName.split("-").first);
+    final locale =
+        S.delegate.isSupported(langCode) ? langCode : const Locale('en');
     final newInstance = Settings(
       isPda: isPda,
       isPdaModeEnabled: isPdaModeEnabled,

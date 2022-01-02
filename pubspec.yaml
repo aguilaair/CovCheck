@@ -43,6 +43,7 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_settings_ui: ^2.0.1
   adaptive_theme: ^2.3.0
+  universal_io: ^2.0.4
 
 dev_dependencies:
   flutter_test:
