@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "appsettings": MessageLookupByLibrary.simpleMessage("App Settings"),
         "areyousurereset": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to reset all settings?"),
+        "camerasupport": MessageLookupByLibrary.simpleMessage("Camera Mode"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "certType": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),

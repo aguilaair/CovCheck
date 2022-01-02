@@ -929,6 +929,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Camera Mode`
+  String get camerasupport {
+    return Intl.message(
+      'Camera Mode',
+      name: 'camerasupport',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

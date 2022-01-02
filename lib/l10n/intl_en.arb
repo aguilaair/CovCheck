@@ -86,5 +86,6 @@
     "resetsettings": "Reset Settings",
     "reset": "Reset",
     "areyousurereset": "Are you sure you want to reset all settings?",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "camerasupport": "Camera Mode"
 }

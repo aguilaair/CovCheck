@@ -114,18 +114,31 @@ class _SettingScreenState extends State<SettingScreen> {
                         subtitle: S.of(context).pdamodedesc,
                         switchValue: newSettings!.isPda,
                         onToggle: (bool value) {
-                          setState(() {
-                            newSettings = newSettings!.copyWith(isPda: value);
-                            widget.updateSettings(
-                              newSettings!.copyWith(isPda: value),
-                            );
-                          });
+                          if (!(newSettings?.isCameraSupported ?? false)) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(S.of(context).notsupported),
+                            ));
+                          } else {
+                            setState(() {
+                              newSettings = newSettings!.copyWith(isPda: value);
+                              widget.updateSettings(
+                                newSettings!.copyWith(isPda: value),
+                              );
+                            });
+                          }
                         },
                       ),
                       SettingsTile(
                         title: S.of(context).honeywellpda,
                         leading: const Icon(Icons.h_plus_mobiledata_rounded),
                         subtitle: (newSettings?.isHoneywellSupported ?? false)
+                            ? S.of(context).supported
+                            : S.of(context).notsupported,
+                      ),
+                      SettingsTile(
+                        title: S.of(context).camerasupport,
+                        leading: const Icon(Icons.camera_alt_rounded),
+                        subtitle: (newSettings?.isCameraSupported ?? false)
                             ? S.of(context).supported
                             : S.of(context).notsupported,
                       ),

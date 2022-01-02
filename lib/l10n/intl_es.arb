@@ -85,5 +85,6 @@
     "resetsettings": "Reestablecer Ajustes",
     "reset": "Reestablecer",
     "areyousurereset": "Esto restablecerá todos los ajustes.",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "camerasupport": "Modo Cámara"
 }
