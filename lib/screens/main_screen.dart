@@ -101,13 +101,13 @@ class _MyHomePageState extends State<MyHomePage>
     // PDA Checking
 
     universalPdaFocusNode ??= FocusNode();
-    universalPdaTextEditingController ??= TextEditingController();
+    //universalPdaTextEditingController ??= TextEditingController();
 
     universalPdaFocusNode!.requestFocus();
     print("Getting focus");
 
     universalPdaFocusNode!.addListener(() {
-      if (!universalPdaFocusNode!.hasFocus) {
+      if (!universalPdaFocusNode!.hasFocus && settings!.isPdaModeEnabled) {
         print("Getting focus");
         universalPdaFocusNode!.requestFocus();
       }
@@ -265,7 +265,8 @@ class _MyHomePageState extends State<MyHomePage>
                       controller: universalPdaTextEditingController,
                     ),
                     visible: false,
-                    maintainSize: true,
+                    maintainSize: (universalPdaFocusNode != null &&
+                        universalPdaTextEditingController != null),
                     maintainInteractivity: true,
                     maintainState: true,
                     maintainAnimation: true,
