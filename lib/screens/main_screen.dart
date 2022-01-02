@@ -5,6 +5,7 @@ import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/models/settings.dart';
 import 'package:covid_checker/utils/base45.dart';
+import 'package:covid_checker/widgets/molecules/invisible_text_field.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +64,6 @@ class _MyHomePageState extends State<MyHomePage>
 
   Settings? settings;
 
-  FocusNode? universalPdaFocusNode;
-  TextEditingController? universalPdaTextEditingController;
-
   @override
   void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
@@ -100,17 +98,6 @@ class _MyHomePageState extends State<MyHomePage>
   void initPda() {
     // PDA Checking
 
-    universalPdaFocusNode ??= FocusNode();
-    //universalPdaTextEditingController ??= TextEditingController();
-
-    universalPdaFocusNode!.requestFocus();
-
-    universalPdaFocusNode!.addListener(() {
-      if (!universalPdaFocusNode!.hasFocus && settings!.isPdaModeEnabled) {
-        universalPdaFocusNode!.requestFocus();
-      }
-    });
-
     if (Platform.isAndroid) {
       honeywellScanner ??= HoneywellScanner();
 
@@ -139,9 +126,6 @@ class _MyHomePageState extends State<MyHomePage>
       case AppLifecycleState.resumed:
         controller?.resumeCamera();
         honeywellScanner?.resumeScanner();
-        if (!(universalPdaFocusNode?.hasFocus ?? false)) {
-          universalPdaFocusNode!.requestFocus();
-        }
         break;
       case AppLifecycleState.inactive:
         controller?.pauseCamera();
@@ -246,29 +230,8 @@ class _MyHomePageState extends State<MyHomePage>
           child: Column(
             //alignment: Alignment.center,
             children: [
-              if (universalPdaFocusNode != null &&
-                  universalPdaTextEditingController != null)
-                SizedBox(
-                  width: 1,
-                  height: 0,
-                  child: Visibility(
-                    child: TextField(
-                      focusNode: universalPdaFocusNode,
-                      keyboardType: TextInputType.none,
-                      onSubmitted: (value) {
-                        onDecoded(value);
-                        universalPdaTextEditingController?.clear();
-                      },
-                      controller: universalPdaTextEditingController,
-                    ),
-                    visible: false,
-                    maintainSize: (universalPdaFocusNode != null &&
-                        universalPdaTextEditingController != null),
-                    maintainInteractivity: true,
-                    maintainState: true,
-                    maintainAnimation: true,
-                  ),
-                ),
+              if ((settings?.isPdaModeEnabled ?? false))
+                InvisibleTextField(onSubmit: onDecoded),
               CertSimplifiedView(
                 isPda: settings?.isPda ?? false,
                 toggleCamPda: togglePdaMode,
@@ -337,11 +300,6 @@ class _MyHomePageState extends State<MyHomePage>
       setState(() {
         honeywellScanner?.stopScanner();
         honeywellScanner = null;
-        universalPdaFocusNode?.unfocus();
-        universalPdaFocusNode?.dispose();
-        universalPdaTextEditingController?.dispose();
-        universalPdaFocusNode = null;
-        universalPdaTextEditingController = null;
         Hive.box('settings').put(
             "settings", settings!.copyWith(isPdaModeEnabled: false).toJson());
         settings = settings!.copyWith(isPdaModeEnabled: false);
@@ -363,10 +321,6 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     controller?.dispose();
     honeywellScanner?.stopScanner();
-    universalPdaFocusNode?.dispose();
-    universalPdaTextEditingController?.dispose();
-    universalPdaFocusNode = null;
-    universalPdaTextEditingController = null;
     super.dispose();
   }
 
