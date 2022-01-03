@@ -44,7 +44,6 @@ dependencies:
   flutter_settings_ui: ^2.0.1
   adaptive_theme: ^2.3.0
   universal_io: ^2.0.4
-  input_with_keyboard_control: ^1.0.8
   fluttertoast: ^8.0.8
 
 dev_dependencies:
