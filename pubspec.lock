@@ -224,6 +224,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  input_with_keyboard_control:
+    dependency: "direct main"
+    description:
+      name: input_with_keyboard_control
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.8"
   intl:
     dependency: "direct main"
     description:

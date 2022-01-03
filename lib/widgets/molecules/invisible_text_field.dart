@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:input_with_keyboard_control/input_with_keyboard_control.dart';
 
 class InvisibleTextField extends StatefulWidget {
   const InvisibleTextField({
@@ -13,7 +14,7 @@ class InvisibleTextField extends StatefulWidget {
 }
 
 class _InvisibleTextFieldState extends State<InvisibleTextField> {
-  final universalPdaFocusNode = FocusNode();
+  final universalPdaFocusNode = InputWithKeyboardControlFocusNode();
   final universalPdaTextEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,10 @@ class _InvisibleTextFieldState extends State<InvisibleTextField> {
               universalPdaFocusNode.requestFocus();
             }
           },
-          child: TextField(
+          child: InputWithKeyboardControl(
             focusNode: universalPdaFocusNode,
-            keyboardType: TextInputType.none,
+            //keyboardType: TextInputType.none,
+            width: 0,
             onSubmitted: (value) {
               widget.onSubmit(value);
               universalPdaTextEditingController.clear();

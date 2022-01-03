@@ -224,8 +224,8 @@ class _MyHomePageState extends State<MyHomePage>
       Expanded(
         flex: 1,
         child: Padding(
-          padding: (orientation == Orientation.portrait &&
-                  settings!.isPdaModeEnabled)
+          padding: orientation == Orientation.portrait ||
+                  (settings?.isPdaModeEnabled ?? false)
               ? EdgeInsets.zero
               : const EdgeInsets.only(right: 10),
           child: Column(
