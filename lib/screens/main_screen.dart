@@ -10,6 +10,7 @@ import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -64,8 +65,13 @@ class _MyHomePageState extends State<MyHomePage>
 
   Settings? settings;
 
+  late FToast fToast;
+
   @override
   void initState() {
+    fToast = FToast();
+    fToast.init(context);
+
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
     (certs["dsc_trust_list"] as Map).forEach((key, value) {
@@ -365,6 +371,9 @@ class _MyHomePageState extends State<MyHomePage>
           processedResult = null;
         });
       }
+    } else if (scanData.code! != (result?.code)) {
+      result = scanData;
+      fToast.showToast(child: Text(S.of(context).invalidcert));
     }
   }
 
