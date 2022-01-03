@@ -371,7 +371,7 @@ class _MyHomePageState extends State<MyHomePage>
           processedResult = null;
         });
       }
-    } else if (scanData.code! != (result?.code)) {
+    } else if (scanData.code != null && scanData.code! != (result?.code)) {
       result = scanData;
       fToast.showToast(child: Text(S.of(context).invalidcert));
     }
