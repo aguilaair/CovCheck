@@ -64,10 +64,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   Settings? settings;
 
-
   @override
   void initState() {
-
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
     (certs["dsc_trust_list"] as Map).forEach((key, value) {
@@ -344,7 +342,8 @@ class _MyHomePageState extends State<MyHomePage>
         var cose = Cose.decodeAndVerify(scanres, certMap);
 
         /// Vibrate as we're done
-        HapticFeedback.lightImpact();
+        HapticFeedback.lightImpact()
+            .whenComplete(() => HapticFeedback.lightImpact());
 
         setState(() {
           /// Update the state and set cose and scanData
@@ -356,7 +355,8 @@ class _MyHomePageState extends State<MyHomePage>
         });
       } catch (e) {
         /// If there are any issues assume QR was corrupted, set as invalid format.
-        HapticFeedback.lightImpact();
+        HapticFeedback.lightImpact()
+            .whenComplete(() => HapticFeedback.lightImpact());
         setState(() {
           coseResult = CoseResult(
               payload: {},
