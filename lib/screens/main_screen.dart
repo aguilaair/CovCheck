@@ -6,6 +6,7 @@ import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/models/settings.dart';
 import 'package:covid_checker/utils/base45.dart';
 import 'package:covid_checker/widgets/molecules/invisible_text_field.dart';
+import 'package:covid_checker/widgets/molecules/toast.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -373,25 +374,7 @@ class _MyHomePageState extends State<MyHomePage>
       }
     } else if (scanData.code != null && scanData.code! != (result?.code)) {
       result = scanData;
-      fToast.showToast(
-          child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.0),
-          color:
-              Theme.of(context).snackBarTheme.backgroundColor?.withOpacity(0.5),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.warning_amber_rounded),
-            const SizedBox(
-              width: 12.0,
-            ),
-            Text(S.of(context).invalidcert),
-          ],
-        ),
-      ));
+      fToast.showToast(child: const ToastInvalidCert());
     }
   }
 
