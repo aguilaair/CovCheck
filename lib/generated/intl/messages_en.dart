@@ -132,6 +132,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "unk": MessageLookupByLibrary.simpleMessage("Unknown"),
         "update": MessageLookupByLibrary.simpleMessage("Update"),
         "updateall": MessageLookupByLibrary.simpleMessage("Update All"),
+        "updatefail": MessageLookupByLibrary.simpleMessage(
+            "Failed to update data, please try again later"),
+        "updateok": MessageLookupByLibrary.simpleMessage(
+            "Update successfully completed"),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacciantion"),
         "vaccproph":
             MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),

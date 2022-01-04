@@ -1,6 +1,6 @@
-import 'dart:convert';
 
-import 'package:hive/hive.dart';
+import 'package:covid_checker/certs/certs.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:jose/jose.dart';
 
@@ -44,4 +44,32 @@ sSSXWtDUTXhmclnJFnU=
     Hive.box("certs").put("certs_iat", iat);
   }
   return {"certs": certs, "iat": iat};
+}
+
+Map<String, String> initCerts(Function setCerts) {
+  final certsLoaded = Hive.box('certs').get(
+    "certs",
+  );
+  Map<String, String> certMap = {};
+  if (certsLoaded == null) {
+    (certs["dsc_trust_list"] as Map).forEach((key, value) {
+      for (var element in (value["keys"] as List)) {
+        certMap[element["kid"]] = (element["x5c"][0] as String);
+      }
+    });
+    Hive.box('certs').put('certs', certMap);
+    Hive.box('certs').put(
+        'certs',
+        DateTime.fromMillisecondsSinceEpoch(
+          (certs['iat'] as int) * 1000,
+        ));
+  } else {
+    certMap = Map<String, String>.from(certsLoaded);
+  }
+
+  Hive.box("certs").listenable(keys: ["certs"]).addListener(() {
+    setCerts(Map<String, String>.from(Hive.box('certs').get("certs")));
+  });
+
+  return certMap;
 }

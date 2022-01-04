@@ -5,6 +5,7 @@ import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/models/settings.dart';
 import 'package:covid_checker/utils/base45.dart';
+import 'package:covid_checker/utils/get_new_certs.dart';
 import 'package:covid_checker/widgets/molecules/invisible_text_field.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/foundation.dart';
@@ -69,29 +70,17 @@ class _MyHomePageState extends State<MyHomePage>
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
     loadSettings();
+    initCerts((certs) {
+      if (mounted) {
+        setState(() {
+          certMap = certs;
+        });
+      }
+    });
     super.initState();
   }
 
   void loadSettings() async {
-    final certsLoaded = Hive.box('certs').get(
-      "certs",
-    );
-    if (certsLoaded == null) {
-      (certs["dsc_trust_list"] as Map).forEach((key, value) {
-        for (var element in (value["keys"] as List)) {
-          certMap[element["kid"]] = (element["x5c"][0] as String);
-        }
-      });
-      Hive.box('certs').put('certs', certMap);
-      Hive.box('certs').put(
-          'certs',
-          DateTime.fromMillisecondsSinceEpoch(
-            (certs['iat'] as int) * 1000,
-          ));
-    } else {
-      certMap = Map<String, String>.from(certsLoaded);
-    }
-
     final settingsLoaded = Hive.box('settings').get(
       "settings",
     );
@@ -353,8 +342,7 @@ class _MyHomePageState extends State<MyHomePage>
         scanres = gzipDecode(scanres);
 
         /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
-        var cose =
-            Cose.decodeAndVerify(scanres, certMap as Map<String, String>);
+        var cose = Cose.decodeAndVerify(scanres, certMap);
 
         /// Vibrate as we're done
         HapticFeedback.lightImpact()

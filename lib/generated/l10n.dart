@@ -939,6 +939,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Update successfully completed`
+  String get updateok {
+    return Intl.message(
+      'Update successfully completed',
+      name: 'updateok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update data, please try again later`
+  String get updatefail {
+    return Intl.message(
+      'Failed to update data, please try again later',
+      name: 'updatefail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

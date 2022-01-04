@@ -86,5 +86,7 @@
     "reset": "Reestablecer",
     "areyousurereset": "Esto restablecerá todos los ajustes.",
     "cancel": "Cancelar",
-    "camerasupport": "Modo Cámara"
+    "camerasupport": "Modo Cámara",
+    "updateok": "Actualización completa",
+    "updatefail": "Error al actualizar los datos, vuelve a intentarlo en unos minutos"
 }
