@@ -68,16 +68,25 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     /// Cycle through all of the certificates and extract the KID and X5C values, mapping them into certMap.
     /// This is a relatively expensive process so should be run as little as possible.
-    (certs["dsc_trust_list"] as Map).forEach((key, value) {
-      for (var element in (value["keys"] as List)) {
-        certMap[element["kid"]] = element["x5c"][0];
-      }
-    });
     loadSettings();
     super.initState();
   }
 
   void loadSettings() async {
+    final certsLoaded = Hive.box('settings').get(
+      "certs",
+    );
+    if (certsLoaded == null) {
+      (certs["dsc_trust_list"] as Map).forEach((key, value) {
+        for (var element in (value["keys"] as List)) {
+          certMap[element["kid"]] = (element["x5c"][0] as String);
+        }
+      });
+      Hive.box('settings').put('certs', certMap);
+    } else {
+      certMap = Map<String, String>.from(certsLoaded);
+    }
+
     final settingsLoaded = Hive.box('settings').get(
       "settings",
     );
@@ -339,7 +348,8 @@ class _MyHomePageState extends State<MyHomePage>
         scanres = gzipDecode(scanres);
 
         /// Pass the data onto the Cose decoder where it will match it to a certificate (if valid)
-        var cose = Cose.decodeAndVerify(scanres, certMap);
+        var cose =
+            Cose.decodeAndVerify(scanres, certMap as Map<String, String>);
 
         /// Vibrate as we're done
         HapticFeedback.lightImpact()
