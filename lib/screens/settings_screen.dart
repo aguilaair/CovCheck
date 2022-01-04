@@ -237,7 +237,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                   } catch (e) {
                                     ScaffoldMessenger.of(context)
                                         .clearSnackBars();
-                                    successSnackbar(context);
                                     errorSnackbar(context);
                                   }
                                   setState(() {
