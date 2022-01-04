@@ -222,23 +222,12 @@ class _SettingScreenState extends State<SettingScreen> {
                                   setState(() {
                                     downloading = true;
                                   });
-                                  try {
-                                    progressSnackbar(context, 0, 4);
+                                  await doTaskOnSnackbar(context, () async {
                                     await getNewCerts();
-                                    progressSnackbar(context, 1, 4);
                                     await getNewTests();
-                                    progressSnackbar(context, 2, 4);
                                     await getNewVaccineAuthHolders();
-                                    progressSnackbar(context, 3, 4);
                                     await getNewVaccines();
-                                    ScaffoldMessenger.of(context)
-                                        .clearSnackBars();
-                                    successSnackbar(context);
-                                  } catch (e) {
-                                    ScaffoldMessenger.of(context)
-                                        .clearSnackBars();
-                                    errorSnackbar(context);
-                                  }
+                                  });
                                   setState(() {
                                     downloading = false;
                                   });
@@ -269,12 +258,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   setState(() {
                                     downloading = true;
                                   });
-                                  try {
-                                    await getNewCerts();
-                                    successSnackbar(context);
-                                  } catch (e) {
-                                    errorSnackbar(context);
-                                  }
+                                  await doTaskOnSnackbar(context, getNewCerts);
                                   setState(() {
                                     downloading = false;
                                   });
@@ -299,12 +283,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                     setState(() {
                                       downloading = true;
                                     });
-                                    try {
-                                      await getNewTests();
-                                      successSnackbar(context);
-                                    } catch (e) {
-                                      errorSnackbar(context);
-                                    }
+                                    await doTaskOnSnackbar(
+                                        context, getNewTests);
                                     setState(() {
                                       downloading = false;
                                     });
@@ -329,12 +309,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                   setState(() {
                                     downloading = true;
                                   });
-                                  try {
-                                    await getNewVaccines();
-                                    successSnackbar(context);
-                                  } catch (e) {
-                                    errorSnackbar(context);
-                                  }
+                                  await doTaskOnSnackbar(
+                                      context, getNewVaccines);
                                   setState(() {
                                     downloading = false;
                                   });
@@ -360,12 +336,8 @@ class _SettingScreenState extends State<SettingScreen> {
                                   setState(() {
                                     downloading = true;
                                   });
-                                  try {
-                                    await getNewVaccineAuthHolders();
-                                    successSnackbar(context);
-                                  } catch (e) {
-                                    errorSnackbar(context);
-                                  }
+                                  await doTaskOnSnackbar(
+                                      context, getNewVaccineAuthHolders);
                                   setState(() {
                                     downloading = false;
                                   });

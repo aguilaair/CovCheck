@@ -144,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error al actualizar los datos, vuelve a intentarlo en unos minutos"),
         "updateok":
             MessageLookupByLibrary.simpleMessage("Actualización completa"),
+        "updatingdata":
+            MessageLookupByLibrary.simpleMessage("Actualizando datos..."),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacunación"),
         "vaccproph": MessageLookupByLibrary.simpleMessage("Tipo de Vacuna"),
         "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),

@@ -959,6 +959,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Updating data...`
+  String get updatingdata {
+    return Intl.message(
+      'Updating data...',
+      name: 'updatingdata',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -136,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to update data, please try again later"),
         "updateok": MessageLookupByLibrary.simpleMessage(
             "Update successfully completed"),
+        "updatingdata":
+            MessageLookupByLibrary.simpleMessage("Updating data..."),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacciantion"),
         "vaccproph":
             MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),

@@ -88,5 +88,6 @@
     "cancel": "Cancelar",
     "camerasupport": "Modo Cámara",
     "updateok": "Actualización completa",
-    "updatefail": "Error al actualizar los datos, vuelve a intentarlo en unos minutos"
+    "updatefail": "Error al actualizar los datos, vuelve a intentarlo en unos minutos",
+    "updatingdata": "Actualizando datos..."
 }

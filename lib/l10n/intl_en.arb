@@ -89,5 +89,6 @@
     "cancel": "Cancel",
     "camerasupport": "Camera Mode",
     "updateok": "Update successfully completed",
-    "updatefail": "Failed to update data, please try again later"
+    "updatefail": "Failed to update data, please try again later",
+    "updatingdata": "Updating data..."
 }
