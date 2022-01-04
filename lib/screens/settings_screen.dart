@@ -4,8 +4,11 @@ import 'package:covid_checker/certs/test_manufacturer_name.dart';
 import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
 import 'package:covid_checker/certs/vaccine_product_name.dart';
 import 'package:covid_checker/generated/l10n.dart';
+import 'package:covid_checker/utils/get_new_certs.dart';
 import 'package:covid_checker/widgets/molecules/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:intl/intl.dart';
@@ -28,6 +31,7 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   Settings? newSettings;
+  bool downloading = false;
   @override
   Widget build(BuildContext context) {
     newSettings ??= widget.settings;
@@ -236,19 +240,78 @@ class _SettingScreenState extends State<SettingScreen> {
                                 Localizations.localeOf(context).countryCode)
                             .add_jms()
                             .format(
-                              DateTime.fromMillisecondsSinceEpoch(
-                                (certs['iat'] as int) * 1000,
+                              Hive.box("certs").get(
+                                "certs_iat",
+                                defaultValue: DateTime(2000),
                               ),
                             ),
                         trailing: TextButton(
                           child: Text(S.of(context).update),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Coming Soon"),
-                              ),
-                            );
-                          },
+                          onPressed: !downloading
+                              ? () async {
+                                  setState(() {
+                                    downloading = true;
+                                  });
+                                  try {
+                                    await getNewCerts();
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Row(
+                                          children: [
+                                            const Icon(Icons.check_rounded),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              S.of(context).validcert,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        backgroundColor:
+                                            const Color(0xff1BCA4C),
+                                      ),
+                                    );
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Row(
+                                          children: [
+                                            const Icon(Icons.error_rounded),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              S.of(context).errordecoding,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        behavior: SnackBarBehavior.floating,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        backgroundColor:
+                                            Theme.of(context).errorColor,
+                                      ),
+                                    );
+                                  }
+                                  setState(() {
+                                    downloading = false;
+                                  });
+                                }
+                              : null,
                         ),
                       ),
                       SettingsTile(

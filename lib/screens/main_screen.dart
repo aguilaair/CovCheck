@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void loadSettings() async {
-    final certsLoaded = Hive.box('settings').get(
+    final certsLoaded = Hive.box('certs').get(
       "certs",
     );
     if (certsLoaded == null) {
@@ -82,7 +82,12 @@ class _MyHomePageState extends State<MyHomePage>
           certMap[element["kid"]] = (element["x5c"][0] as String);
         }
       });
-      Hive.box('settings').put('certs', certMap);
+      Hive.box('certs').put('certs', certMap);
+      Hive.box('certs').put(
+          'certs',
+          DateTime.fromMillisecondsSinceEpoch(
+            (certs['iat'] as int) * 1000,
+          ));
     } else {
       certMap = Map<String, String>.from(certsLoaded);
     }

@@ -12,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('settings');
+  await Hive.openBox('certs');
   runApp(const CovCheckApp());
 }
 
