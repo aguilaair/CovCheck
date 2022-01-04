@@ -1,5 +1,9 @@
+import 'dart:convert';
 
 import 'package:covid_checker/certs/certs.dart';
+import 'package:covid_checker/certs/test_manufacturer_name.dart';
+import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
+import 'package:covid_checker/certs/vaccine_product_name.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:jose/jose.dart';
@@ -46,8 +50,10 @@ sSSXWtDUTXhmclnJFnU=
   return {"certs": certs, "iat": iat};
 }
 
-Map<String, String> initCerts(Function setCerts) {
-  final certsLoaded = Hive.box('certs').get(
+void initCerts(Function setCerts) {
+  final certBox = Hive.box('certs');
+
+  final certsLoaded = certBox.get(
     "certs",
   );
   Map<String, String> certMap = {};
@@ -57,19 +63,78 @@ Map<String, String> initCerts(Function setCerts) {
         certMap[element["kid"]] = (element["x5c"][0] as String);
       }
     });
-    Hive.box('certs').put('certs', certMap);
-    Hive.box('certs').put(
-        'certs',
+    certBox.put('certs', certMap);
+    certBox.put(
+        'certs_iat',
         DateTime.fromMillisecondsSinceEpoch(
           (certs['iat'] as int) * 1000,
         ));
   } else {
     certMap = Map<String, String>.from(certsLoaded);
   }
+  setCerts(Map<String, String>.from(certMap));
 
-  Hive.box("certs").listenable(keys: ["certs"]).addListener(() {
-    setCerts(Map<String, String>.from(Hive.box('certs').get("certs")));
+  certBox.listenable(keys: ["certs"]).addListener(() {
+    setCerts(Map<String, String>.from(certBox.get("certs")));
   });
 
-  return certMap;
+  if (certBox.get("tests") == null) {
+    certBox.put("tests", testManfName);
+  }
+
+  if (certBox.get("vaccine-medicinal-product") == null) {
+    certBox.put("vaccine-medicinal-product", vaccineMedicinalProduct);
+  }
+
+  if (certBox.get("vaccines-covid-19-auth-holders") == null) {
+    certBox.put("vaccines-covid-19-auth-holders", vaccineManfName);
+  }
+}
+
+Future<Map<String, dynamic>?> getNewTests() async {
+  final newTestsReq = await http.get(
+    Uri(
+        scheme: "https",
+        host: "dgcg.covidbevis.se",
+        path: "tp/valuesets/test-manf.json"),
+  );
+  if (newTestsReq.statusCode == 200) {
+    final content = jsonDecode(newTestsReq.body);
+
+    Hive.box("certs").put("tests", content);
+  } else {
+    throw newTestsReq.statusCode;
+  }
+}
+
+Future<Map<String, dynamic>?> getNewVaccines() async {
+  final newTestsReq = await http.get(
+    Uri(
+        scheme: "https",
+        host: "dgcg.covidbevis.se",
+        path: "tp/valuesets/vaccine-medicinal-product.json"),
+  );
+  if (newTestsReq.statusCode == 200) {
+    final content = jsonDecode(newTestsReq.body);
+
+    Hive.box("certs").put("vaccine-medicinal-product", content);
+  } else {
+    throw newTestsReq.statusCode;
+  }
+}
+
+Future<Map<String, dynamic>?> getNewVaccineAuthHolders() async {
+  final newTestsReq = await http.get(
+    Uri(
+        scheme: "https",
+        host: "dgcg.covidbevis.se",
+        path: "tp/valuesets/vaccines-covid-19-auth-holders"),
+  );
+  if (newTestsReq.statusCode == 200) {
+    final content = jsonDecode(newTestsReq.body);
+
+    Hive.box("certs").put("vaccines-covid-19-auth-holders", content);
+  } else {
+    throw newTestsReq.statusCode;
+  }
 }

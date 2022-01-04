@@ -1,7 +1,4 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:covid_checker/certs/test_manufacturer_name.dart';
-import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
-import 'package:covid_checker/certs/vaccine_product_name.dart';
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/utils/get_new_certs.dart';
 import 'package:covid_checker/widgets/molecules/logo.dart';
@@ -219,13 +216,31 @@ class _SettingScreenState extends State<SettingScreen> {
                           width: 10,
                         ),
                         TextButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Coming Soon"),
-                              ),
-                            );
-                          },
+                          onPressed: !downloading
+                              ? () async {
+                                  setState(() {
+                                    downloading = true;
+                                  });
+                                  try {
+                                    progressSnackbar(context, 0, 4);
+                                    await getNewCerts();
+                                    progressSnackbar(context, 1, 4);
+                                    await getNewTests();
+                                    progressSnackbar(context, 2, 4);
+                                    await getNewVaccineAuthHolders();
+                                    progressSnackbar(context, 3, 4);
+                                    await getNewVaccines();
+                                    ScaffoldMessenger.of(context)
+                                        .clearSnackBars();
+                                    successSnackbar(context);
+                                  } catch (e) {
+                                    errorSnackbar(context);
+                                  }
+                                  setState(() {
+                                    downloading = false;
+                                  });
+                                }
+                              : null,
                           child: Text(S.of(context).updateall),
                         ),
                       ],
@@ -271,19 +286,27 @@ class _SettingScreenState extends State<SettingScreen> {
                         subtitle: DateFormat.yMMMMd(
                                 Localizations.localeOf(context).countryCode)
                             .format(
-                          DateTime.parse(
-                              testManfName['valueSetDate'] as String),
+                          DateTime.parse(Hive.box("certs")
+                              .get("tests")['valueSetDate'] as String),
                         ),
                         trailing: TextButton(
-                          child: Text(S.of(context).update),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Coming Soon"),
-                              ),
-                            );
-                          },
-                        ),
+                            child: Text(S.of(context).update),
+                            onPressed: !downloading
+                                ? () async {
+                                    setState(() {
+                                      downloading = true;
+                                    });
+                                    try {
+                                      await getNewTests();
+                                      successSnackbar(context);
+                                    } catch (e) {
+                                      errorSnackbar(context);
+                                    }
+                                    setState(() {
+                                      downloading = false;
+                                    });
+                                  }
+                                : null),
                       ),
                       SettingsTile(
                         title: S.of(context).lastvaxupdate,
@@ -292,18 +315,28 @@ class _SettingScreenState extends State<SettingScreen> {
                         subtitle: DateFormat.yMMMMd(
                                 Localizations.localeOf(context).countryCode)
                             .format(
-                          DateTime.parse(vaccineMedicinalProduct['valueSetDate']
+                          DateTime.parse(Hive.box("certs").get(
+                                  "vaccine-medicinal-product")['valueSetDate']
                               as String),
                         ),
                         trailing: TextButton(
                           child: Text(S.of(context).update),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Coming Soon"),
-                              ),
-                            );
-                          },
+                          onPressed: !downloading
+                              ? () async {
+                                  setState(() {
+                                    downloading = true;
+                                  });
+                                  try {
+                                    await getNewVaccines();
+                                    successSnackbar(context);
+                                  } catch (e) {
+                                    errorSnackbar(context);
+                                  }
+                                  setState(() {
+                                    downloading = false;
+                                  });
+                                }
+                              : null,
                         ),
                       ),
                       SettingsTile(
@@ -313,18 +346,28 @@ class _SettingScreenState extends State<SettingScreen> {
                         subtitle: DateFormat.yMMMMd(
                                 Localizations.localeOf(context).countryCode)
                             .format(
-                          DateTime.parse(
-                              vaccineManfName['valueSetDate'] as String),
+                          DateTime.parse(Hive.box("certs")
+                                  .get("vaccines-covid-19-auth-holders")[
+                              'valueSetDate'] as String),
                         ),
                         trailing: TextButton(
                           child: Text(S.of(context).update),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Coming Soon"),
-                              ),
-                            );
-                          },
+                          onPressed: !downloading
+                              ? () async {
+                                  setState(() {
+                                    downloading = true;
+                                  });
+                                  try {
+                                    await getNewVaccineAuthHolders();
+                                    successSnackbar(context);
+                                  } catch (e) {
+                                    errorSnackbar(context);
+                                  }
+                                  setState(() {
+                                    downloading = false;
+                                  });
+                                }
+                              : null,
                         ),
                       ),
                     ],
