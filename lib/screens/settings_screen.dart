@@ -1,5 +1,4 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/certs/test_manufacturer_name.dart';
 import 'package:covid_checker/certs/vaccine_manufacturer_name.dart';
 import 'package:covid_checker/certs/vaccine_product_name.dart';
@@ -9,7 +8,6 @@ import 'package:covid_checker/widgets/molecules/logo.dart';
 import 'package:covid_checker/widgets/molecules/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:intl/intl.dart';

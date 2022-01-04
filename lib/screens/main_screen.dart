@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:covid_checker/certs/certs.dart';
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/models/settings.dart';
