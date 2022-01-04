@@ -120,9 +120,10 @@ class _SettingScreenState extends State<SettingScreen> {
                             ));
                           } else {
                             setState(() {
-                              newSettings = newSettings!.copyWith(isPda: value);
+                              newSettings = newSettings!.copyWith(
+                                  isPda: value, isPdaModeEnabled: value);
                               widget.updateSettings(
-                                newSettings!.copyWith(isPda: value),
+                                newSettings!,
                               );
                             });
                           }
