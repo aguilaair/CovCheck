@@ -630,11 +630,21 @@ class S {
     );
   }
 
-  /// `Scanning on PDA mode available`
-  String get pdadetected {
+  /// `Scanning on PDA mode`
+  String get pdamodeon {
     return Intl.message(
-      'Scanning on PDA mode available',
-      name: 'pdadetected',
+      'Scanning on PDA mode',
+      name: 'pdamodeon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scanning on Camera mode`
+  String get pdamodeoff {
+    return Intl.message(
+      'Scanning on Camera mode',
+      name: 'pdamodeoff',
       desc: '',
       args: [],
     );

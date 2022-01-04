@@ -100,11 +100,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vaccination Not Complete"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
         "notsupported": MessageLookupByLibrary.simpleMessage("Not Supported"),
-        "pdadetected": MessageLookupByLibrary.simpleMessage(
-            "Scanning on PDA mode available"),
         "pdamode": MessageLookupByLibrary.simpleMessage("PDA Mode"),
         "pdamodedesc":
             MessageLookupByLibrary.simpleMessage("BETA: Any scanner type"),
+        "pdamodeoff":
+            MessageLookupByLibrary.simpleMessage("Scanning on Camera mode"),
+        "pdamodeon":
+            MessageLookupByLibrary.simpleMessage("Scanning on PDA mode"),
         "pdaswitch": MessageLookupByLibrary.simpleMessage("Switch Scan Mode"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Personal Details"),

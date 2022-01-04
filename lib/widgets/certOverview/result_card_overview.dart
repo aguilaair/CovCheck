@@ -48,7 +48,8 @@ class CertSimplifiedView extends StatelessWidget {
               settings: settings,
             ),
             TweenAnimationBuilder(
-              tween: Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)),
+              tween: Tween<Offset>(
+                  begin: const Offset(0, 1), end: const Offset(0, 0)),
               duration: const Duration(milliseconds: 50),
               curve: Curves.easeIn,
               builder: (context, Offset value, child) {
@@ -125,12 +126,22 @@ class EmptyResult extends StatelessWidget {
                   height: 5,
                 ),
                 if (isPda)
-                  Text(
-                    S.of(context).pdadetected,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle2!
-                        .copyWith(fontWeight: FontWeight.w100),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).splashColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      (settings?.isPdaModeEnabled ?? false)
+                          ? S.of(context).pdamodeon
+                          : S.of(context).pdamodeoff,
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle2!
+                          .copyWith(fontWeight: FontWeight.w300),
+                    ),
                   ),
                 if (isPda)
                   const SizedBox(

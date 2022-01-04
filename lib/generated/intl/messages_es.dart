@@ -103,11 +103,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pauta de Vacunación No Completa"),
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
         "notsupported": MessageLookupByLibrary.simpleMessage("No Compatible"),
-        "pdadetected": MessageLookupByLibrary.simpleMessage(
-            "Escaneo en modo PDA disponible"),
         "pdamode": MessageLookupByLibrary.simpleMessage("Modo PDA"),
         "pdamodedesc": MessageLookupByLibrary.simpleMessage(
             "BETA: Cualquier tipo de escaner"),
+        "pdamodeoff":
+            MessageLookupByLibrary.simpleMessage("Escaneando en modo Cámara"),
+        "pdamodeon":
+            MessageLookupByLibrary.simpleMessage("Escaneando en modo PDA"),
         "pdaswitch":
             MessageLookupByLibrary.simpleMessage("Cambiar Modo de Escaneo"),
         "personaldetails":
