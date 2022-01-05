@@ -2,7 +2,7 @@
 
 const testManfName = {
   "valueSetId": "covid-19-lab-test-manufacturer-and-name",
-  "valueSetDate": "2021-12-24",
+  "valueSetDate": "2022-01-01",
   "valueSetValues": {
     "1341": {
       "display":
