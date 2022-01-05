@@ -58,6 +58,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         SettingsTile(
                           title: S.of(context).language,
                           leading: const Icon(Icons.language_rounded),
+                          platform: TargetPlatform.android,
                           trailing: DropdownButton(
                             items: S.delegate.supportedLocales.map((element) {
                               return DropdownMenuItem(
@@ -79,6 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).theme,
+                          platform: TargetPlatform.android,
                           leading: Icon(AdaptiveTheme.of(context).mode ==
                                   AdaptiveThemeMode.light
                               ? Icons.light_mode_rounded
@@ -115,6 +117,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile.switchTile(
                           title: S.of(context).pdamode,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.qr_code_scanner_rounded),
                           subtitle: S.of(context).pdamodedesc,
                           switchValue: newSettings!.isPda,
@@ -137,6 +140,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).honeywellpda,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.h_plus_mobiledata_rounded),
                           subtitle: (newSettings?.isHoneywellSupported ?? false)
                               ? S.of(context).supported
@@ -144,6 +148,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).camerasupport,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.camera_alt_rounded),
                           subtitle: (newSettings?.isCameraSupported ?? false)
                               ? S.of(context).supported
@@ -151,6 +156,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).appinfo,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.info_outline_rounded),
                           onPressed: (BuildContext context) {
                             showAboutDialog(
@@ -163,6 +169,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).resetsettings,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.restore_rounded),
                           trailing: TextButton(
                               onPressed: () {
@@ -248,6 +255,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       tiles: [
                         SettingsTile(
                           title: S.of(context).lastcertupdate,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.shield_rounded),
                           subtitleMaxLines: 10,
                           subtitle: DateFormat.yMMMMd(
@@ -277,6 +285,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).lasttestupdate,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.animation_rounded),
                           subtitleMaxLines: 10,
                           subtitle: DateFormat.yMMMMd(
@@ -302,6 +311,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).lastvaxupdate,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.business_center_rounded),
                           subtitleMaxLines: 10,
                           subtitle: DateFormat.yMMMMd(
@@ -329,6 +339,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                         SettingsTile(
                           title: S.of(context).lastauthholderupdate,
+                          platform: TargetPlatform.android,
                           leading: const Icon(Icons.business_rounded),
                           subtitleMaxLines: 10,
                           subtitle: DateFormat.yMMMMd(
