@@ -56,7 +56,8 @@
     "validuntil": "Válido Hasta",
     "webwarntitle": "Atención: Experienca web limitada",
     "webwarntext": "La versión web de CovCheck está diseñada para demostración y no todas las funciones pueden disponibles. Por favor, instala la app en tu dispositivo.",
-    "pdadetected": "Escaneo en modo PDA disponible",
+    "pdamodeon": "Escaneando en modo PDA",
+    "pdamodeoff": "Escaneando en modo Cámara",
     "pdaswitch": "Cambiar Modo de Escaneo",
     "language": "Idioma",
     "theme": "Tema",
@@ -86,5 +87,8 @@
     "reset": "Reestablecer",
     "areyousurereset": "Esto restablecerá todos los ajustes.",
     "cancel": "Cancelar",
-    "camerasupport": "Modo Cámara"
+    "camerasupport": "Modo Cámara",
+    "updateok": "Actualización completa",
+    "updatefail": "Error al actualizar los datos, vuelve a intentarlo en unos minutos",
+    "updatingdata": "Actualizando datos..."
 }

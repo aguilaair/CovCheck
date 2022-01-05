@@ -630,11 +630,21 @@ class S {
     );
   }
 
-  /// `Scanning on PDA mode available`
-  String get pdadetected {
+  /// `Scanning on PDA mode`
+  String get pdamodeon {
     return Intl.message(
-      'Scanning on PDA mode available',
-      name: 'pdadetected',
+      'Scanning on PDA mode',
+      name: 'pdamodeon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scanning on Camera mode`
+  String get pdamodeoff {
+    return Intl.message(
+      'Scanning on Camera mode',
+      name: 'pdamodeoff',
       desc: '',
       args: [],
     );
@@ -935,6 +945,36 @@ class S {
     return Intl.message(
       'Camera Mode',
       name: 'camerasupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update successfully completed`
+  String get updateok {
+    return Intl.message(
+      'Update successfully completed',
+      name: 'updateok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update data, please try again later`
+  String get updatefail {
+    return Intl.message(
+      'Failed to update data, please try again later',
+      name: 'updatefail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Updating data...`
+  String get updatingdata {
+    return Intl.message(
+      'Updating data...',
+      name: 'updatingdata',
       desc: '',
       args: [],
     );

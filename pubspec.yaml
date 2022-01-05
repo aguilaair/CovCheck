@@ -44,6 +44,8 @@ dependencies:
   flutter_settings_ui: ^2.0.1
   adaptive_theme: ^2.3.0
   universal_io: ^2.0.4
+  jose: ^0.3.2
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

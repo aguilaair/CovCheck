@@ -103,11 +103,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pauta de Vacunación No Completa"),
         "notdetected": MessageLookupByLibrary.simpleMessage("No Detectado"),
         "notsupported": MessageLookupByLibrary.simpleMessage("No Compatible"),
-        "pdadetected": MessageLookupByLibrary.simpleMessage(
-            "Escaneo en modo PDA disponible"),
         "pdamode": MessageLookupByLibrary.simpleMessage("Modo PDA"),
         "pdamodedesc": MessageLookupByLibrary.simpleMessage(
             "BETA: Cualquier tipo de escaner"),
+        "pdamodeoff":
+            MessageLookupByLibrary.simpleMessage("Escaneando en modo Cámara"),
+        "pdamodeon":
+            MessageLookupByLibrary.simpleMessage("Escaneando en modo PDA"),
         "pdaswitch":
             MessageLookupByLibrary.simpleMessage("Cambiar Modo de Escaneo"),
         "personaldetails":
@@ -140,6 +142,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "unk": MessageLookupByLibrary.simpleMessage("Desconocido"),
         "update": MessageLookupByLibrary.simpleMessage("Actualizar"),
         "updateall": MessageLookupByLibrary.simpleMessage("Actualizar Todo"),
+        "updatefail": MessageLookupByLibrary.simpleMessage(
+            "Error al actualizar los datos, vuelve a intentarlo en unos minutos"),
+        "updateok":
+            MessageLookupByLibrary.simpleMessage("Actualización completa"),
+        "updatingdata":
+            MessageLookupByLibrary.simpleMessage("Actualizando datos..."),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacunación"),
         "vaccproph": MessageLookupByLibrary.simpleMessage("Tipo de Vacuna"),
         "vacdate": MessageLookupByLibrary.simpleMessage("Fecha de Vacunación"),
