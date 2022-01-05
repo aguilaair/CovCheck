@@ -630,11 +630,21 @@ class S {
     );
   }
 
-  /// `Scanning on PDA mode available`
-  String get pdadetected {
+  /// `Scanning on PDA mode`
+  String get pdamodeon {
     return Intl.message(
-      'Scanning on PDA mode available',
-      name: 'pdadetected',
+      'Scanning on PDA mode',
+      name: 'pdamodeon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scanning on Camera mode`
+  String get pdamodeoff {
+    return Intl.message(
+      'Scanning on Camera mode',
+      name: 'pdamodeoff',
       desc: '',
       args: [],
     );
@@ -645,6 +655,326 @@ class S {
     return Intl.message(
       'Switch Scan Mode',
       name: 'pdaswitch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PDA Mode`
+  String get pdamode {
+    return Intl.message(
+      'PDA Mode',
+      name: 'pdamode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BETA: Any scanner type`
+  String get pdamodedesc {
+    return Intl.message(
+      'BETA: Any scanner type',
+      name: 'pdamodedesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Settings`
+  String get appsettings {
+    return Intl.message(
+      'App Settings',
+      name: 'appsettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App Info`
+  String get appinfo {
+    return Intl.message(
+      'App Info',
+      name: 'appinfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Certificate & Database Info.`
+  String get infocertssection {
+    return Intl.message(
+      'Certificate & Database Info.',
+      name: 'infocertssection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update All`
+  String get updateall {
+    return Intl.message(
+      'Update All',
+      name: 'updateall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Certificate Update`
+  String get lastcertupdate {
+    return Intl.message(
+      'Last Certificate Update',
+      name: 'lastcertupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Tests Update`
+  String get lasttestupdate {
+    return Intl.message(
+      'Last Tests Update',
+      name: 'lasttestupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Auth Holders Update`
+  String get lastauthholderupdate {
+    return Intl.message(
+      'Last Vaccine Auth Holders Update',
+      name: 'lastauthholderupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Update`
+  String get lastvaxupdate {
+    return Intl.message(
+      'Last Vaccine Update',
+      name: 'lastvaxupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Disease Agent Targeted Update`
+  String get lastdiseaseupdate {
+    return Intl.message(
+      'Last Disease Agent Targeted Update',
+      name: 'lastdiseaseupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Test Result Update`
+  String get lasttestresult {
+    return Intl.message(
+      'Last Test Result Update',
+      name: 'lasttestresult',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Test Type Update`
+  String get lasttesttypeupdate {
+    return Intl.message(
+      'Last Test Type Update',
+      name: 'lasttesttypeupdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Vaccine Prophixalis Update`
+  String get lastvaccineproph {
+    return Intl.message(
+      'Last Vaccine Prophixalis Update',
+      name: 'lastvaccineproph',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you can update CovCheck's database for new certificates and other info.`
+  String get certsettingssubtitle {
+    return Intl.message(
+      'Here you can update CovCheck\'s database for new certificates and other info.',
+      name: 'certsettingssubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Honeywell PDA mode`
+  String get honeywellpda {
+    return Intl.message(
+      'Honeywell PDA mode',
+      name: 'honeywellpda',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Supported`
+  String get supported {
+    return Intl.message(
+      'Supported',
+      name: 'supported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Supported`
+  String get notsupported {
+    return Intl.message(
+      'Not Supported',
+      name: 'notsupported',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Settings`
+  String get resetsettings {
+    return Intl.message(
+      'Reset Settings',
+      name: 'resetsettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get reset {
+    return Intl.message(
+      'Reset',
+      name: 'reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to reset all settings?`
+  String get areyousurereset {
+    return Intl.message(
+      'Are you sure you want to reset all settings?',
+      name: 'areyousurereset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera Mode`
+  String get camerasupport {
+    return Intl.message(
+      'Camera Mode',
+      name: 'camerasupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update successfully completed`
+  String get updateok {
+    return Intl.message(
+      'Update successfully completed',
+      name: 'updateok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to update data, please try again later`
+  String get updatefail {
+    return Intl.message(
+      'Failed to update data, please try again later',
+      name: 'updatefail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Updating data...`
+  String get updatingdata {
+    return Intl.message(
+      'Updating data...',
+      name: 'updatingdata',
       desc: '',
       args: [],
     );

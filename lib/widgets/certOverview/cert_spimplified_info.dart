@@ -2,8 +2,8 @@ import 'package:circle_flags/circle_flags.dart';
 import 'package:covid_checker/generated/l10n.dart';
 import 'package:covid_checker/models/result.dart';
 import 'package:covid_checker/utils/years_old.dart';
-import 'package:covid_checker/widgets/cert_detailed_view.dart';
-import 'package:covid_checker/widgets/detail.dart';
+import 'package:covid_checker/widgets/moreDetails/cert_detailed_view.dart';
+import 'package:covid_checker/widgets/molecules/detail.dart';
 import 'package:dart_cose/dart_cose.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -162,6 +162,7 @@ class CertInfoViewer extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    constraints: const BoxConstraints(maxWidth: 800),
                     context: context,
                     barrierColor:
                         Theme.of(context).brightness == Brightness.light

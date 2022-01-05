@@ -28,13 +28,22 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Country": MessageLookupByLibrary.simpleMessage("Country"),
         "age": MessageLookupByLibrary.simpleMessage("Age"),
+        "appinfo": MessageLookupByLibrary.simpleMessage("App Info"),
+        "appsettings": MessageLookupByLibrary.simpleMessage("App Settings"),
+        "areyousurereset": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to reset all settings?"),
+        "camerasupport": MessageLookupByLibrary.simpleMessage("Camera Mode"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "certType": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certid": MessageLookupByLibrary.simpleMessage("Certificate ID"),
         "certinfo": MessageLookupByLibrary.simpleMessage("Certificate Info"),
         "certres": MessageLookupByLibrary.simpleMessage("Result"),
+        "certsettingssubtitle": MessageLookupByLibrary.simpleMessage(
+            "Here you can update CovCheck\'s database for new certificates and other info."),
         "certtype": MessageLookupByLibrary.simpleMessage("Type of certificate"),
         "certver": MessageLookupByLibrary.simpleMessage("Certificate Version"),
         "country": MessageLookupByLibrary.simpleMessage("Vaccination country"),
+        "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "detected": MessageLookupByLibrary.simpleMessage("Detected"),
         "detialtype": m0,
         "dob": MessageLookupByLibrary.simpleMessage("Date of Brith"),
@@ -55,9 +64,31 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unsupported Algorithm"),
         "firstpositivetest":
             MessageLookupByLibrary.simpleMessage("First Positive Test"),
+        "honeywellpda":
+            MessageLookupByLibrary.simpleMessage("Honeywell PDA mode"),
+        "infocertssection": MessageLookupByLibrary.simpleMessage(
+            "Certificate & Database Info."),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid (Expired)"),
         "invalidcert":
             MessageLookupByLibrary.simpleMessage("Invalid Certificate"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "lastauthholderupdate": MessageLookupByLibrary.simpleMessage(
+            "Last Vaccine Auth Holders Update"),
+        "lastcertupdate":
+            MessageLookupByLibrary.simpleMessage("Last Certificate Update"),
+        "lastdiseaseupdate": MessageLookupByLibrary.simpleMessage(
+            "Last Disease Agent Targeted Update"),
+        "lasttestresult":
+            MessageLookupByLibrary.simpleMessage("Last Test Result Update"),
+        "lasttesttypeupdate":
+            MessageLookupByLibrary.simpleMessage("Last Test Type Update"),
+        "lasttestupdate":
+            MessageLookupByLibrary.simpleMessage("Last Tests Update"),
+        "lastvaccineproph": MessageLookupByLibrary.simpleMessage(
+            "Last Vaccine Prophixalis Update"),
+        "lastvaxupdate":
+            MessageLookupByLibrary.simpleMessage("Last Vaccine Update"),
+        "light": MessageLookupByLibrary.simpleMessage("Light"),
         "manname": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "moredetails": MessageLookupByLibrary.simpleMessage("More Details"),
         "name": MessageLookupByLibrary.simpleMessage("First Name"),
@@ -68,8 +99,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "nopassvac":
             MessageLookupByLibrary.simpleMessage("Vaccination Not Complete"),
         "notdetected": MessageLookupByLibrary.simpleMessage("Not Detected"),
-        "pdadetected": MessageLookupByLibrary.simpleMessage(
-            "Scanning on PDA mode available"),
+        "notsupported": MessageLookupByLibrary.simpleMessage("Not Supported"),
+        "pdamode": MessageLookupByLibrary.simpleMessage("PDA Mode"),
+        "pdamodedesc":
+            MessageLookupByLibrary.simpleMessage("BETA: Any scanner type"),
+        "pdamodeoff":
+            MessageLookupByLibrary.simpleMessage("Scanning on Camera mode"),
+        "pdamodeon":
+            MessageLookupByLibrary.simpleMessage("Scanning on PDA mode"),
         "pdaswitch": MessageLookupByLibrary.simpleMessage("Switch Scan Mode"),
         "personaldetails":
             MessageLookupByLibrary.simpleMessage("Personal Details"),
@@ -77,19 +114,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "rawData": MessageLookupByLibrary.simpleMessage("Raw Data"),
         "recovered": MessageLookupByLibrary.simpleMessage("Recovered"),
         "recovstate": MessageLookupByLibrary.simpleMessage("Validity"),
+        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "resetsettings": MessageLookupByLibrary.simpleMessage("Reset Settings"),
         "restartcamera": MessageLookupByLibrary.simpleMessage("Restart Camera"),
         "rotatecamera": MessageLookupByLibrary.simpleMessage("Change Camera"),
         "scanqrmessage": MessageLookupByLibrary.simpleMessage("Scan a QR Code"),
         "signingauth":
             MessageLookupByLibrary.simpleMessage("Signing Authority"),
+        "supported": MessageLookupByLibrary.simpleMessage("Supported"),
         "surname": MessageLookupByLibrary.simpleMessage("Last Name"),
+        "system": MessageLookupByLibrary.simpleMessage("System"),
         "targetdisease": MessageLookupByLibrary.simpleMessage("Disease"),
         "test": MessageLookupByLibrary.simpleMessage("Test"),
         "testdate": MessageLookupByLibrary.simpleMessage("Test Date"),
         "testloc": MessageLookupByLibrary.simpleMessage("Location of Test"),
         "testtype": MessageLookupByLibrary.simpleMessage("Test type"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "toggleflash": MessageLookupByLibrary.simpleMessage("Flash"),
         "unk": MessageLookupByLibrary.simpleMessage("Unknown"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "updateall": MessageLookupByLibrary.simpleMessage("Update All"),
+        "updatefail": MessageLookupByLibrary.simpleMessage(
+            "Failed to update data, please try again later"),
+        "updateok": MessageLookupByLibrary.simpleMessage(
+            "Update successfully completed"),
+        "updatingdata":
+            MessageLookupByLibrary.simpleMessage("Updating data..."),
         "vaccination": MessageLookupByLibrary.simpleMessage("Vacciantion"),
         "vaccproph":
             MessageLookupByLibrary.simpleMessage("Vaccination Prophylaxis"),
