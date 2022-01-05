@@ -41,8 +41,10 @@ class CertInfoViewer extends StatelessWidget {
           ),
           Detail(
             title: S.of(context).dob,
-            detail: DateFormat.yMd(Localizations.localeOf(context).countryCode)
-                .format(processedResult.dob!),
+            detail: processedResult.dob == null
+                ? S.of(context).unk
+                : DateFormat.yMd(Localizations.localeOf(context).countryCode)
+                    .format(processedResult.dob!),
           ),
           const SizedBox(
             height: 5,
