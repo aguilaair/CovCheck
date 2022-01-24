@@ -14,6 +14,9 @@
 - Available on all platforms, including Android, iOS, iPadOS, Windows (only PDA mode), Linux (only PDA mode) and MacOS (only PDA mode) in addition to [the web](https://covcheck.eduardom.dev)
 
 The verification is done by [dart_cose](https://pub.dev/packages/dart_cose).
+
+<a href="https://www.producthunt.com/posts/covcheck?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-covcheck" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=328045&theme=dark" alt="CovCheck - The easy and efficient EU vaccination card checker | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ![Banner Screenshot](https://raw.githubusercontent.com/aguilaair/covid-certificate-checker/main/assets/promo/Banner%20Main.png)
 
 ### Coming Soon to an App Store near you
@@ -23,6 +26,4 @@ The verification is done by [dart_cose](https://pub.dev/packages/dart_cose).
 
 # Contributing
 Due to the sensitive nature of the content in `lib\certs\` no PRs will be accepeted that modify any files in that directory. If you want to request an update please open a new issue.
-
-
 
